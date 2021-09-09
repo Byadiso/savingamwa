@@ -17,23 +17,24 @@
 
 # PROJECT OVERVIEW
 
-**rentowacu**is a platform where people can create and/or search properties for sale or rent. It was built from using javascritpt, node, HTML , CSS.
+**savingamwa**is a ap to track your expenses and income, you can create and/or search your expenses or income. It was built from using javascript, node, HTML , and CSS.
 
--   The user interface link : https://byadiso.github.io/rentowacu/
--   Live app is hosted on heroku : https://rentowacu.herokuapp.com
+-   The user interface link : https://byadiso.github.io/savingamwa/
+-   Live app is hosted on heroku : https://savingamwa.herokuapp.com
 
 # FEATURES
 
 -   user can Sign in
 -   user can login
 -   user can view
--   user can view specific property
--   user can view user property
--   user can delete his property
--   user can add property to the cart
--   user can do simple payment
--   user can modify or mark his property as booked
--   user can book and pay his apartment
+-   user can view specific transaction
+-   user can view user expenses
+-   user can delete user expenses
+-   user can view user income
+-   user can delete his income
+-   user can do his history
+-   user can modify his input
+    t
 
 # DEMO
 
@@ -58,10 +59,14 @@
 
 ## API End Points
 
--   GET /api/v1/property _Get all Property_
--   POST/api/v1/property _Create proeprty_
--   PUT/api/v1/property _Update property_
--   DELETE/api/v1/property _Delete Property_
+-   GET /api/v1/expenses \_Get all expenses
+-   POST/api/v1/expenses \_Create expenses
+-   PUT/api/v1/expense \_Update expense
+-   DELETE/api/v1/expense \_Delete expense
+-   GET /api/v1/incomes \_Get all incomes
+-   POST/api/v1/income \_Create income
+-   PUT/api/v1/income \_Update income
+-   DELETE/api/v1/income \_Delete income
 
 -   POST/api/v1/auth/signup _User to signup_
 -   POST/api/v1/auth/signin _User to signin_
@@ -74,7 +79,7 @@ Everything work perfect , However :
 
 # Installation
 
--   \$ git clone https://github.com/Byadiso/rentowacu.git
+-   \$ git clone https://github.com/Byadiso/savingamwa.git
 -   \$ cd UI
 -   \$ npm i, to install depencies
 -   \$ npm start ,to start the server
