@@ -4,7 +4,7 @@
 <head>
   <meta>
   <link rel="stylesheet" type="text/css" href="../css/style-signup-signin-sell.css">
-  <title> PropertyPro LITE</title>
+  <title> Savingamwa</title>
   <link rel="icon" type="image/ico" href="../image/bar-icon.png" />
   <script src="../js/update.js"></script>
 
@@ -18,7 +18,7 @@
 
   <div class="topnav">
     
-     <a class="active"href="./property.html"><strong>PROPERTY FOR RENT</strong></a>
+     <a class="active"href="./property.html"><strong>Check my budget</strong></a>
           <a href="user.html"><strong>My Details</strong></a>
    
   <div class="login-container">
@@ -44,7 +44,7 @@
       <div class="login-form">
         
         <form id="create_property_form" class="control-group create_property">
-          <h3 class="create_property_header" >Update Your Property</h3>
+          <h3 class="create_property_header" >Update Your Money</h3>
 
           <div class="display_error"></div> 
             
@@ -56,19 +56,14 @@
               <option placeholder="category" class="login-field create_select"> Choose category</option>
              
             </select>
-            <input type="number" class="login-field"  placeholder="sold"  name="sold" id="sold">
-            <input type="number" class="login-field"  placeholder="quantity"  name="quantity" id="quantity">
-            <select class="login-field create_select_center" name="shipping" id="shipping">
-              <option placeholder="Shipping">Choose shipping </option>
-              <option placeholder="Shipping" value="yes">Yes </option>
-              <option placeholder="Shipping" value="no">No</option>             
-            </select>
+          
+           
             <input type="file" accept="image/*" class="login-field create_select_center"   name="image" id="fileUpload">          
             <br>
             
             <!-- <input type="submit"  class="submitBtn login-field " id="create_pro">  -->
         </form>
-        <button id="create_pro" class="submitBtn login-field">Update property</button>
+        <button id="create_pro" class="submitBtn login-field">Update Money</button>
 
       </div>
     </div>
@@ -78,38 +73,13 @@
 
 
   <div id="footer">
-    &copy; 2019 Designed by BYAMUNGU desire || Andela Developer Challenge
+    &copy; 2019 Designed by BYAMUNGU desire || Savingamwa
   </div>
-<!-- <script>
-//                 const updateBtn = document.getElementById('submitUpdates');
-//                   updateBtn.addEventListener('click',(e,_id)=>{
-//                     e.preventDefault();
-
-//                     fetch( `http://localhost:3000/api/v1/property/${_id}`, {
-//                     method: 'PUT',
-//                     headers: {
-                        // Accept: "application/json",
-                        // "Content-Type": "application/json",
-//                     body: JSON.stringify({
-//                       owner:this.value,
-//                       price:this.value,
-//                       state:this.value,
-//                       city:this.value,
-//                       phone: this.value,
-//                       url:this.value,
-//                       dateCreated:this.value
-//                     })
-//                   }).then(response =>  response.json())
-//                   .then(dataUpdated => console.log(dataUpdated))
-//                   .catch(err =>console.log(err))
-//                   })
-                  
-                
-// console.log('we are on updated page')
-
-</script> -->
+<script>
 
 
+//Real time for footer
+
+</script>
 </body>
-
 </html>
