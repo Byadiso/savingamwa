@@ -8,8 +8,6 @@ import Money from "../models/money";
 exports.moneyById = (req,res, next, id ) =>{
     Money.findById(id)
     .populate('category')
-    .populate('comments','text created')
-    .populate('comments.createdBy','_id name')
     .exec((err, money)=>{
         if(err || !money){
             return res.status(400).json({
@@ -34,9 +32,6 @@ exports.list = (req, res )=>{
     Money.find()
         .select('-photo')
         .populate('category')
-        // .populate('comments','text created')
-        .populate('comments.createdBy','_id name')
-        // .populate('createdBy', '_id name')
         .sort([[sortBy, order]])
         .limit(limit)
         .exec((err, data) =>{
@@ -86,7 +81,7 @@ exports.listCategories = (req, res )=>{
 exports.listByUser = (req, res) => {
     Money.find({ createdBy: req.profile._id })
         .populate('createdBy', '_id name')
-        .select('_id name description created shipping comments')
+        .select('_id name description created ')
         .sort('_created')
         .exec((err, properties) => {
             if (err) {
