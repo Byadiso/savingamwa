@@ -2,28 +2,28 @@ import  { errorHandler } from "../helper/dbErroHandler";
 import  formidable from 'formidable';
 import _  from 'lodash';
 import fs from 'fs';
-import Product from "../models/property";
+import Money from "../models/money";
 
 
-exports.productById = (req,res, next, id ) =>{
-    Product.findById(id)
+exports.moneyById = (req,res, next, id ) =>{
+    Money.findById(id)
     .populate('category')
     .populate('comments','text created')
     .populate('comments.createdBy','_id name')
-    .exec((err, product)=>{
-        if(err || !product){
+    .exec((err, money)=>{
+        if(err || !money){
             return res.status(400).json({
-                error:" Product not found"
+                error:" money not found"
             });
         }
-        req.product = product;
+        req.money = money;
         next();
     });
 };
 
 exports.read = (req,res )=>{
-    req.product.photo = undefined;
-    return res.json(req.product);
+    req.money.photo = undefined;
+    return res.json(req.money);
 }
 
 exports.list = (req, res )=>{
@@ -31,7 +31,7 @@ exports.list = (req, res )=>{
     let sortBy = req.query.sortBy ? req.query.sortBy :'_id' ;
     let limit = req.query.limit ? parseInt(req.query.limit) : 6 ;    
 
-    Product.find()
+    Money.find()
         .select('-photo')
         .populate('category')
         // .populate('comments','text created')
@@ -42,7 +42,7 @@ exports.list = (req, res )=>{
         .exec((err, data) =>{
                 if(err) {
                     return res.status(400).json({
-                        error: "Products not found"
+                        error: "moneys not found"
                     });
                 }
         res.status(200).json({
@@ -55,24 +55,24 @@ exports.list = (req, res )=>{
 
 exports.listRelated = (req, res )=>{    
     let limit = req.query.limit ? parseInt(req.query.limit) : 4 ;
-    Product.find({_id: {$ne: req.product}, category: req.product.category})
+    Money.find({_id: {$ne: req.money}, category: req.money.category})
         .select('-photo')
         .limit(limit)
         .populate('category', '_id name')    
-        .exec((err, products) =>{
+        .exec((err, moneys) =>{
         if(err) {
             return res.status(400).json({
-                error: "Products not found"
+                error: "moneys not found"
             });
         }
-        res.json(products)
+        res.json(moneys)
     })
 
 }
 
 
 exports.listCategories = (req, res )=>{
-    Product.distinct('category', {}, (err, categories) =>{
+    Money.distinct('category', {}, (err, categories) =>{
         if(err) {
             return res.status(400).json({
                 error: ' categories not found'
@@ -84,7 +84,7 @@ exports.listCategories = (req, res )=>{
 
 
 exports.listByUser = (req, res) => {
-    Product.find({ createdBy: req.profile._id })
+    Money.find({ createdBy: req.profile._id })
         .populate('createdBy', '_id name')
         .select('_id name description created shipping comments')
         .sort('_created')
@@ -127,7 +127,7 @@ exports.listBySearch = (req, res) => {
         }
     }
  
-    Product.find(findArgs)
+    Money.find(findArgs)
         .select("-photo")
         .populate("category")
         .sort([[sortBy, order]])
@@ -136,7 +136,7 @@ exports.listBySearch = (req, res) => {
         .exec((err, data) => {
             if (err) {
                 return res.status(400).json({
-                    error: "Products not found"
+                    error: "moneys not found"
                 });
             }
             res.json({
@@ -164,8 +164,8 @@ exports.create = (req, res)=>{
             })
         }
 
-        let product = new Product(fields);
-        product.createdBy = req.profile;
+        let money = new Money(fields);
+        money.createdBy = req.profile;
         if(files.photo){
             //validation of photo files
             if(files.photo.size> 3000000){
@@ -173,10 +173,10 @@ exports.create = (req, res)=>{
                     error:"Image should be less than  3mb in size"
                 })
             }
-            product.photo.data = fs.readFileSync(files.photo.path)
-            product.photo.contentType = files.photo.type
+            money.photo.data = fs.readFileSync(files.photo.path)
+            money.photo.contentType = files.photo.type
         }
-        product.save((err, result)=>{
+        money.save((err, result)=>{
             if(err){
                 return res.status(404).json({
                     error: errorHandler(err),
@@ -196,16 +196,16 @@ exports.create = (req, res)=>{
 
 
 exports.remove = (req, res)=>{
-    let product = req.product;
-    product.remove((err, deletedProduct)=>{
+    let money = req.money;
+    money.remove((err, deletedmoney)=>{
         if(err){
             return res.status(400).json({
                 error: errorHandler(err)
             });
         }
         res.json({
-            // deletedProduct, 
-            message:"Product deleted successfully",
+            // deletedmoney, 
+            message:"money deleted successfully",
             status:true
         })
     })
@@ -231,8 +231,8 @@ exports.update = (req, res)=>{
         //     })
         // }
 
-        let product = req.product;
-        product = _.extend(product, fields)
+        let money = req.money;
+        money = _.extend(money, fields)
         if(files.photo){
             //validation of photo files
             if(files.photo.size> 3000000){
@@ -240,10 +240,10 @@ exports.update = (req, res)=>{
                     error:"Image should be less than  3mb in size"
                 })
             }
-            product.photo.data = fs.readFileSync(files.photo.path)
-            product.photo.contentType = files.photo.type
+            money.photo.data = fs.readFileSync(files.photo.path)
+            money.photo.contentType = files.photo.type
         }
-        product.save((err, result)=>{
+        money.save((err, result)=>{
             if(err){
                 return res.status(404).json({
                     error: errorHandler(err),
@@ -262,9 +262,9 @@ exports.update = (req, res)=>{
 
 
 exports.photo = (req, res, next )=>{
-    if(req.product.photo){
-        res.set('Content-Type', req.product.photo.contentType);
-        return res.send(req.product.photo.data);
+    if(req.money.photo){
+        res.set('Content-Type', req.money.photo.contentType);
+        return res.send(req.money.photo.data);
     }
     next();
 }
@@ -281,15 +281,15 @@ exports.listSearch = (req, res) => {
         if (req.query.category && req.query.category != 'All') {
             query.category = req.query.category;
         }
-        // find the product based on query object with 2 properties
+        // find the money based on query object with 2 properties
         // search and category
-        Product.find(query, (err, products) => {
+        Money.find(query, (err, moneys) => {
             if (err) {
                 return res.status(400).json({
                     error: errorHandler(err)
                 });
             }
-            res.json(products);
+            res.json(moneys);
         }).select('-photo');
     }
 };
@@ -297,127 +297,4 @@ exports.listSearch = (req, res) => {
 
 
 
-exports.decreaseQuantity = (req, res, next) => {
-    let bulkOps = req.body.order.products.map(item => {
-        return {
-            updateOne: {
-                filter: { _id: item._id },
-                update: { $inc: { quantity: -item.count, sold: +item.count } }
-            }
-        };
-    });
 
-    Product.bulkWrite(bulkOps, {}, (error, products) => {
-        if (error) {
-            return res.status(400).json({
-                error: 'Could not update product'
-            });
-        }
-        next();
-    });
-};
-
-
-
-//new feauture for review comment, uncomment and likes, unlike for property 
-
-exports.like = (req, res) => {
-    Product.findByIdAndUpdate(req.body.propertyId, { $push: { likes: req.body.userId } }, { new: true }).exec(
-        (err, result) => {
-            if (err) {
-                return res.status(400).json({
-                    error: err
-                });
-            } else {
-                res.json(result);
-            }
-        }
-    );
-};
-
-exports.unlike = (req, res) => {
-    Product.findByIdAndUpdate(req.body.propertyId, { $pull: { likes: req.body.userId } }, { new: true }).exec(
-        (err, result) => {
-            if (err) {
-                return res.status(400).json({
-                    error: err
-                });
-            } else {
-                res.json(result);
-            }
-        }
-    );
-};
-
-exports.comment = (req, res) => {    
-    let comment = req.body.comment;
-    comment.createdBy = req.body.userId;    
-
-    Product.findByIdAndUpdate(req.body.propertyId, { $push: { comments: comment } }, { new: true }) 
-        .populate('comments','text created')     
-        .populate('comments.createdBy', '_id name')
-        .populate('createdBy', '_id name')
-        .exec((err, result) => {
-            if (err) {
-                return res.status(400).json({
-                    error: err
-                });
-            } else {
-                res.json({                    
-                    data: result,
-                    status: true,
-                    message:"Your comment has been added "
-                });
-            }
-        });
-};
-
-exports.uncomment = (req, res) => {
-    let comment = req.body.comment;
-
-    Product.findByIdAndUpdate(req.body.propertyId, { $pull: { comments: { _id: comment._id } } }, { new: true })
-        .populate('comments.postedBy', '_id name')
-        .populate('postedBy', '_id name')
-        .exec((err, result) => {
-            if (err) {
-                return res.status(400).json({
-                    error: err
-                });
-            } else {
-                res.json({                    
-                    data: result,
-                    status: true,
-                    message:"Your comment has been removed "
-                });
-            }
-        });
-};
-
-exports.updateComment = (req, res) => {
-    let comment = req.body.comment;
-
-    Product.findByIdAndUpdate(req.body.propertyId, { $pull: { comments: { _id: comment._id } } }).exec((err, result) => {
-        if (err) {
-            return res.status(400).json({
-                error: err
-            });
-        } else {
-            Product.findByIdAndUpdate(
-                req.body.propertyId,
-                { $push: { comments: comment, updated: new Date() } },
-                { new: true }
-            )
-                .populate('comments.postedBy', '_id name')
-                .populate('postedBy', '_id name')
-                .exec((err, result) => {
-                    if (err) {
-                        return res.status(400).json({
-                            error: err
-                        });
-                    } else {
-                        res.json(result);
-                    }
-                });
-        }
-    });
-};

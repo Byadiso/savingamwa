@@ -10,14 +10,13 @@ import {
     orderById,
     updateOrderStatus
 } from "../controllers/order";
-import { decreaseQuantity } from "../controllers/property";
+
 
 router.post(
     "/order/create/:userId",
     requireSignin,
     isAuth,
     addOrderToUserHistory,
-    decreaseQuantity,
     create
 );
 

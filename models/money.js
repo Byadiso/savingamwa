@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 const {ObjectId } = mongoose.Schema;
 
 
-const expenseSchema = new mongoose.Schema(
+const moneySchema = new mongoose.Schema(
     {
         title:{
             type:String,
@@ -36,14 +36,7 @@ const expenseSchema = new mongoose.Schema(
             ref: 'USer'
         },
            
-         reviews: [
-                {
-                text: String,
-                created: { type: Date, default: Date.now },
-                createdBy: { type: ObjectId, ref: 'USer' }
-                }
-            ],  
-
+    
 
     },
       { timestamps: true }
@@ -51,4 +44,4 @@ const expenseSchema = new mongoose.Schema(
 
 
 
-module.exports = mongoose.model("Expense", expenseSchema);
+module.exports = mongoose.model("Money", moneySchema);
