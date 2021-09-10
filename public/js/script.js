@@ -73,20 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
                  //save all transaction in locastorage savings               
-                 if(category.name.toLowerCase() =="savings"){                                 
-                  savingsAmount.push(amount)
-                  localStorage.setItem('Savings', JSON.stringify(savingsAmount));  
-                  console.log(savingsAmount)  
-                  
-
-                }else if (category.name.toLowerCase() =="income"){                 
-                  incomesAmount.push(amount)  
-                  localStorage.setItem('Incomes', JSON.stringify(incomesAmount)); 
-                  console.log(incomesAmount)   
-                } else if(category.name.toLowerCase() =="expenses") {
-                  expensesAmount.push(amount)  
-                  localStorage.setItem('Expenses', JSON.stringify(expensesAmount));
-                  console.log(expensesAmount)  
+                 if(category.name.toLowerCase() =="savings"){ 
+                   setItemStorage(savingsAmount, 'Savings', amount); 
+                }else if (category.name.toLowerCase() =="income"){  
+                  setItemStorage(incomesAmount, 'Incomes', amount);
+                } else if(category.name.toLowerCase() =="expenses") {   
+                  setItemStorage(expensesAmount, 'Expenses', amount);
                 }
                           
                
@@ -197,13 +189,19 @@ document.addEventListener('DOMContentLoaded', () => {
               return JSON.parse(localStorage.getItem(item));           
             }
 
+            //function set items to local storage
+            function setItemStorage(arrayMoney, titleMoney, amountMoney){
+              arrayMoney.push(amountMoney)
+              localStorage.setItem(titleMoney , JSON.stringify(arrayMoney));  
+              console.log(arrayMoney)  
+            }
+
             //render item to ui
 
             function renderToUI(render,amount, amountFromLocal ){          
               amount = getTotal(amountFromLocal)                           
               render.innerHTML = amount + " PLN"
             }
-
 
       
           })
