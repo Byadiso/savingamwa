@@ -5,7 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
           const ordersMsg = document.getElementById('header-text');  
           const mainDiv = document.getElementById('myMoneys'); 
           const searchBar = document.getElementById('searchBar'); 
-          let moneys = [] ;                   
+          const savings = document.querySelector('#saving');
+          let moneys = [] ;   
+          let saveAmount = []; 
+          
+          let totalSavings = 10 
           
          
           //function to fetch all dat from backend
@@ -29,10 +33,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 moneys= dataPro.moneys;                  
               for ( var i= 0; i < moneys.length; i++ ){            
                 let  divprop= document.createElement("DIV"); 
-                const { _id,amount,title,description,category,createdAt} = moneys[i];        
-               
+                let { _id,amount,title,description,category,createdAt} = moneys[i];  
 
-            
+                
+                
+              //save amount in localstorage
+              //adding negative sign to amount for expenses
+              if(category.name.toLowerCase() =="expenses"){ 
+                amount = -amount                  
+                console.log(amount + "some shit")
+                saveAmount.push(amount)  
+              }else {
+                saveAmount.push(amount)  
+              }
+                         
+               localStorage.setItem('amountTotal', JSON.stringify(saveAmount));
+
                // for short  notation is the best
                var timestamp= timeDifference(new Date(), new Date(createdAt));
                 divprop.innerHTML =`
@@ -67,7 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
   
                 });
               }            
-                   
+             
+              
+              //get amount from localstorage and calculate my savings
+              let amountFromLocal = localStorage.getItem('amountTotal');
+              console.log(amountFromLocal)
+
+              savings.innerHTML = totalSavings
               
               // implementing logOut
                 const logOutBtn = document.querySelector('.log-out');

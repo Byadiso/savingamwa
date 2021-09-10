@@ -420,9 +420,11 @@ margin-bottom: 10px;
 
   /* user money */
   #myMoneys{
-    margin-bottom: 0px;
+    margin-left: 350px;
     width: 40%;
     height: 20%;    
+
+    
   }
 
   
@@ -661,8 +663,7 @@ float: left;
   border-radius:10px ; 
   padding: 5px;
   margin-bottom: var(--spacing);
-  
-}
+ }
 .item_money p{
   background-color: white; 
 }
@@ -683,4 +684,13 @@ float: left;
 .income{
   border-left: solid 4px var(--incomeColor); 
   border-radius:10px ; 
+}
+
+.saving_card{
+  color: var(--whiteColor);
+  background-color: var(--incomeColor);
+  margin-bottom: 5px;
+}
+.saving_card h3{
+  padding: 10px;
 }
