@@ -703,8 +703,7 @@ float: left;
   padding: 5px;
 }
 .wallet_details{
-  display: flex;
-  margin-left: 300px;
+  display: flex; 
   justify-content: center;
   align-items: center;
   
@@ -733,7 +732,6 @@ float: left;
 .wallet_details .incomes{
   background-color: rgb(24, 192, 24);
 }
-
 
 .wallet_details .expense{
   background-color: orange;
