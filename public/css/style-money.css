@@ -4,7 +4,9 @@
   --expenseColor: rgb(230, 91, 91);
   --incomeColor: rgb(84, 197, 84);
   --walletColor:rgb(156, 155, 75);
+  --savingsColor:rgb(236, 233, 40);
   --spacing: 4px;
+  
 }
 
 
@@ -684,6 +686,11 @@ float: left;
 
 .income{
   border-left: solid 4px var(--incomeColor); 
+  border-radius:10px ; 
+}
+
+.savings{
+  border-left: solid 4px var(--savingsColor); 
   border-radius:10px ; 
 }
 

@@ -6,10 +6,20 @@ document.addEventListener('DOMContentLoaded', () => {
           const mainDiv = document.getElementById('myMoneys'); 
           const searchBar = document.getElementById('searchBar'); 
           const savings = document.querySelector('#saving');
+          const savingsDisplay = document.querySelector('#savings');
+          const incomesDisplay = document.querySelector('#incomes');
+          const expensesDisplay = document.querySelector('#expenses');
           let moneys = [] ;   
-          let saveAmount = []; 
+          let walletAmount = []; 
+          let savingsAmount = []; 
+          let incomesAmount = []; 
+          let expensesAmount = []; 
           
-          let totalSavings = 10 
+          let myWallet;
+          let savingsMoney;
+          let incomesMoney;
+          let expensesMoney;
+
           
          
           //function to fetch all dat from backend
@@ -33,9 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 moneys= dataPro.moneys;                  
               for ( var i= 0; i < moneys.length; i++ ){            
                 let  divprop= document.createElement("DIV"); 
-                let { _id,amount,title,description,category,createdAt} = moneys[i];  
-
-                
+                let { _id,amount,title,description,category,createdAt} = moneys[i];                 
                 
              
 
@@ -56,19 +64,41 @@ document.addEventListener('DOMContentLoaded', () => {
               if(category.name.toLowerCase() =="expenses"){ 
                 amount = -amount                  
                 console.log(amount + "some shit")
-                saveAmount.push(amount)  
+                walletAmount.push(amount)  
               }else {
-                saveAmount.push(amount)  
+                walletAmount.push(amount)  
               }
                          
-              localStorage.setItem('amountTotal', JSON.stringify(saveAmount));
+              localStorage.setItem('amountTotal', JSON.stringify(walletAmount));
 
+
+                 //save all transaction in locastorage savings               
+                 if(category.name.toLowerCase() =="savings"){                                 
+                  savingsAmount.push(amount)
+                  localStorage.setItem('Savings', JSON.stringify(savingsAmount));  
+                  console.log(savingsAmount)  
+                  
+
+                }else if (category.name.toLowerCase() =="income"){                 
+                  incomesAmount.push(amount)  
+                  localStorage.setItem('Incomes', JSON.stringify(incomesAmount)); 
+                  console.log(incomesAmount)   
+                } else if(category.name.toLowerCase() =="expenses") {
+                  expensesAmount.push(amount)  
+                  localStorage.setItem('Expenses', JSON.stringify(expensesAmount));
+                  console.log(expensesAmount)  
+                }
+                          
+               
               
                    
         // add a class for a right border
           if(category.name.toLowerCase() =="income"){
             divprop.classList.add("income")
-          } else {
+          } else if(category.name.toLowerCase() =="savings"){
+            divprop.classList.add("savings")
+          }         
+          else {
             divprop.classList.add("expenses")
           }
           // to append my whole create section   
@@ -92,12 +122,23 @@ document.addEventListener('DOMContentLoaded', () => {
              
               
               //get amount from localstorage and calculate my savings
-              let amountFromLocal =JSON.parse(localStorage.getItem('amountTotal'));                       
-              
-               totalSavings = amountFromLocal.reduce((previousValue, currentValue) => previousValue + currentValue)
-                           
-              savings.innerHTML = totalSavings
-              
+              let amountFromLocal =JSON.parse(localStorage.getItem('amountTotal'));            
+              myWallet = getTotal(amountFromLocal)                           
+              savings.innerHTML = myWallet
+
+              //get individual details for expenses incomes and savings
+
+              //for savingas
+              let amountSavedFromLocal = getItemStorage('Savings'); 
+              savingsMoney = getTotal(amountSavedFromLocal)                           
+              savingsDisplay.innerHTML = savingsMoney + " PLN"
+
+                 //for incomes
+
+                //for expense
+
+
+                               
               // implementing logOut
                 const logOutBtn = document.querySelector('.log-out');
                   logOutBtn.addEventListener('click', ()=>{
@@ -109,7 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
                listAll();
 
                function timeDifference(current, previous) {
-
                 var msPerMinute = 60 * 1000;
                 var msPerHour = msPerMinute * 60;
                 var msPerDay = msPerHour * 24;
@@ -143,6 +183,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 else {
                     return Math.round(elapsed/msPerYear ) + ' years ago';   
                 }
+            }
+
+            //function to calculate total
+            function getTotal(amountArray){
+              return amountArray.reduce((previousValue, currentValue) => previousValue + currentValue)
+            }
+
+            //funciton get items form local
+            function getItemStorage(item){             
+              return JSON.parse(localStorage.getItem(item));           
+            }
+
+            //render item to ui
+
+            function renderToUI(item){          
+              savingsMoney = getTotal(amountSavedFromLocal)                           
+              savingsDisplay.innerHTML = savingsMoney + " PLN"
             }
 
 
