@@ -43,11 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 moneys= dataPro.moneys;                  
               for ( var i= 0; i < moneys.length; i++ ){            
                 let  divprop= document.createElement("DIV"); 
-                let { _id,amount,title,description,category,createdAt} = moneys[i];                 
-                
+                let { _id,amount,title,description,category,createdAt} = moneys[i];            
              
-
-
                // for short  notation is the best
                var timestamp= timeDifference(new Date(), new Date(createdAt));
                 divprop.innerHTML =`
@@ -84,19 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
                
               
                    
-        // add a class for a right border
-          if(category.name.toLowerCase() =="income"){
-            divprop.classList.add("income")
-          } else if(category.name.toLowerCase() =="savings"){
-            divprop.classList.add("savings")
-          }         
-          else {
-            divprop.classList.add("expenses")
-          }
-          // to append my whole create section   
-          mainDiv.append(divprop);   
-               
-              }   
+                  // add a class function for a right border
+                  addClassBorderToMyWallet( "income", "savings",category, divprop )
+                    // to append my whole create section   
+                    mainDiv.append(divprop);   
+                        
+                        }   
               
                    
          const viewBtns = document.querySelectorAll('.btn-view');
@@ -197,10 +187,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             //render item to ui
-
             function renderToUI(render,amount, amountFromLocal ){          
               amount = getTotal(amountFromLocal)                           
               render.innerHTML = amount + " PLN"
+            }
+
+            //add class function and i am not putting expense cos I am not interested in that
+            function addClassBorderToMyWallet( income, savings,category, render ){
+                if(category.name.toLowerCase() ==income){
+                  render.classList.add("income")
+                } else if(category.name.toLowerCase() == savings){
+                  render.classList.add("savings")
+                }         
+                else {
+                  render.classList.add("expenses")
+                }
             }
 
       
