@@ -128,10 +128,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
               //get individual details for expenses incomes and savings
 
-              //for savingas
+              //for savings
               let amountSavedFromLocal = getItemStorage('Savings'); 
-              savingsMoney = getTotal(amountSavedFromLocal)                           
-              savingsDisplay.innerHTML = savingsMoney + " PLN"
+              // savingsMoney = getTotal(amountSavedFromLocal)                           
+              // savingsDisplay.innerHTML = savingsMoney + " PLN"
+              renderToUI(savingsDisplay,savingsMoney, amountSavedFromLocal)
 
                  //for incomes
 
@@ -197,9 +198,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             //render item to ui
 
-            function renderToUI(item){          
-              savingsMoney = getTotal(amountSavedFromLocal)                           
-              savingsDisplay.innerHTML = savingsMoney + " PLN"
+            function renderToUI(render,amount, amountFromLocal ){          
+              amount = getTotal(amountFromLocal)                           
+              render.innerHTML = amount + " PLN"
             }
 
 
