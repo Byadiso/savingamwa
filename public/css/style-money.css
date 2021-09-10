@@ -3,6 +3,7 @@
   --whiteColor: #ffffff;
   --expenseColor: rgb(230, 91, 91);
   --incomeColor: rgb(84, 197, 84);
+  --walletColor:rgb(156, 155, 75);
   --spacing: 4px;
 }
 
@@ -517,7 +518,7 @@ for searched properties */
 }
 
 #searched_content{
-    margin-bottom: 100px;  
+    margin-bottom: 10px;  
     display: grid;
     grid-template-columns: auto auto auto auto;
     
@@ -694,3 +695,47 @@ float: left;
 .saving_card h3{
   padding: 10px;
 }
+
+#header-text{
+  color: var(--whiteColor);
+  background-color: var(--walletColor);
+  border-radius:10px ; 
+  padding: 5px;
+}
+.wallet_details{
+  display: flex;
+  margin-left: 300px;
+  justify-content: center;
+  align-items: center;
+  
+}
+.wallet_details span{
+  background-color:var(--blueColor);
+  color: var(--whiteColor);
+  padding: 2px; 
+  float: left;
+  margin: 2px;
+
+}
+.wallet_details h5{ 
+  padding: 8px; 
+  margin-left:10px;
+  border-radius: 20%;
+  align-items: center;
+ 
+}
+
+.wallet_details .savings{
+  background-color: yellow;
+}
+
+
+.wallet_details .incomes{
+  background-color: rgb(24, 192, 24);
+}
+
+
+.wallet_details .expense{
+  background-color: orange;
+}
+

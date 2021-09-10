@@ -42,7 +42,7 @@ exports.list = (req, res )=>{
                 }
         res.status(200).json({
             moneys: data,
-            message: 'all moneys',
+            message: 'My Budget',
             status: true
         })
     })
