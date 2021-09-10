@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 
-const categorySchema = new mongoose.Schema(
+const categorySavSchema = new mongoose.Schema(
     {
         name:{
             type:String,
@@ -16,4 +16,4 @@ const categorySchema = new mongoose.Schema(
 
 
 
-module.exports = mongoose.model("Category", categorySchema);
+module.exports = mongoose.model("CategorySav", categorySavSchema);

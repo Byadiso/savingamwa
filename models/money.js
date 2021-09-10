@@ -24,7 +24,7 @@ const moneySchema = new mongoose.Schema(
         },
         category:{
             type:ObjectId,
-            ref:'Category',
+            ref:'CategorySav',
             require:true
         },
        icon:{

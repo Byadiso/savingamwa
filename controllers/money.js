@@ -109,7 +109,7 @@ exports.listBySearch = (req, res) => {
  
     for (let key in req.body.filters) {
         if (req.body.filters[key].length > 0) {
-            if (key === "price") {
+            if (key === "amount") {
                 // gte -  greater than price [0-10]
                 // lte - less than
                 findArgs[key] = {
@@ -152,8 +152,8 @@ exports.create = (req, res)=>{
             })
         }
         // check for all fields
-        const {name, description, price, category, quantity, shipping } = fields
-        if(!name || !description || !price || !category || !quantity || !shipping) {
+        const {name, description, amount, category, } = fields
+        if(!name || !description || !amount || !category ) {
             return res.status(400).json({
                 error: " All fields are required"
             })
@@ -196,10 +196,11 @@ exports.remove = (req, res)=>{
         if(err){
             return res.status(400).json({
                 error: errorHandler(err)
+                
             });
         }
         res.json({
-            // deletedmoney, 
+            deletedmoney, 
             message:"money deleted successfully",
             status:true
         })
