@@ -76,15 +76,14 @@ document.addEventListener('DOMContentLoaded', () => {
                   setItemStorage(incomesAmount, 'Incomes', amount);
                 } else if(category.name.toLowerCase() =="expenses") {   
                   setItemStorage(expensesAmount, 'Expenses', amount);
-                }
-                          
+                }                       
                
               
                    
                   // add a class function for a right border
                   addClassBorderToMyWallet( "income", "savings",category, divprop )
                     // to append my whole create section   
-                    mainDiv.append(divprop);   
+                    mainDiv.append(divprop); 
                         
                         }   
               
@@ -95,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Storage()
                     let propId = e.target.parentElement.dataset.id;
                     localStorage.setItem('id', propId)
-                    console.log(propId);
                     location.href='../pages/singleProperty.html';
                   })
   
