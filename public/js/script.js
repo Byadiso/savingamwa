@@ -122,22 +122,23 @@ document.addEventListener('DOMContentLoaded', () => {
              
               
               //get amount from localstorage and calculate my savings
-              let amountFromLocal =JSON.parse(localStorage.getItem('amountTotal'));            
-              myWallet = getTotal(amountFromLocal)                           
-              savings.innerHTML = myWallet
+              
+              let amountFromLocal = getItemStorage('amountTotal'); 
+              renderToUI(savings,myWallet, amountFromLocal)
 
               //get individual details for expenses incomes and savings
 
               //for savings
               let amountSavedFromLocal = getItemStorage('Savings'); 
-              // savingsMoney = getTotal(amountSavedFromLocal)                           
-              // savingsDisplay.innerHTML = savingsMoney + " PLN"
               renderToUI(savingsDisplay,savingsMoney, amountSavedFromLocal)
 
                  //for incomes
+              let amountIncomesFromLocal = getItemStorage('Incomes'); 
+              renderToUI(incomesDisplay,incomesMoney, amountIncomesFromLocal)
 
                 //for expense
-
+              let amountexpensesFromLocal = getItemStorage('Expenses'); 
+              renderToUI(expensesDisplay,expensesMoney, amountexpensesFromLocal)
 
                                
               // implementing logOut
@@ -150,6 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
               
                listAll();
 
+            // time display in readable format
                function timeDifference(current, previous) {
                 var msPerMinute = 60 * 1000;
                 var msPerHour = msPerMinute * 60;
@@ -157,8 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 var msPerMonth = msPerDay * 30;
                 var msPerYear = msPerDay * 365;
             
-                var elapsed = current - previous;
-            
+                var elapsed = current - previous;            
                 if (elapsed < msPerMinute) {
                     if(elapsed/1000 <30) return "Just now";
             
