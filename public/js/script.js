@@ -37,17 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 
                 
-              //save amount in localstorage
-              //adding negative sign to amount for expenses
-              if(category.name.toLowerCase() =="expenses"){ 
-                amount = -amount                  
-                console.log(amount + "some shit")
-                saveAmount.push(amount)  
-              }else {
-                saveAmount.push(amount)  
-              }
-                         
-               localStorage.setItem('amountTotal', JSON.stringify(saveAmount));
+             
+
 
                // for short  notation is the best
                var timestamp= timeDifference(new Date(), new Date(createdAt));
@@ -58,6 +49,21 @@ document.addEventListener('DOMContentLoaded', () => {
                   </div>                                            
                 </div>`
                 
+
+              //save amount in localstorage
+
+              //adding negative sign to amount for expenses
+              if(category.name.toLowerCase() =="expenses"){ 
+                amount = -amount                  
+                console.log(amount + "some shit")
+                saveAmount.push(amount)  
+              }else {
+                saveAmount.push(amount)  
+              }
+                         
+              localStorage.setItem('amountTotal', JSON.stringify(saveAmount));
+
+              
                    
         // add a class for a right border
           if(category.name.toLowerCase() =="income"){
@@ -86,9 +92,10 @@ document.addEventListener('DOMContentLoaded', () => {
              
               
               //get amount from localstorage and calculate my savings
-              let amountFromLocal = localStorage.getItem('amountTotal');
-              console.log(amountFromLocal)
-
+              let amountFromLocal =JSON.parse(localStorage.getItem('amountTotal'));                       
+              
+               totalSavings = amountFromLocal.reduce((previousValue, currentValue) => previousValue + currentValue)
+                           
               savings.innerHTML = totalSavings
               
               // implementing logOut
