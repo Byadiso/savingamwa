@@ -41,8 +41,8 @@ exports.list = (req, res )=>{
                     });
                 }
         res.status(200).json({
-            properties: data,
-            message: 'all properties',
+            moneys: data,
+            message: 'all moneys',
             status: true
         })
     })
@@ -53,7 +53,7 @@ exports.listRelated = (req, res )=>{
     Money.find({_id: {$ne: req.money}, category: req.money.category})
         .select('-photo')
         .limit(limit)
-        .populate('category', '_id name')    
+        .populate('category', '_id title')    
         .exec((err, moneys) =>{
         if(err) {
             return res.status(400).json({
@@ -80,17 +80,17 @@ exports.listCategories = (req, res )=>{
 
 exports.listByUser = (req, res) => {
     Money.find({ createdBy: req.profile._id })
-        .populate('createdBy', '_id name')
-        .select('_id name description created ')
+        .populate('createdBy', '_id title')
+        .select('_id title description created ')
         .sort('_created')
-        .exec((err, properties) => {
+        .exec((err, moneys) => {
             if (err) {
                 return res.status(400).json({
                     error: err
                 });
             }
             res.json({
-                properties: properties,
+                moneys: moneys,
                 message: `property by this user`
             });
         });
@@ -145,15 +145,15 @@ exports.listBySearch = (req, res) => {
 exports.create = (req, res)=>{
     let form = new formidable.IncomingForm();
     form.keepExtensions = true;
-    form.parse(req, (err, fields, files )=>{
+    form.parse(req, (err, fields )=>{
         if(err){
             return res.status(400).json({
                 error: 'Image could not be uploaded'
             })
         }
         // check for all fields
-        const {name, description, amount, category, } = fields
-        if(!name || !description || !amount || !category ) {
+        const {title, description, amount, category, } = fields
+        if(!title || !description || !amount || !category ) {
             return res.status(400).json({
                 error: " All fields are required"
             })
@@ -161,21 +161,11 @@ exports.create = (req, res)=>{
 
         let money = new Money(fields);
         money.createdBy = req.profile;
-        if(files.photo){
-            //validation of photo files
-            if(files.photo.size> 3000000){
-                return res.status(400).json({
-                    error:"Image should be less than  3mb in size"
-                })
-            }
-            money.photo.data = fs.readFileSync(files.photo.path)
-            money.photo.contentType = files.photo.type
-        }
-        money.save((err, result)=>{
+          money.save((err, result)=>{
             if(err){
                 return res.status(404).json({
-                    error: errorHandler(err),
-                    // error: err,
+                    // error: errorHandler(err),
+                    error: err,
                     status: false
                 });
             }
@@ -219,14 +209,7 @@ exports.update = (req, res)=>{
                 error: 'Image could not be uploaded'
             })
         }
-        // check for all fields
-        // const {name, description, price, category, quantity, shipping } = fields
-        // if(!name || !description || !price || !category || !quantity || !shipping) {
-        //     return res.status(400).json({
-        //         error: " All fields are required"
-        //     })
-        // }
-
+      
         let money = req.money;
         money = _.extend(money, fields)
         if(files.photo){
@@ -270,14 +253,14 @@ exports.photo = (req, res, next )=>{
 exports.listSearch = (req, res) => {
     // create query object to hold search value and category value
     const query = {};
-    // assign search value to query.name
+    // assign search value to query.title
     if (req.query.search) {
-        query.name = { $regex: req.query.search, $options: 'i' };
+        query.title = { $regex: req.query.search, $options: 'i' };
         // assign category value to query.category
         if (req.query.category && req.query.category != 'All') {
             query.category = req.query.category;
         }
-        // find the money based on query object with 2 properties
+        // find the money based on query object with 2 moneys
         // search and category
         Money.find(query, (err, moneys) => {
             if (err) {

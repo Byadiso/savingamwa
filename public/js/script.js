@@ -3,19 +3,19 @@
 document.addEventListener('DOMContentLoaded', () => {     
           
           const ordersMsg = document.getElementById('header-text');  
-          const mainDiv = document.getElementById('myProperties'); 
+          const mainDiv = document.getElementById('myMoneys'); 
           const searchBar = document.getElementById('searchBar'); 
-          let properties = [] ;                   
+          let moneys = [] ;                   
           
          
           //function to fetch all dat from backend
 
           const listAll = () => {
-           return  fetch('http://localhost:3000/api/v1/properties')
+           return  fetch('http://localhost:3000/api/v1/moneys')
             .then((resp) =>resp.json())
             .then((data) =>  {
             renderProperty(data);
-            localStorage.setItem('properties', JSON.stringify(data));
+            localStorage.setItem('moneys', JSON.stringify(data));
           });
             
           }
@@ -26,42 +26,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
                ordersMsg.className = 'err';
               ordersMsg.innerHTML = dataPro.message;
-                properties= dataPro.properties;                  
-              for ( var i= 0; i < properties.length; i++ ){            
+                moneys= dataPro.moneys;                  
+              for ( var i= 0; i < moneys.length; i++ ){            
                 let  divprop= document.createElement("DIV"); 
-                const { _id,photo,name,description,createdAt} = properties[i];        
-                 
+                const { _id,amount,title,description,category,createdAt} = moneys[i];        
+               
 
             
-
-             let photoUrl = `http://localhost:3000/api/v1/property/photo/${_id}`
-
                // for short  notation is the best
                var timestamp= timeDifference(new Date(), new Date(createdAt));
                 divprop.innerHTML =`
-                <div class="flip-box" data-id="${_id}">
-                  <div class="flip-box-inner">
-                     <div class="flip-box-front">
-                           <img src=${photoUrl} class="imgCreated" style="width: 270px; height: 170px;">
-                           
-                      </div>
-                      
-                      <div class="flip-box-back">
-                          <p id="phone"><strong>name:</strong> ${name}</p>
-                          <p id="address"><strong>Description:</strong> ${description}</p>
-                          <p id="dateCreated;"><strong>Date Create:</strong> ${timestamp}</p>
-                      </div>
-                  </div>  
-                  <button class="btn-view">View</button>
+                <div class="money_details" data-id="${_id}">                                        
+                  <div class="item_money>
+                    <p id="title"> ${title}</p>              
+                    <p id="amount"> ${amount + " "}PLN</p>    
+                  </div>                                            
                 </div>`
                 
-                
-
-
-          // adding a class to my divprop 
-        divprop.setAttribute("class",'column-grid-Property')
-
-          // to append my whole create section    
+                   
+        // add a class for a right border
+          if(category.name =="income"){
+            divprop.classList.add("income")
+          } else {
+            divprop.classList.add("expenses")
+          }
+          // to append my whole create section   
           mainDiv.append(divprop);   
                
               }   

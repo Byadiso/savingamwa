@@ -3,20 +3,16 @@
 document.addEventListener('DOMContentLoaded', ()=> { 
 
     // for accessing only my form to create a property 
-    const name = document.querySelector('#name');
-    const price = document.querySelector('#price');
-    const quantity = document.querySelector('#quantity');
+    const title = document.querySelector('#title');
+    const amount = document.querySelector('#amount');
     const description = document.querySelector('#description');
-    const shipping = document.querySelector('#shipping');  
-    const category = document.querySelector('.category');
-    const photo = document.querySelector('#fileUpload');
+    const category = document.querySelector('.category');    
     const submitButton = document.querySelector('#create_pro');
     const selectionCategory = document.querySelector('.category');
     const form = document.querySelector('#create_property_form');
     const display_error = document.querySelector('.display_error');    
 
     let categoryVar
-    let shippingVar
 
 
     let categoriesItem  = JSON.parse(localStorage.getItem('categories'));
@@ -41,11 +37,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
      //for quantity change event 
 
-     quantity.addEventListener('change',(e)=>{
-       quantity.textContent = e.target.value
-     });
-
-     function getCategories(){
+       function getCategories(){
       fetchCategories();
      for ( var i= 0; i < categoriesItem.length; i++ ){        
         let { name, _id} = categoriesItem[i];
@@ -68,12 +60,6 @@ selectionCategory.addEventListener('change',(e)=>{
   console.log(datCategorie._id);
 });
 
-//for shipping change event
-shipping.addEventListener('change',(e)=>{
-  const myShipping = e.target.value;
-  shippingVar = myShipping
-})
-
   // --------------------------------------------------------------------------------------
    const user= JSON.parse(localStorage.getItem('user'));
    const id = user.user._id;
@@ -82,7 +68,7 @@ shipping.addEventListener('change',(e)=>{
 
   submitButton.addEventListener('click',  (e) => {
     e.preventDefault();     
-    if (!name.value.trim() ) {
+    if (!title.value.trim() ) {
       display_error.textContent = '* Please fill in all fields';        
     } 
     
@@ -91,15 +77,14 @@ shipping.addEventListener('change',(e)=>{
     const formData = new FormData();
     const fileField = document.querySelector('input[type="file"]');
 
-    formData.append('name', name.value);
-    formData.append('photo', fileField.files[0]);
-    formData.append('price', price.value);
-    formData.append('description', description.value);
+    formData.append('title', title.value);
+     formData.append('amount', amount.value);
+     formData.append('description', description.value);
     formData.append('category', categoryVar);
-    formData.append('quantity', quantity.value); 
-    formData.append('shipping', shippingVar);
 
-    fetch(`http://localhost:3000/api/v1/property/create/${id}`, {
+
+
+    fetch(`http://localhost:3000/api/v1/money/create/${id}`, {
         method: 'POST',
         headers: {
           "Access-Control-Allow-Origin": "*",
@@ -114,7 +99,7 @@ shipping.addEventListener('change',(e)=>{
 .then(data => {
    if(data.status == true){
      let storedData = localStorage.setItem('property', JSON.stringify(data))  
-     window.location.href = '../pages/property.html'
+     window.location.href = '../pages/myBugdet.html'
   } 
   
   if(data.status == false) console.log(data.error);        
