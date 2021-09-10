@@ -38,14 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 divprop.innerHTML =`
                 <div class="money_details" data-id="${_id}">                                        
                   <div class="item_money>
-                    <p id="title"> ${title}</p>              
-                    <p id="amount"> ${amount + " "}PLN</p>    
+                      <p id="title"> ${title}<span class="amount"> ${amount + " "}PLN</span></p>   
                   </div>                                            
                 </div>`
                 
                    
         // add a class for a right border
-          if(category.name =="income"){
+          if(category.name.toLowerCase() =="income"){
             divprop.classList.add("income")
           } else {
             divprop.classList.add("expenses")

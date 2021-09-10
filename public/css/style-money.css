@@ -1,3 +1,13 @@
+:root{
+  --blueColor: #1e90ff;
+  --whiteColor: #ffffff;
+  --expenseColor: rgb(230, 91, 91);
+  --incomeColor: rgb(84, 197, 84);
+  --spacing: 4px;
+}
+
+
+
 * {
 box-sizing: border-box;
 }
@@ -7,7 +17,7 @@ box-sizing: border-box;
 }
 body {
 font-family: Arial;
-background-color: #3498DB;
+background-color:var(--blueColor);
 padding: 50px;
 background-image: url("../image/nganatech.jpg");
 background-position: center;
@@ -17,7 +27,7 @@ margin:0;
 }
 
 .text{
-  color: white;
+  color: var(--whiteColor);
   font-family: helvetica;
   font-size: 16px;
 font-weight: 200;
@@ -395,7 +405,6 @@ margin-bottom: 10px;
 }
 
 /* for footer */
-
  
 #footer {
   position: fixed;
@@ -409,23 +418,15 @@ margin-bottom: 10px;
   font-size: 16px;
   }
 
-  /* user property */
+  /* user money */
   #myMoneys{
-    margin-bottom: 20px;
-    border-radius: 50%; 
-    width: 60%;
-    height: 30%;
-    
+    margin-bottom: 0px;
+    width: 40%;
+    height: 20%;    
   }
 
   
-  .h3-property{
-    text-align:center;
-    
-  }
-
-
-/* for my updated list from selling property 
+  /* for my updated list from selling property 
  */
 
 .imgCreated{
@@ -656,26 +657,30 @@ float: left;
 /* for new money style */
 
 .money_details{
-  background-color: white; 
+  background-color: white;   
   border-radius:10px ; 
   padding: 5px;
+  margin-bottom: var(--spacing);
   
 }
-.item_money{
-  background-color: white;
-  color: #3498DB;
-  display: flex;
-  margin-right: 20px;
+.item_money p{
+  background-color: white; 
+}
+.amount{
+  background-color: var(--blueColor);
+  color: var(--whiteColor);
+  margin: var(--spacing);
+  float: right;
+  padding: var(--spacing);
+
 }
 
 .expenses{
-  border-left: solid 4px red; 
+  border-left: solid 4px var(--expenseColor); 
   border-radius:10px ; 
-
 }
 
 .income{
-  border-left: solid 4px green; 
+  border-left: solid 4px var(--incomeColor); 
   border-radius:10px ; 
-
 }
