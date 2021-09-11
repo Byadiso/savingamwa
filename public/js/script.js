@@ -133,8 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
                   blockMoney.addEventListener('click', (e)=>{
                     // Storage()
                     let categoryBlockId = e.target.parentElement.dataset.category;
+                    console.log(categoryBlockId);
                     let saveCategoryToLocalStorage = localStorage.setItem('category-details', JSON.stringify(categoryBlockId))                  
-                      location.href='../pages/category.html';
+                      // location.href='../pages/category.html';
                                     
                    })  
                 });
