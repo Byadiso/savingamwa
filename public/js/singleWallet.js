@@ -17,15 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
     })
    
     let newMoneys = Mypro.moneys;   
-    // newMoneys=[...newMoneys]
+    
       
     let findedOne = newMoneys.find(() =>(item)=> item._id === proId);
     console.log(newMoneys) 
     console.log(proId)
     console.log(findedOne)
-    let { description,amount,title,category,createdAt, _id } = findedOne;
-
- 
+    let { description,amount,title,category,createdAt, _id } = findedOne; 
 
             // time display in readable format
             var timestamp= timeDifference(new Date(), new Date(createdAt));
@@ -39,8 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
                 var elapsed = current - previous;            
                 if (elapsed < msPerMinute) {
-                    if(elapsed/1000 <30) return "Just now";
-            
+                    if(elapsed/1000 <30) return "Just now";            
                     return Math.round(elapsed/1000) + ' seconds ago';   
                 }            
                 else if (elapsed < msPerHour) {
@@ -86,14 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderPro()
            
-
-
- //for acessing my comments reviews and description
- const descriptionCont = document.querySelector('.description_details')
-
- // set all content
- descriptionCont.textContent = description 
- 
          
    // access user and token
     const user= JSON.parse(localStorage.getItem('user'));
@@ -127,21 +116,22 @@ document.addEventListener('DOMContentLoaded', () => {
         header_related.textContent = 'Related money';
 
         // create a header for related money
-        container_related.append(header_related)
+        container_related.append(header_related);
 
         for (var i = 0; i < moneys.length; i++) {
-            const { _id, name, category } = moneys[i]
-            let money_related = document.createElement('div')
-            money_related.classList.add('related_moneys')
-
-            money_related.innerHTML = `<img scr=http://localhost:3000/api/v1/money/photo/${_id} class="imgCreated" style="width: 100px; height: 50px;">
-         <p id="phone"><strong>name:</strong> ${name}</p>       
+            const { _id, amount } = moneys[i]
+            let money_related = document.createElement('div');
+            money_related.classList.add('related_moneys');
+            money_related.innerHTML = `
+            <div class="money_details" data-id="${_id}">                                        
+                <div class="item_money>
+                    <p id="title"> ${title}<span class="amount"> ${amount + " "}PLN</span></p>   
+                </div>                                            
+            </div>               
           `
-            container_related.append(money_related)
-            mainSingleDiv.appendChild(container_related)
-            
+            container_related.append(money_related);
+            mainSingleDiv.appendChild(container_related);            
         }
     }
     fetchingRelated();
-
 })
