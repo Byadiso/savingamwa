@@ -92,8 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   blockMoney.addEventListener('click', (e)=>{
                     // Storage()
                     let moneyBlockId = e.target.parentElement.dataset.id;
-                    let saveIdToLocalStorage = localStorage.setItem('id', JSON.stringify(moneyBlockId))
-                  
+                    let saveIdToLocalStorage = localStorage.setItem('id', JSON.stringify(moneyBlockId))                  
                       location.href='../pages/money.html';
                                     
                    })  
