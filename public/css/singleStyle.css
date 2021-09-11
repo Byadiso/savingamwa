@@ -1,3 +1,15 @@
+:root{
+  --blueColor: #1e90ff;
+  --whiteColor: #ffffff;
+  --expenseColor: rgb(230, 91, 91);
+  --incomeColor: rgb(84, 197, 84);
+  --walletColor:rgb(156, 155, 75);
+  --savingsColor:rgb(236, 233, 40);
+  --spacing: 4px;
+  
+}
+
+
 * {
   box-sizing: border-box;
   }
@@ -65,12 +77,13 @@
   .date_posted{
     color: black;
   }
-  /* 
-  for hidding delete comment or uncomment */
-  .hide{
-    display: none;
-  }
-  
+.amount{
+  background-color: var(--blueColor);
+  color: var(--whiteColor); 
+  border-radius: 20px;
+  margin: var(--spacing);
+  padding: var(--spacing);
+}
    
   
   .transparentBcg {

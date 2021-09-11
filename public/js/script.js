@@ -140,9 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
                    })  
                 });
 
-
-
-              
+            
                listAll();
 
 

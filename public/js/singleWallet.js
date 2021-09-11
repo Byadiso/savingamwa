@@ -1,14 +1,5 @@
 
-    export default function renderUIPart(id,title,amount){
-        return `
-        <div class="money_details" data-id="${id}">                                        
-            <div class="item_money>
-                <p id="title"> ${title}<span class="amount"> ${amount + " "}PLN</span></p>   
-            </div>                                            
-        </div>               
-      `
-    }
-
+ 
 /* eslint-disable prettier/prettier */
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -79,9 +70,27 @@ document.addEventListener('DOMContentLoaded', () => {
                    <h5>${description}</h5>                   
                    <h5>${category.name}</h5>
                    <h5>${amount}</h5>
-                   <h5>${timestamp}</h5>
+                   <h5>Added ${timestamp}</h5>
+                   <div class="btns_category">
+                        <buton class="btn btn_edit">Edit</buton>
+                        <buton class="btn btn_delete">Delete</buton>
+                   </div>
+                   
              </div>
-                 `                  
+                 `      
+                 
+        //add eventlistener to edit and delete buttons
+        const edit_btns_category = document.querySelectorAll('.btn_edit');
+        edit_btns_category.forEach(blockMoney => {
+            blockMoney.addEventListener('click', (e)=>{
+              // Storage()
+              let moneyBlockId = e.target.parentElement.dataset.id;    
+              console.log(moneyBlockId)                
+              let saveCategoryToLocalStorage = localStorage.setItem('money_edit_details', JSON.stringify(moneyBlockId))                  
+                // location.href='../pages/update.html';
+                              
+             })  
+          });
                 
         
         //appending the main container
@@ -133,17 +142,21 @@ document.addEventListener('DOMContentLoaded', () => {
             let money_related = document.createElement('div');
             money_related.classList.add('related_moneys');
             money_related.innerHTML = renderUIPart(_id, title, amount)
-            
-        //     `
-        //     <div class="money_details" data-id="${_id}">                                        
-        //         <div class="item_money>
-        //             <p id="title"> ${title}<span class="amount"> ${amount + " "}PLN</span></p>   
-        //         </div>                                            
-        //     </div>               
-        //   `
             container_related.append(money_related);
             mainSingleDiv.appendChild(container_related);            
         }
     }
     fetchingRelated();
+
+       // this is a  function to other part of the pages    
+    
+  function renderUIPart(id,title,amount){
+    return `
+    <div class="money_details" data-id="${id}">                                        
+        <div class="item_money>
+            <p id="title"> ${title}<span class="amount"> ${amount + " "}PLN</span></p>   
+        </div>                                            
+    </div>               
+  `
+}
 })
