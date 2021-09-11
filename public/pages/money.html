@@ -8,9 +8,7 @@
          <title> Savingamwa </title>
          <link rel="icon" type="image/ico" href="../image/bar-icon.png" />
          <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
-         <script type="module" src="../js/singleWallet.js" defer></script>
-
-        
+         <script type="module" src="../js/singleWallet.js" defer></script>      
 
 </head>
 <body>
@@ -42,50 +40,12 @@
 
 </body>
 
-<script>
-                
-
-function open_single_tabs(evt, single_tabs) {
-    // Declare all variables
-    var i, tabcontent, tablinks;
-    
-    // Get all elements with class="tabcontent" and hide them
-    tabcontent = document.getElementsByClassName("tabcontent");
-    // tabcontent.textContent= 'this has been fecthed'
-    for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";     
-    }
-    
-    // Get all elements with class="tablinks" and remove the class "active"
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    
-    // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(single_tabs).style.display = "block";
-    evt.currentTarget.className += " active"; 
-
-    }
-
-
-    // // to show properties in cart
-    let user = JSON.parse(localStorage.getItem('user'));      
-        if (user == null) {
-            window.location.href = './login.html'
-        }
-
-         // cart logic
-        if (typeof window !== 'undefined') {
-        if (localStorage.getItem('cart')) {            
-            let storedInCarrt = JSON.parse(localStorage.getItem('cart'))
-            let cart = document.querySelectorAll(".cart-items")[0];
-            cart.textContent = storedInCarrt.length
-        }
-
-    }
-
-    
+<script>            
+            // // to show properties in cart
+            let user = JSON.parse(localStorage.getItem('user'));      
+                if (user == null) {
+                    window.location.href = './login.html'
+                }   
   
 
             // ---------------------for real time date at the bootom-------------------
@@ -124,11 +84,6 @@ function open_single_tabs(evt, single_tabs) {
 
                 
             date.textContent= today +"-"+ month +"-"+year;
-
             //...............................End here date month format    
-
-
-
 </script>
-
 </html>
