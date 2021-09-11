@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
    
     const mainSingleDiv = document.getElementById('singleProperty')
     let proId = localStorage.getItem('id');
+    console.log(proId);
     const success_message = document.querySelector('.success_message');
     const display_error = document.querySelector('.display_error_comment');
     let propertiesItem = { ...JSON.parse(localStorage.getItem('properties')) };

@@ -60,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
               //adding negative sign to amount for expenses
               if(category.name.toLowerCase() =="expenses"){ 
                 amount = -amount                  
-                console.log(amount + "some shit")
                 walletAmount.push(amount)  
               }else {
                 walletAmount.push(amount)  
@@ -93,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   blockMoney.addEventListener('click', (e)=>{
                     // Storage()
                     let moneyBlockId = e.target.parentElement.dataset.id;
-                    localStorage.setItem('id', moneyBlockId)
+                    localStorage.setItem('id', JSON.stringify(moneyBlockId))                    
                     location.href='../pages/money.html';
                   })  
                 });
@@ -145,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
             function setItemStorage(arrayMoney, titleMoney, amountMoney){
               arrayMoney.push(amountMoney)
               localStorage.setItem(titleMoney , JSON.stringify(arrayMoney));  
-              console.log(arrayMoney)  
+             
             }
 
             //render item to ui
