@@ -70,6 +70,53 @@
     background-color: red;
   }
   
+  .btn {
+    border: 2px solid transparent;
+    background: #3498DB;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 15px;
+    padding: 2px 0;
+    margin: 2px 3px;
+    text-decoration: none;
+    text-shadow: none;
+    border-radius: 3px;
+    box-shadow: none;
+    transition: 0.25s;
+    display: block;
+    width: 60px;        
+  }
+  
+  .btn:hover {
+    background-color: #2980B9;
+    cursor: pointer;
+  }
+  
+
+  .btn_edit, .btn_delete{
+    border: 2px solid transparent;
+    background: #3498DB;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 15px;
+    padding: 2px 0;
+    margin: 2px 3px;
+    text-decoration: none;
+    text-shadow: none;
+    border-radius: 3px;
+    box-shadow: none;
+    transition: 0.25s;
+    display: block;
+    width: 60px;  
+  }
+  .btn_edit:hover, .btn_delete:hover {
+    cursor: pointer;
+  }
+
+  .btns_category{
+    display: flex;
+  }
+  
   .posted_by{
   color: white;
   }

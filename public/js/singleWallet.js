@@ -65,34 +65,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const moneyContainer = document.createElement('DIV');     
                       
          moneyContainer.innerHTML =`
-                <div class="money_container" data-toAdd="${_id}">    
+                <div class="money_container">    
                    <h5>${title}</h5>               
                    <h5>${description}</h5>                   
                    <h5>${category.name}</h5>
                    <h5>${amount}</h5>
                    <h5>Added ${timestamp}</h5>
-                   <div class="btns_category">
-                        <buton class="btn btn_edit">Edit</buton>
-                        <buton class="btn btn_delete">Delete</buton>
+                   <div class=" btns_category" data-toAdd="${_id}">
+                        <buton class="btn_edit">Edit</buton>
+                        <buton class="btn_delete">Delete</buton>
                    </div>
                    
              </div>
                  `      
                  
-        //add eventlistener to edit and delete buttons
-        const edit_btns_category = document.querySelectorAll('.btn_edit');
-        edit_btns_category.forEach(blockMoney => {
-            blockMoney.addEventListener('click', (e)=>{
-              // Storage()
-              let moneyBlockId = e.target.parentElement.dataset.id;    
-              console.log(moneyBlockId)                
-              let saveCategoryToLocalStorage = localStorage.setItem('money_edit_details', JSON.stringify(moneyBlockId))                  
-                // location.href='../pages/update.html';
-                              
-             })  
-          });
-                
-        
+          
         //appending the main container
         mainSingleDiv.appendChild(moneyContainer);       
 
@@ -159,4 +146,37 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>               
   `
 }
+
+document.getElementById('singleMoney').addEventListener('click',(event)=> {
+    if (event.target.className === 'btn_edit') { 
+        console.log('Clicked! yes it is edit btn');
+        let propId = event.target.parentElement.dataset.toadd;
+        console.log(propId)
+              console.log('soon i am going to udpate you friend ' + propId);    
+              let data_user = {
+                prop_id: propId,
+                user_id: _id,
+                token : token
+              }
+              localStorage.setItem('id_user_to_update', JSON.stringify(data_user));   
+              let stored = JSON.parse(localStorage.getItem('id')); 
+            //   stored ? location.href='../pages/update.html' : console.log('no stored id to update');
+       
+      } else if(event.target.className === 'btn_delete'){
+        let propId = event.target.parentElement.dataset.toadd;
+        console.log('soon i am going to delete you friend ' + propId);    
+        let data_to_be_updated = {
+          prop_id: propId,
+          user_id: _id,
+          token : token
+        }
+        localStorage.setItem('id_to_update', JSON.stringify(data_to_be_updated));   
+        let stored = JSON.parse(localStorage.getItem('id_to_deleted')); 
+        stored ? location.href='../pages/myBugdet.html' : console.log('no stored id to delete');
+      }
+})
+
+
+
+
 })
