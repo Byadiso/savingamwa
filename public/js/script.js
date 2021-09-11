@@ -92,13 +92,14 @@ document.addEventListener('DOMContentLoaded', () => {
                   blockMoney.addEventListener('click', (e)=>{
                     // Storage()
                     let moneyBlockId = e.target.parentElement.dataset.id;
-                    localStorage.setItem('id', JSON.stringify(moneyBlockId))                    
-                    location.href='../pages/money.html';
-                  })  
+                    let saveIdToLocalStorage = localStorage.setItem('id', JSON.stringify(moneyBlockId))
+                  
+                      location.href='../pages/money.html';
+                                    
+                   })  
                 });
               }            
-             
-              
+                          
               //get amount from localstorage and calculate my savings
               
               let amountFromLocal = getItemStorage('amountTotal'); 

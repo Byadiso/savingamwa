@@ -31,13 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const renderPro = () => {       
         const moneyContainer = document.createElement('DIV');       
-         
-                
-        
-
-    moneyContainer.innerHTML =`
+                      
+         moneyContainer.innerHTML =`
                 <div class="money_container" data-toAdd="${_id}">                   
-                   <h4>${description}</h4>
+                   <h5>${description}</h5>
                 </div>
                  `                  
                 
