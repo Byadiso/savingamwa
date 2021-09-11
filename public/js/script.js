@@ -132,10 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
               category_details.forEach(blockMoney => {
                   blockMoney.addEventListener('click', (e)=>{
                     // Storage()
-                    let categoryBlockId = e.target.parentElement.dataset.category;
-                    console.log(categoryBlockId);
+                    let categoryBlockId = e.target.dataset.category;    
+                    console.log(categoryBlockId)                
                     let saveCategoryToLocalStorage = localStorage.setItem('category-details', JSON.stringify(categoryBlockId))                  
-                      // location.href='../pages/category.html';
+                      location.href='../pages/category.html';
                                     
                    })  
                 });
