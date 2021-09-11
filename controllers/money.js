@@ -5,7 +5,8 @@ import fs from 'fs';
 import Money from "../models/money";
 
 
-exports.moneyById = (req,res, next, id ) =>{
+exports.moneyById = (req,res, next) =>{
+    let id = req.moneyId
     Money.findById(id)
     .populate('category')
     .exec((err, money)=>{
@@ -44,14 +45,14 @@ exports.list = (req, res )=>{
             moneys: data,
             message: 'My Budget',
             status: true
-        })
-    })
+        });
+    });
 }
 
 exports.listRelated = (req, res )=>{    
     let limit = req.query.limit ? parseInt(req.query.limit) : 4 ;
+    console.log(req.money.category);
     Money.find({_id: {$ne: req.money}, category: req.money.category})
-        .select('-photo')
         .limit(limit)
         .populate('category', '_id title')    
         .exec((err, moneys) =>{
@@ -60,9 +61,8 @@ exports.listRelated = (req, res )=>{
                 error: "moneys not found"
             });
         }
-        res.json(moneys)
-    })
-
+        res.json(moneys);
+    });
 }
 
 
@@ -76,26 +76,6 @@ exports.listCategories = (req, res )=>{
         res.json(categories)
     })
 }
-
-
-exports.listByUser = (req, res) => {
-    Money.find({ createdBy: req.profile._id })
-        .populate('createdBy', '_id title')
-        .select('_id title description created ')
-        .sort('_created')
-        .exec((err, moneys) => {
-            if (err) {
-                return res.status(400).json({
-                    error: err
-                });
-            }
-            res.json({
-                moneys: moneys,
-                message: `property by this user`
-            });
-        });
-};
-
 
 exports.listBySearch = (req, res) => {
     let order = req.body.order ? req.body.order : "desc";
@@ -238,16 +218,6 @@ exports.update = (req, res)=>{
         
     });
 };
-
-
-exports.photo = (req, res, next )=>{
-    if(req.money.photo){
-        res.set('Content-Type', req.money.photo.contentType);
-        return res.send(req.money.photo.data);
-    }
-    next();
-}
-
 
 
 exports.listSearch = (req, res) => {
