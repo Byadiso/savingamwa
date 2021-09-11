@@ -1,4 +1,5 @@
-      
+    // import this function from singlewallet
+    import renderUIPart from './singleWallet';
           
 document.addEventListener('DOMContentLoaded', () => {     
           
@@ -47,12 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
              
                // for short  notation is the best
              
-                divprop.innerHTML =`
-                <div class="money_details" data-id="${_id}">                                        
-                  <div class="item_money>
-                      <p id="title"> ${title}<span class="amount"> ${amount + " "}PLN</span></p>   
-                  </div>                                            
-                </div>`
+                divprop.innerHTML = renderUIPart(_id,title,amount);
+                
+                // `
+                // <div class="money_details" data-id="${_id}">                                        
+                //   <div class="item_money>
+                //       <p id="title"> ${title}<span class="amount"> ${amount + " "}PLN</span></p>   
+                //   </div>                                            
+                // </div>`
                 
 
               //save amount in localstorage

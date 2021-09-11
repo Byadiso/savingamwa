@@ -1,7 +1,18 @@
 
+    export default function renderUIPart(id,title,amount){
+        return `
+        <div class="money_details" data-id="${id}">                                        
+            <div class="item_money>
+                <p id="title"> ${title}<span class="amount"> ${amount + " "}PLN</span></p>   
+            </div>                                            
+        </div>               
+      `
+    }
 
 /* eslint-disable prettier/prettier */
 document.addEventListener('DOMContentLoaded', () => {
+
+    
    
     const mainSingleDiv = document.getElementById('singleMoney')
     let moneyIdFrom = localStorage.getItem('id');
@@ -135,14 +146,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     fetchingRelated();
-
-    function renderUIPart(id,title,amount){
-        return `
-        <div class="money_details" data-id="${id}">                                        
-            <div class="item_money>
-                <p id="title"> ${title}<span class="amount"> ${amount + " "}PLN</span></p>   
-            </div>                                            
-        </div>               
-      `
-    }
 })
