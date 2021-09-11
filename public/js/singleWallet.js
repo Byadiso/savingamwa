@@ -121,16 +121,28 @@ document.addEventListener('DOMContentLoaded', () => {
             const { _id, amount } = moneys[i]
             let money_related = document.createElement('div');
             money_related.classList.add('related_moneys');
-            money_related.innerHTML = `
-            <div class="money_details" data-id="${_id}">                                        
-                <div class="item_money>
-                    <p id="title"> ${title}<span class="amount"> ${amount + " "}PLN</span></p>   
-                </div>                                            
-            </div>               
-          `
+            money_related.innerHTML = renderUIPart(_id, title, amount)
+            
+        //     `
+        //     <div class="money_details" data-id="${_id}">                                        
+        //         <div class="item_money>
+        //             <p id="title"> ${title}<span class="amount"> ${amount + " "}PLN</span></p>   
+        //         </div>                                            
+        //     </div>               
+        //   `
             container_related.append(money_related);
             mainSingleDiv.appendChild(container_related);            
         }
     }
     fetchingRelated();
+
+    function renderUIPart(id,title,amount){
+        return `
+        <div class="money_details" data-id="${id}">                                        
+            <div class="item_money>
+                <p id="title"> ${title}<span class="amount"> ${amount + " "}PLN</span></p>   
+            </div>                                            
+        </div>               
+      `
+    }
 })
