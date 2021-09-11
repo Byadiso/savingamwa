@@ -3,21 +3,21 @@
 /* eslint-disable prettier/prettier */
 document.addEventListener('DOMContentLoaded', () => {
    
-    const mainSingleDiv = document.getElementById('singlemoney')
+    const mainSingleDiv = document.getElementById('singleMoney')
     let proId = localStorage.getItem('id');
     const success_message = document.querySelector('.success_message');
     const display_error = document.querySelector('.display_error_comment');
     let moneysItem = { ...JSON.parse(localStorage.getItem('moneys')) };
-    let cart_items = 1;
+   
     let pro = []
     pro = [...pro, moneysItem]
 
     let Mypro = pro.find((item) => () => {
-        item.money.id[0] === proId
+        item.money.id === proId
     })
    
-    let newMoneys = Mypro.moneys;
-    newMoneys=[...newMoneys]
+    let newMoneys = Mypro.moneys;   
+    // newMoneys=[...newMoneys]
       
     let findedOne = newMoneys.find((item) =>()=> item._id === proId);
     console.log(newMoneys) 
