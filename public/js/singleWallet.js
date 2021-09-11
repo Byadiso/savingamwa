@@ -3,48 +3,47 @@
 /* eslint-disable prettier/prettier */
 document.addEventListener('DOMContentLoaded', () => {
    
-    const mainSingleDiv = document.getElementById('singleProperty')
+    const mainSingleDiv = document.getElementById('singlemoney')
     let proId = localStorage.getItem('id');
-    console.log(proId);
     const success_message = document.querySelector('.success_message');
     const display_error = document.querySelector('.display_error_comment');
-    let propertiesItem = { ...JSON.parse(localStorage.getItem('properties')) };
+    let moneysItem = { ...JSON.parse(localStorage.getItem('moneys')) };
     let cart_items = 1;
     let pro = []
-    pro = [...pro, propertiesItem]
+    pro = [...pro, moneysItem]
 
     let Mypro = pro.find((item) => () => {
-        item.Property.id[0] === proId
+        item.money.id[0] === proId
     })
 
-    let newPro = Mypro.properties;    
-    let findedOne = newPro.find((item) => item._id === proId);
-    let { description, shipping, reviews, comments, _id } = findedOne;
+    let newMoneys = Mypro.moneys;
+      
+    let findedOne = newMoneys.find((item) => item._id === proId);
+    console.log(findedOne) 
+    let { description,amount,title,category, _id } = findedOne;
 
  
 
-// ..................................render property ................................................
+// ..................................render money ................................................
 
     const renderPro = () => {       
-        const propertyContainer = document.createElement('DIV');       
-        let photoUrl = `http://localhost:3000/api/v1/property/photo/${proId}`;     
+        const moneyContainer = document.createElement('DIV');       
+        let photoUrl = `http://localhost:3000/api/v1/money/photo/${proId}`;     
        let isIncart = checkInCart(_id);
 
-      
-       
+           
         
 
-    propertyContainer.innerHTML =`
-                <div class="property_container" data-toadd="${_id}">
+    moneyContainer.innerHTML =`
+                <div class="money_container" data-toAdd="${_id}">
                     <img src=${photoUrl} class="imgCreated" style="width: 350px; height: 400px;">
                     <button class="btn_addCart"><i class="fas fa-shopping-cart"></i>${isIncart ? "In Cart": "Add to cart"}</button>
                 </div>
-                 `  
-                 
+                 `                  
                 
         
         //appending the main container
-        mainSingleDiv.appendChild(propertyContainer);       
+        mainSingleDiv.appendChild(moneyContainer);       
 
         //  trying to addToCart butto a even listenenre
          const btns = document.querySelectorAll('.btn_addCart');         
@@ -54,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
               // add event listener
              btn.addEventListener('click', (event)=>{  
-                let item_id = event.target.parentNode.dataset.toadd;
+                let item_id = event.target.parentNode.dataset.toAdd;
                 let buttonAddToCart =  event.target;               
                 addToCart(item_id, buttonAddToCart );                    
              });
@@ -65,9 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function addToCart(item_id, buttonContent){                
             let cart=[];     
-            let propertiesItem = {...JSON.parse(localStorage.getItem('properties'))};           
-            let newPro = propertiesItem.properties;            
-            let itemTobeAdded = newPro.find((item) => item._id === item_id);           
+            let moneysItem = {...JSON.parse(localStorage.getItem('moneys'))};           
+            let newMoneys = moneysItem.moneys;            
+            let itemTobeAdded = newMoneys.find((item) => item._id === item_id);           
                         
    
             if (typeof window !== 'undefined') {
@@ -198,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const user= JSON.parse(localStorage.getItem('user'));
     const userId = user.user._id;
     const token = user.token; 
-    let propertyId =_id
+    let moneyId =_id
              
 
 
@@ -210,14 +209,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         // const comments = document.querySelector('.comment')[0];
                         let comment_created = e.target.parentNode.children[0].dataset.comment
                         console.log(comment_created)
-                        return fetch(`http://localhost:3000/api/v1/property/uncomment/`, {
+                        return fetch(`http://localhost:3000/api/v1/money/uncomment/`, {
                             method: "PUT",
                             headers: {
                                 Accept: "application/json",
                                 "Content-Type": "application/json",
                                 Authorization: `Bearer ${token}`
                             },
-                            body: JSON.stringify( { userId , propertyId, comment: {text: comment_created} })
+                            body: JSON.stringify( { userId , moneyId, comment: {text: comment_created} })
                         })
                 .then(data => {
                     // console.log(data)
@@ -245,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //fetching related
     const fetchingRelated = () => {
-        fetch(`http://localhost:3000/api/v1/properties/related/${proId}/`, {
+        fetch(`http://localhost:3000/api/v1/moneys/related/${proId}/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -257,26 +256,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderRelated(data) {
         console.log(data)
-        let properties = data
-        console.log(properties)
+        let moneys = data
+        console.log(moneys)
         const container_related = document.createElement('DIV')
-        container_related.classList.add('property_container');
+        container_related.classList.add('money_container');
         let header_related = document.createElement('h1');
         header_related.classList.add('header_related');
-        header_related.textContent = 'Related Property';
+        header_related.textContent = 'Related money';
 
-        // create a header for related property
+        // create a header for related money
         container_related.append(header_related)
 
-        for (var i = 0; i < properties.length; i++) {
-            const { _id, name, category } = properties[i]
-            let property_related = document.createElement('div')
-            property_related.classList.add('related_properties')
+        for (var i = 0; i < moneys.length; i++) {
+            const { _id, name, category } = moneys[i]
+            let money_related = document.createElement('div')
+            money_related.classList.add('related_moneys')
 
-            property_related.innerHTML = `<img scr=http://localhost:3000/api/v1/property/photo/${_id} class="imgCreated" style="width: 100px; height: 50px;">
+            money_related.innerHTML = `<img scr=http://localhost:3000/api/v1/money/photo/${_id} class="imgCreated" style="width: 100px; height: 50px;">
          <p id="phone"><strong>name:</strong> ${name}</p>       
           `
-            container_related.append(property_related)
+            container_related.append(money_related)
             mainSingleDiv.appendChild(container_related)
             
         }
@@ -286,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// add properties in cart 
+// add moneys in cart 
 document.body.addEventListener( 'click', function ( event ) { 
 
     if( event.target && event.target.matches(".btn_addCart")) {            
@@ -301,9 +300,9 @@ document.body.addEventListener( 'click', function ( event ) {
 
 function addToCart(item_id, buttonContent){ 
     let cart=[];     
-    let propertiesItem = { ...JSON.parse(localStorage.getItem('properties')) } ;          
-        let itemTobeAdded =  propertiesItem.properties.find((item) => () => {
-        item.Property.id === item_id
+    let moneysItem = { ...JSON.parse(localStorage.getItem('moneys')) } ;          
+        let itemTobeAdded =  moneysItem.moneys.find((item) => () => {
+        item.money.id === item_id
     });            
     console.log("let add to the cart");            
     cart.push({
@@ -318,7 +317,7 @@ function addToCart(item_id, buttonContent){
 
 
 
-//  //check property in cart
+//  //check money in cart
 //  function checkIfInCart (id){
 //     let storedInCarrt = JSON.parse(localStorage.getItem('cart'))
 //     let cart = document.querySelectorAll(".cart-items")[0];
