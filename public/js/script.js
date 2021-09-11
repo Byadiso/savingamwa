@@ -126,6 +126,21 @@ document.addEventListener('DOMContentLoaded', () => {
                   localStorage.clear();
                   window.location.href = '../pages/login.html';
               })
+
+              // category page run
+              const category_details = document.querySelectorAll('.category_details');
+              category_details.forEach(blockMoney => {
+                  blockMoney.addEventListener('click', (e)=>{
+                    // Storage()
+                    let categoryBlockId = e.target.parentElement.dataset.category;
+                    let saveCategoryToLocalStorage = localStorage.setItem('category-details', JSON.stringify(categoryBlockId))                  
+                      location.href='../pages/category.html';
+                                    
+                   })  
+                });
+
+
+
               
                listAll();
 
