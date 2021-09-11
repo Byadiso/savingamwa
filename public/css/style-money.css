@@ -735,6 +735,10 @@ float: left;
   background-color: yellow;
 }
 
+.money_details:hover{
+cursor: pointer;
+}
+
 
 .wallet_details .incomes{
   background-color: rgb(24, 192, 24);
