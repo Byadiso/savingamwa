@@ -5,8 +5,7 @@ import fs from 'fs';
 import Money from "../models/money";
 
 
-exports.moneyById = (req,res, next) =>{
-    let id = req.moneyId
+exports.moneyById = (req,res, next,id) =>{    
     Money.findById(id)
     .populate('category')
     .exec((err, money)=>{

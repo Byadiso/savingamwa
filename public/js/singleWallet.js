@@ -4,7 +4,7 @@
 document.addEventListener('DOMContentLoaded', () => {
    
     const mainSingleDiv = document.getElementById('singleMoney')
-    let proId = localStorage.getItem('id');
+    let moneyIdFrom = localStorage.getItem('id');
     const success_message = document.querySelector('.success_message');
     const display_error = document.querySelector('.display_error_comment');
     let moneysItem = { ...JSON.parse(localStorage.getItem('moneys')) };
@@ -13,16 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
     pro = [...pro, moneysItem]
 
     let Mypro = pro.find((item) => () => {
-        item.money.id === proId
+        item.money.id[0] === moneyIdFrom
     })
    
     let newMoneys = Mypro.moneys;   
     
       
-    let findedOne = newMoneys.find(() =>(item)=> item._id === proId);
-    console.log(newMoneys) 
-    console.log(proId)
-    console.log(findedOne)
+    let findedOne = newMoneys.find((item) =>()=> {
+        item._id === moneyIdFrom
+    });
     let { description,amount,title,category,createdAt, _id } = findedOne; 
 
             // time display in readable format
@@ -95,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //fetching related
     const fetchingRelated = () => {
-        fetch(`http://localhost:3000/api/v1/moneys/related/${proId}/`, {
+        fetch(`http://localhost:3000/api/v1/moneys/related/${moneyId}/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
