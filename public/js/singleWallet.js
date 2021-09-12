@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
 
       
-    let findedOne = pro.find((item) => item._id === moneyIdFrom);
+    let findedOne = pro.find((item) =>()=> item._id === moneyIdFrom);
     
     console.log(findedOne._id)
     console.log(moneyIdFrom)
