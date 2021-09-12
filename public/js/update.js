@@ -6,13 +6,10 @@ document.addEventListener('DOMContentLoaded', ()=> {
             
   // for accessing only my form to be updated 
   // for accessing only my form to create a property 
-  const name = document.querySelector('#name');
-  const price = document.querySelector('#price');
-  const quantity = document.querySelector('#quantity');
-  const description = document.querySelector('#description');
-  const shipping = document.querySelector('#shipping');
-  const sold = document.querySelector('#sold');
-  const category = document.querySelector('.category');
+  const title = document.querySelector('#title');
+  const amount = document.querySelector('#amount');
+   const description = document.querySelector('#description');
+    const category = document.querySelector('.category');
   const photo = document.querySelector('#fileUpload');
   const submitButton = document.querySelector('#create_pro');
   const selectionCategory = document.querySelector('.category');
@@ -29,8 +26,8 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
   // for storage purpose 
   let property_to_update = JSON.parse(localStorage.getItem('id_to_update'));
-  let properties = JSON.parse(localStorage.getItem('properties'));
-  let data = properties.properties;
+  let moneys = JSON.parse(localStorage.getItem('moneys'));
+  let data = moneys.moneys;
   
 // console.log(property_to_update.user_id);
   const { prop_id,user_id,token } = property_to_update
@@ -39,7 +36,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
   console.log(token);
 
   // console.log(data)
-
   let proData = data.find(item => item._id == prop_id);
   console.log(proData);
 
@@ -71,8 +67,8 @@ function getCategories(){
 selectionCategory.addEventListener('change',(e)=>{
   const myCategorie = e.target.value;
   // category.textContent= myCategorie; 
-  // myCategorie === String ? "_id ": 'name'; 
-  let datCategorie = categoriesItem.find(item => item.name === myCategorie);
+  // myCategorie === String ? "_id ": 'title'; 
+  let datCategorie = categoriesItem.find(item => item.title === myCategorie);
 
   // categoryVar = myCategorie
   categoryVar = datCategorie._id;
@@ -80,27 +76,18 @@ selectionCategory.addEventListener('change',(e)=>{
 
 });
 
-//for shipping change event
-shipping.addEventListener('change',(e)=>{
-  const myShipping = e.target.value;
-  // shipping.textContent= myShipping;
-  shippingVar = myShipping
-
-})
 
   // setting values 
-  name.value = proData.name;  
-  price.value = proData.price;
+  title.value = proData.title;  
+  amount.value = proData.amount;
   description.value = proData.description;
-  quantity.value = proData.quantity;
-  sold.value = proData.sold;
   
   
   
 
   submitButton.addEventListener('click',  (e) => {
     e.preventDefault();     
-    if (!name.value.trim() ) {
+    if (!title.value.trim() ) {
       display_error.textContent = '* Please fill in all fields';        
     } else{
 
@@ -109,12 +96,9 @@ shipping.addEventListener('change',(e)=>{
 
     formData.append('name', name.value);
     formData.append('photo', fileField.files[0]);
-    formData.append('price', price.value);
+    formData.append('amount', amount.value);
     formData.append('description', description.value);
     formData.append('category', categoryVar);
-    formData.append('quantity', quantity.value);
-    formData.append('sold', sold.value);
-    formData.append('shipping', shippingVar); 
       fetch(`http://localhost:3000/api/v1/property/${prop_id}/${user_id}`, {
         method: 'PUT',
         headers: {

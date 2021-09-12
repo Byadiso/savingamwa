@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
     let findedOne = pro.find((item) =>()=> item._id === moneyIdFrom);
     
-    console.log(findedOne._id)
+    console.log(findedOne.title)
     console.log(moneyIdFrom)
     let { description,amount,title,category,createdAt, _id } = findedOne; 
 
@@ -109,10 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
             .then((data) => renderRelated(data))
     }
 
-    function renderRelated(data) {
-        console.log(data)
-        let moneys = data
-        console.log(moneys)
+    function renderRelated(data) {       
+        let moneys = data        
         const container_related = document.createElement('DIV')
         container_related.classList.add('money_container');
         let header_related = document.createElement('h1');
@@ -148,16 +146,16 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('singleMoney').addEventListener('click',(event)=> {
     if (event.target.className === 'btn_edit') { 
         console.log('Clicked! yes it is edit btn');
-        let propId = event.target.parentElement.dataset.toadd;
-        console.log(propId)
-              console.log('soon i am going to udpate you friend ' + propId);    
+        let propId = event.target.parentElement.dataset.toadd;        
+                
               let data_user = {
                 prop_id: propId,
                 user_id: _id,
                 token : token
               }
+
               localStorage.setItem('id_user_to_update', JSON.stringify(data_user));   
-              let stored = localStorage.getItem('id'); 
+              let stored = localStorage.getItem('single_id'); 
               stored ? location.href='../pages/update.html' : console.log('no stored id to update');
        
       } else if(event.target.className === 'btn_delete'){
