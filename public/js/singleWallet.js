@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainSingleDiv = document.getElementById('singleMoney')
     let moneyIdFrom = localStorage.getItem('single_id');
     let moneysItems = JSON.parse(localStorage.getItem('moneys')) ;
-
     let pro = moneysItems.moneys  
      
     let findedOne = pro.find((item) =>()=> item._id === moneyIdFrom);

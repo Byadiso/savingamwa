@@ -746,3 +746,7 @@ cursor: pointer;
   background-color: orange;
 }
 
+.category_details:hover {
+	cursor:pointer;
+}
+
