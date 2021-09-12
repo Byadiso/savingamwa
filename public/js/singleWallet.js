@@ -150,10 +150,10 @@ document.getElementById('singleMoney').addEventListener('click',(event)=> {
                 
               let data_user = {
                 prop_id: propId,
-                user_id: _id,
+                user_id: userId,
                 token : token
               }
-
+console.log(data_user)
               localStorage.setItem('id_user_to_update', JSON.stringify(data_user));   
               let stored = localStorage.getItem('single_id'); 
               stored ? location.href='../pages/update.html' : console.log('no stored id to update');

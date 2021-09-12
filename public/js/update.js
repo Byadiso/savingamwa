@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', ()=> {
   let property_to_update = JSON.parse(localStorage.getItem('id_to_update'));
   let moneys = JSON.parse(localStorage.getItem('moneys'));
   let data = moneys.moneys;
+
+  console.log(property_to_update)
   
 // console.log(property_to_update.user_id);
   const { prop_id,user_id,token } = property_to_update
@@ -90,16 +92,13 @@ selectionCategory.addEventListener('change',(e)=>{
     if (!title.value.trim() ) {
       display_error.textContent = '* Please fill in all fields';        
     } else{
-
+console.log(user_id)
       const formData = new FormData();
-      const fileField = document.querySelector('input[type="file"]');
-
-    formData.append('name', name.value);
-    formData.append('photo', fileField.files[0]);
+    formData.append('title', title.value);
     formData.append('amount', amount.value);
     formData.append('description', description.value);
     formData.append('category', categoryVar);
-      fetch(`http://localhost:3000/api/v1/property/${prop_id}/${user_id}`, {
+      fetch(`http://localhost:3000/api/v1/money/${prop_id}/${user_id}`, {
         method: 'PUT',
         headers: {
           "Access-Control-Allow-Origin": "*",
