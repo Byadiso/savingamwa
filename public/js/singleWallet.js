@@ -6,24 +6,22 @@ document.addEventListener('DOMContentLoaded', () => {
     
    
     const mainSingleDiv = document.getElementById('singleMoney')
-    let moneyIdFrom = localStorage.getItem('id');
+    let moneyIdFrom = localStorage.getItem('single_id');
     const success_message = document.querySelector('.success_message');
     const display_error = document.querySelector('.display_error_comment');
-    let moneysItem = { ...JSON.parse(localStorage.getItem('moneys')) };
-   
-    let pro = []
-    pro = [...pro, moneysItem]
+    let moneysItems = JSON.parse(localStorage.getItem('moneys')) ;
 
-    let Mypro = pro.find((item) => () => {
-        item.money.id[0] === moneyIdFrom
-    })
+    let pro = moneysItems.moneys
    
-    let newMoneys = Mypro.moneys;   
+    console.log(pro)
     
+    
+
       
-    let findedOne = newMoneys.find((item) =>()=> {
-        item._id === moneyIdFrom
-    });
+    let findedOne = pro.find((item) => item._id === moneyIdFrom);
+    
+    console.log(findedOne._id)
+    console.log(moneyIdFrom)
     let { description,amount,title,category,createdAt, _id } = findedOne; 
 
             // time display in readable format
@@ -159,8 +157,8 @@ document.getElementById('singleMoney').addEventListener('click',(event)=> {
                 token : token
               }
               localStorage.setItem('id_user_to_update', JSON.stringify(data_user));   
-              let stored = JSON.parse(localStorage.getItem('id')); 
-            //   stored ? location.href='../pages/update.html' : console.log('no stored id to update');
+              let stored = localStorage.getItem('id'); 
+              stored ? location.href='../pages/update.html' : console.log('no stored id to update');
        
       } else if(event.target.className === 'btn_delete'){
         let propId = event.target.parentElement.dataset.toadd;
