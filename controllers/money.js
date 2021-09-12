@@ -76,6 +76,17 @@ exports.listCategories = (req, res )=>{
     })
 }
 
+exports.listByUser= (req, res )=>{
+    Money.distinct('postedBy', {}, (err, moneys) =>{
+        if(err) {
+            return res.status(400).json({
+                error: ' moneys not found'
+            });
+        }
+        res.json(moneys)
+    })
+}
+
 exports.listBySearch = (req, res) => {
     let order = req.body.order ? req.body.order : "desc";
     let sortBy = req.body.sortBy ? req.body.sortBy : "_id";

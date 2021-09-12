@@ -153,7 +153,11 @@ function renderAllCategories (cat){
 });
     }
       
-      })          
+      }) 
+      
+      
+      //fetch category and display all single category
+      
     
 });
 
