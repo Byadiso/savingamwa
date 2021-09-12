@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
                    <div class=" btns_category" data-toAdd="${_id}">
                         <buton class="btn_edit">Edit</buton>
                         <buton class="btn_delete">Delete</buton>
+                        <span class="message_display"></span>
                    </div>
                    
              </div>
@@ -153,23 +154,40 @@ document.getElementById('singleMoney').addEventListener('click',(event)=> {
                 user_id: userId,
                 token : token
               }
-console.log(data_user)
+
               localStorage.setItem('id_user_to_update', JSON.stringify(data_user));   
               let stored = localStorage.getItem('single_id'); 
               stored ? location.href='../pages/update.html' : console.log('no stored id to update');
        
       } else if(event.target.className === 'btn_delete'){
-        let propId = event.target.parentElement.dataset.toadd;
-        console.log('soon i am going to delete you friend ' + propId);    
-        let data_to_be_updated = {
-          prop_id: propId,
-          user_id: _id,
-          token : token
-        }
-        localStorage.setItem('id_to_update', JSON.stringify(data_to_be_updated));   
-        let stored = JSON.parse(localStorage.getItem('id_to_deleted')); 
-        stored ? location.href='../pages/myBugdet.html' : console.log('no stored id to delete');
-      }
+        let moneyIdToDelete = event.target.parentElement.dataset.toadd;     
+        fetch(`http://localhost:3000/api/v1/money/${moneyIdToDelete}/${userId}`, {
+            method: 'DELETE',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }).then(response => {
+            return response.json();
+            }).then(data=>{
+                console.log(data)
+                if(data.status== true){
+                    // show a successful message to the user by creating a div 
+                    const message_display = document.querySelector('.message_display');                    
+                    message_display.innerHTML = `${data.title} was deleted successfuly`
+                    // after put a button to go to market or shop or rental space
+                    // location.reload();                 
+    
+                  } else {
+                    console.log(data.error);
+                  }
+                  
+            })
+            .catch(err => console.log(err));
+            };
+    
+    
 })
 
 
