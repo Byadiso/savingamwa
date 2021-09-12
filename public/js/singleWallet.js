@@ -1,23 +1,12 @@
-
- 
 /* eslint-disable prettier/prettier */
-document.addEventListener('DOMContentLoaded', () => {
-
-    
+document.addEventListener('DOMContentLoaded', () => { 
    
     const mainSingleDiv = document.getElementById('singleMoney')
     let moneyIdFrom = localStorage.getItem('single_id');
-    const success_message = document.querySelector('.success_message');
-    const display_error = document.querySelector('.display_error_comment');
     let moneysItems = JSON.parse(localStorage.getItem('moneys')) ;
 
-    let pro = moneysItems.moneys
-   
-    console.log(pro)
-    
-    
-
-      
+    let pro = moneysItems.moneys  
+     
     let findedOne = pro.find((item) =>()=> item._id === moneyIdFrom);
     
     console.log(findedOne.title)
@@ -76,25 +65,22 @@ document.addEventListener('DOMContentLoaded', () => {
                    </div>
                    
              </div>
-                 `      
-                 
+                 `                     
           
         //appending the main container
-        mainSingleDiv.appendChild(moneyContainer);       
+        mainSingleDiv.appendChild(moneyContainer);     
 
     }
    
     //  fetchingSingle();
 
-    renderPro()
-           
+    renderPro()          
          
    // access user and token
     const user= JSON.parse(localStorage.getItem('user'));
     const userId = user.user._id;
     const token = user.token; 
-    let moneyId =_id
-             
+    let moneyId =_id           
 
     // ----------------------------------------------------------------------------------
 
@@ -132,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     fetchingRelated();
 
-       // this is a  function to other part of the pages    
+// this is a  function to other part of the pages    
     
   function renderUIPart(id,title,amount){
     return `
@@ -146,19 +132,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.getElementById('singleMoney').addEventListener('click',(event)=> {
     if (event.target.className === 'btn_edit') { 
-        console.log('Clicked! yes it is edit btn');
-        let propId = event.target.parentElement.dataset.toadd;        
+       let propId = event.target.parentElement.dataset.toadd;        
                 
               let data_user = {
                 prop_id: propId,
                 user_id: userId,
                 token : token
               }
-
               localStorage.setItem('id_user_to_update', JSON.stringify(data_user));   
               let stored = localStorage.getItem('single_id'); 
-              stored ? location.href='../pages/update.html' : console.log('no stored id to update');
-       
+              stored ? location.href='../pages/update.html' : console.log('no stored id to update');       
       } else if(event.target.className === 'btn_delete'){
         let moneyIdToDelete = event.target.parentElement.dataset.toadd;     
         fetch(`http://localhost:3000/api/v1/money/${moneyIdToDelete}/${userId}`, {
@@ -175,14 +158,11 @@ document.getElementById('singleMoney').addEventListener('click',(event)=> {
                 if(data.status== true){
                     // show a successful message to the user by creating a div 
                     const message_display = document.querySelector('.message_display');                    
-                    message_display.innerHTML = `${data.title} was deleted successfuly`
-                    // after put a button to go to market or shop or rental space
-                    // location.reload();                 
-    
+                    message_display.innerHTML = `${data.deletedmoney.title} was deleted successfuly`
+                   
                   } else {
                     console.log(data.error);
-                  }
-                  
+                  }                  
             })
             .catch(err => console.log(err));
             };
