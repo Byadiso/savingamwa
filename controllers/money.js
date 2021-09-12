@@ -76,15 +76,15 @@ exports.listCategories = (req, res )=>{
     })
 }
 
-exports.listByUser= (req, res )=>{
-    Money.distinct('createdBy', {}, (err, moneys) =>{
-        if(err) {
+exports.listByUser= (req, res,next )=>{
+    Money.find({createdBy:req.userId}, (err, moneys) => {
+        if (err) {
             return res.status(400).json({
-                error: ' moneys not found'
+                error: errorHandler(err)
             });
         }
-        res.json(moneys)
-    })
+        res.json(moneys);
+    }).select('-photo');
 }
 
 exports.listBySearch = (req, res) => {

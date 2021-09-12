@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             //list by user 
 
-          const userId= JSON.parse(localStorage.getItem('user'))._id; 
+          const userId= JSON.parse(localStorage.getItem('user')).user._id; 
           console.log(userId);
           const listByMe = () => {
             return  fetch(`http://localhost:3000/api/v1/moneys/${userId}`)
