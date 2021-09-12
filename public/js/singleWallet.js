@@ -63,8 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                  `                     
           
         //appending the main container
-        mainSingleDiv.appendChild(moneyContainer);     
-
+        mainSingleDiv.appendChild(moneyContainer);   
     }
    
     //  fetchingSingle();

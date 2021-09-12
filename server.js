@@ -15,7 +15,6 @@ import authRoutes from './routes/auth';
 import userRoutes from './routes/user';
 import categoryRoutes from './routes/category';
 import moneyRoutes from './routes/money';
-import braintreeRoutes from './routes/braintree';
 import orderRoutes from './routes/order';
 
 
@@ -55,7 +54,6 @@ app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", moneyRoutes);
-app.use('/api', braintreeRoutes);
 app.use('/api', orderRoutes);
 
 
