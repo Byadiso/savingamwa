@@ -177,8 +177,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 else {
                   render.classList.add("expenses")
                 }
-            }
-      
+            };
+
+
+
+            //list by user 
+
+          const userId= JSON.parse(localStorage.getItem('user'))._id; 
+          console.log(userId);
+          const listByMe = () => {
+            return  fetch(`http://localhost:3000/api/v1/moneys/${userId}`)
+             .then((resp) =>resp.json())
+             .then((data) =>  {
+             console.log(data);
+             localStorage.setItem('moneys', JSON.stringify(data));
+           });             
+             }
+           listByMe();      
           })
           
           

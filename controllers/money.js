@@ -77,7 +77,7 @@ exports.listCategories = (req, res )=>{
 }
 
 exports.listByUser= (req, res )=>{
-    Money.distinct('postedBy', {}, (err, moneys) =>{
+    Money.distinct('createdBy', {}, (err, moneys) =>{
         if(err) {
             return res.status(400).json({
                 error: ' moneys not found'
