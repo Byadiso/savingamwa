@@ -191,20 +191,11 @@ exports.update = (req, res)=>{
       
         let money = req.money;
         money = _.extend(money, fields)
-        if(files.photo){
-            //validation of photo files
-            if(files.photo.size> 3000000){
-                return res.status(400).json({
-                    error:"Image should be less than  3mb in size"
-                })
-            }
-            money.photo.data = fs.readFileSync(files.photo.path)
-            money.photo.contentType = files.photo.type
-        }
         money.save((err, result)=>{
             if(err){
                 return res.status(404).json({
-                    error: errorHandler(err),
+                    // error: errorHandler(err),
+                    error: err,
                     status:false
                 });
             }

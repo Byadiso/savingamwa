@@ -9,33 +9,25 @@ document.addEventListener('DOMContentLoaded', ()=> {
   const title = document.querySelector('#title');
   const amount = document.querySelector('#amount');
    const description = document.querySelector('#description');
-    const category = document.querySelector('.category');
-  const photo = document.querySelector('#fileUpload');
+    const category = document.querySelector('.category');  
   const submitButton = document.querySelector('#create_pro');
   const selectionCategory = document.querySelector('.category');
   const form = document.querySelector('#create_property_form');
   const display_error = document.querySelector('.display_error');
   
 
-  let categoryVar
-  let shippingVar
-  let photoVar
+  let categoryVar  
 
   let categoriesItem  = JSON.parse(localStorage.getItem('categories'));
 
 
   // for storage purpose 
-  let property_to_update = JSON.parse(localStorage.getItem('id_to_update'));
+  let property_to_update = JSON.parse(localStorage.getItem('id_user_to_update'));
   let moneys = JSON.parse(localStorage.getItem('moneys'));
   let data = moneys.moneys;
 
-  console.log(property_to_update)
-  
 // console.log(property_to_update.user_id);
-  const { prop_id,user_id,token } = property_to_update
-  console.log(prop_id);
-  console.log(user_id);
-  console.log(token);
+  const { prop_id,user_id,token } = property_to_update;  
 
   // console.log(data)
   let proData = data.find(item => item._id == prop_id);
@@ -46,45 +38,32 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
 function getCategories(){
 
-  // let categoriesItem  = JSON.parse(localStorage.getItem('categories'));
-
-  for ( var i= 0; i < categoriesItem.length; i++ ){ 
-   
+  for ( var i= 0; i < categoriesItem.length; i++ ){    
     let { name, _id} = categoriesItem[i];
     console.log(name);
     const optionCategorie = document.createElement('option');
     optionCategorie.innerHTML= `<option class="option_tag login-field" data-id=${_id}>${name}</option>`;
-
-    selectionCategory.appendChild(optionCategorie);
-   
-    }
-
-    
+    selectionCategory.appendChild(optionCategorie);   
+    }    
  }
 
- getCategories();
- 
+ getCategories(); 
   
 //for selection event 
 selectionCategory.addEventListener('change',(e)=>{
   const myCategorie = e.target.value;
-  // category.textContent= myCategorie; 
-  // myCategorie === String ? "_id ": 'title'; 
-  let datCategorie = categoriesItem.find(item => item.title === myCategorie);
+   let datCategorie = categoriesItem.find(item => item.name === myCategorie);
 
   // categoryVar = myCategorie
   categoryVar = datCategorie._id;
-  console.log(datCategorie._id)
-
+  
 });
 
 
   // setting values 
   title.value = proData.title;  
   amount.value = proData.amount;
-  description.value = proData.description;
-  
-  
+  description.value = proData.description; 
   
 
   submitButton.addEventListener('click',  (e) => {
@@ -92,8 +71,7 @@ selectionCategory.addEventListener('change',(e)=>{
     if (!title.value.trim() ) {
       display_error.textContent = '* Please fill in all fields';        
     } else{
-console.log(user_id)
-      const formData = new FormData();
+    const formData = new FormData();
     formData.append('title', title.value);
     formData.append('amount', amount.value);
     formData.append('description', description.value);
