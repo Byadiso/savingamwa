@@ -7,11 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let pro = moneysItems.moneys  
      
     let findedOne = pro.find((item) =>()=> item._id === moneyIdFrom);
-    
-    console.log(findedOne.title)
-    console.log(moneyIdFrom)
-    let { description,amount,title,category,createdAt, _id } = findedOne; 
-
+     let { description,amount,title,category,createdAt, _id } = findedOne; 
             // time display in readable format
             var timestamp= timeDifference(new Date(), new Date(createdAt));
             
@@ -153,8 +149,10 @@ document.getElementById('singleMoney').addEventListener('click',(event)=> {
         }).then(response => {
             return response.json();
             }).then(data=>{
-                console.log(data)
-                if(data.status== true){
+                  if(data.status== true){
+                    //remoe this product from lcoalstorage
+                   let remainedMoney = pro.filter((item)=>item._id != moneyIdToDelete);
+                   localStorage.setItem('moneys', JSON.stringify(remainedMoney));
                     // show a successful message to the user by creating a div 
                     const message_display = document.querySelector('.message_display');                    
                     message_display.innerHTML = `${data.deletedmoney.title} was deleted successfuly`

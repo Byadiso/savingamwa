@@ -182,7 +182,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
             //list by user 
-
           const userId= JSON.parse(localStorage.getItem('user')).user._id; 
           console.log(userId);
           const listByMe = () => {
@@ -190,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
              .then((resp) =>resp.json())
              .then((data) =>  {
              console.log(data);
-             localStorage.setItem('moneys', JSON.stringify(data));
+             localStorage.setItem('moneysByUser', JSON.stringify(data));
            });             
              }
            listByMe();      
