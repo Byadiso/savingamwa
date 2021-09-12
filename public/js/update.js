@@ -52,9 +52,7 @@ function getCategories(){
 //for selection event 
 selectionCategory.addEventListener('change',(e)=>{
   const myCategorie = e.target.value;
-   let datCategorie = categoriesItem.find(item => item.name === myCategorie);
-
-  // categoryVar = myCategorie
+   let datCategorie = categoriesItem.find(item => item.name === myCategorie);  
   categoryVar = datCategorie._id;
   
 });

@@ -673,10 +673,9 @@ float: left;
 .amount{
   background-color: var(--blueColor);
   color: var(--whiteColor);
-  margin: var(--spacing);
+  /* margin: var(--spacing); */
   float: right;
   padding: var(--spacing);
-
 }
 
 .expenses{
