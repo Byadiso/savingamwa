@@ -1,49 +1,58 @@
 /* eslint-disable prettier/prettier */
-document.addEventListener('DOMContentLoaded', () => { 
-   
+document.addEventListener('DOMContentLoaded', () => {    
     const mainSingleDiv = document.getElementById('singleMoney')
-    let moneyIdFrom = localStorage.getItem('single_id');
-    let moneysItems = JSON.parse(localStorage.getItem('moneys')) ;
-    let pro = moneysItems.moneys  
-     
-    let findedOne = pro.find((item) =>()=> item._id === moneyIdFrom);
-     let { description,amount,title,category,createdAt, _id } = findedOne; 
-            // time display in readable format
-            var timestamp= timeDifference(new Date(), new Date(createdAt));
-            
-            function timeDifference(current, previous) {
-                var msPerMinute = 60 * 1000;
-                var msPerHour = msPerMinute * 60;
-                var msPerDay = msPerHour * 24;
-                var msPerMonth = msPerDay * 30;
-                var msPerYear = msPerDay * 365;
-            
-                var elapsed = current - previous;            
-                if (elapsed < msPerMinute) {
-                    if(elapsed/1000 <30) return "Just now";            
-                    return Math.round(elapsed/1000) + ' seconds ago';   
-                }            
-                else if (elapsed < msPerHour) {
-                     return Math.round(elapsed/msPerMinute) + ' minutes ago';   
-                }
-                else if (elapsed < msPerDay ) {
-                     return Math.round(elapsed/msPerHour ) + ' hours ago';   
-                }
-            
-                else if (elapsed < msPerMonth) {
-                    return Math.round(elapsed/msPerDay) + ' days ago';   
-                }            
-                else if (elapsed < msPerYear) {
-                    return Math.round(elapsed/msPerMonth) + ' months ago';   
-                }            
-                else {
-                    return Math.round(elapsed/msPerYear ) + ' years ago';   
-                }
-            }
+    let moneyIdFrom = JSON.parse(localStorage.getItem('single_id'));
+    // let moneysItems = JSON.parse(localStorage.getItem('moneys')) ;    
+    console.log(moneyIdFrom)
+
+     //fetch single wallet
+
+    const singleWallet = () => {
+        return  fetch(`http://localhost:3000/api/v1/money/${moneyIdFrom}`)
+         .then((resp) =>resp.json())
+         .then((data) =>  {        
+         renderWalet(data)
+         localStorage.setItem('single_wallet', JSON.stringify(data));
+       });             
+         }    
 
 // ..................................render money ................................................
 
-    const renderPro = () => {       
+    const renderWalet = (data) => {          
+        console.log(data)
+     let { description,amount,title,category,createdAt, _id } = data; 
+     // time display in readable format
+     var timestamp= timeDifference(new Date(), new Date(createdAt));
+     
+     function timeDifference(current, previous) {
+         var msPerMinute = 60 * 1000;
+         var msPerHour = msPerMinute * 60;
+         var msPerDay = msPerHour * 24;
+         var msPerMonth = msPerDay * 30;
+         var msPerYear = msPerDay * 365;
+     
+         var elapsed = current - previous;            
+         if (elapsed < msPerMinute) {
+             if(elapsed/1000 <30) return "Just now";            
+             return Math.round(elapsed/1000) + ' seconds ago';   
+         }            
+         else if (elapsed < msPerHour) {
+              return Math.round(elapsed/msPerMinute) + ' minutes ago';   
+         }
+         else if (elapsed < msPerDay ) {
+              return Math.round(elapsed/msPerHour ) + ' hours ago';   
+         }
+     
+         else if (elapsed < msPerMonth) {
+             return Math.round(elapsed/msPerDay) + ' days ago';   
+         }            
+         else if (elapsed < msPerYear) {
+             return Math.round(elapsed/msPerMonth) + ' months ago';   
+         }            
+         else {
+             return Math.round(elapsed/msPerYear ) + ' years ago';   
+         }
+     }
         const moneyContainer = document.createElement('DIV');     
                       
          moneyContainer.innerHTML =`
@@ -68,30 +77,30 @@ document.addEventListener('DOMContentLoaded', () => {
    
     //  fetchingSingle();
 
-    renderPro()          
+    singleWallet()          
          
    // access user and token
     const user= JSON.parse(localStorage.getItem('user'));
     const userId = user.user._id;
     const token = user.token; 
-    let moneyId =_id           
+         
 
     // ----------------------------------------------------------------------------------
 
     //fetching related
     const fetchingRelated = () => {
-        fetch(`http://localhost:3000/api/v1/moneys/related/${moneyId}/`, {
+        fetch(`http://localhost:3000/api/v1/moneys/related/${moneyIdFrom}/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
         })
             .then((res) => res.json())
-            .then((data) => renderRelated(data))
+            .then((dataRelate) => renderRelated(dataRelate))
     }
 
-    function renderRelated(data) {       
-        let moneys = data        
+    function renderRelated(dataRelate) {       
+        let moneys = dataRelate        
         const container_related = document.createElement('DIV')
         container_related.classList.add('money_container');
         let header_related = document.createElement('h1');
@@ -100,9 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // create a header for related money
         container_related.append(header_related);
-
         for (var i = 0; i < moneys.length; i++) {
-            const { _id, amount } = moneys[i]
+            const { _id, amount,title } = moneys[i]
             let money_related = document.createElement('div');
             money_related.classList.add('related_moneys');
             money_related.innerHTML = renderUIPart(_id, title, amount)
@@ -112,9 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     fetchingRelated();
 
-// this is a  function to other part of the pages    
-    
-  function renderUIPart(id,title,amount){
+// this is a  function to other part of the pages  
+function renderUIPart(id,title,amount){
     return `
     <div class="money_details" data-id="${id}">                                        
         <div class="item_money>
@@ -150,8 +157,8 @@ document.getElementById('singleMoney').addEventListener('click',(event)=> {
             }).then(data=>{
                   if(data.status== true){
                     //remoe this product from lcoalstorage
-                   let remainedMoney = pro.filter((item)=>item._id != moneyIdToDelete);
-                   localStorage.setItem('moneys', JSON.stringify(remainedMoney));
+                //    let remainedMoney = pro.filter((item)=>item._id != moneyIdToDelete);
+                   localStorage.setItem('moneys', JSON.stringify(data));
                     // show a successful message to the user by creating a div 
                     const message_display = document.querySelector('.message_display');                    
                     message_display.innerHTML = `${data.deletedmoney.title} was deleted successfuly`
@@ -161,12 +168,6 @@ document.getElementById('singleMoney').addEventListener('click',(event)=> {
                   }                  
             })
             .catch(err => console.log(err));
-            };
-    
-    
-})
-
-
-
-
+            };   
+    })
 })

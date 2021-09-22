@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
   const display_error = document.querySelector('.display_error');
   
 
-  let categoryVar  
+  let categoryVar 
 
   let categoriesItem  = JSON.parse(localStorage.getItem('categories'));
 
@@ -26,18 +26,15 @@ document.addEventListener('DOMContentLoaded', ()=> {
   let moneys = JSON.parse(localStorage.getItem('moneys'));
   let data = moneys.moneys;
 
-// console.log(property_to_update.user_id);
   const { prop_id,user_id,token } = property_to_update;  
 
-  // console.log(data)
-  let proData = data.find(item => item._id == prop_id);
+   let proData = data.find(item => item._id == prop_id);
   console.log(proData);
 
   
 ///get categories
 
 function getCategories(){
-
   for ( var i= 0; i < categoriesItem.length; i++ ){    
     let { name, _id} = categoriesItem[i];
     console.log(name);
@@ -47,22 +44,24 @@ function getCategories(){
     }    
  }
 
- getCategories(); 
-  
-//for selection event 
-selectionCategory.addEventListener('change',(e)=>{
-  const myCategorie = e.target.value;
-   let datCategorie = categoriesItem.find(item => item.name === myCategorie);  
-  categoryVar = datCategorie._id;
-  
-});
+ getCategories();   
 
 
   // setting values 
   title.value = proData.title;  
   amount.value = proData.amount;
-  description.value = proData.description; 
+  description.value = proData.description;  
+  category.value = proData.category.name
   
+
+  //for selection event 
+selectionCategory.addEventListener('change',(e)=>{
+  const myCategorie = e.target.value;
+   let datCategorie = categoriesItem.find(item => item.name === myCategorie);  
+   categoryVar = datCategorie._id; 
+   console.log(category.value)
+});
+
 
   submitButton.addEventListener('click',  (e) => {
     e.preventDefault();     
@@ -87,24 +86,20 @@ selectionCategory.addEventListener('change',(e)=>{
     return  response.json()
 })
 .then(data => {
-  // console.log(data)
+  
   if(data.status == true){
-    //  let storedData = localStorage.setItem('property', JSON.stringify(data))  
-     hideForm(data.message);
+    hideForm(data.message);
   } 
   if(data.status == false){
     console.log(data.error)
     let failMessage = 'Make sure all field are updated'
-    // hideForm(failMessage);
     display_error.textContent = failMessage
   }         
 })
 .catch((err) =>{
     console.log(err)
-  });
-
-  };
-
+     });
+   };
   });
 
 // show message and hide the form 
@@ -115,13 +110,9 @@ selectionCategory.addEventListener('change',(e)=>{
     console.log(message);
     const successfulMessage = document.createElement('div');
     successfulMessage.classList.add('successful_message');
-    successfulMessage.innerHTML= `
-    <p>${message}</p>
-    `
+    successfulMessage.innerHTML= `<p>${message}</p>`
     main.append(successfulMessage);
-
   }
-
 })
 
 

@@ -13,7 +13,7 @@ router.delete('/v1/user/:userId', requireSignin ,isAuth,isAdmin, remove);
 router.get('/v1/users/', requireSignin , listUsers);
 
 router.get('/v1/orders/by/user/:userId', requireSignin, isAuth, purchaseHistory);
-router.get('/v1/moneys/by/user/:userId', requireSignin, isAuth, listMoneysByUser);
+// router.get('/v1/moneys/by/user/:userId', requireSignin, isAuth, listMoneysByUser);
 
 // photo
 router.get("/v1/user/photo/:userId", userPhoto);

@@ -31,10 +31,8 @@ document.addEventListener('DOMContentLoaded', ()=> {
       <div class="item_money>
           <p id="title"> ${title}<span class="amount"> ${amount + " "}PLN</span></p>   
       </div>                                            
-    </div>`;
-    
-    categories_container.append(maindiv);
- 
+    </div>`;    
+    categories_container.append(maindiv); 
 }     
     
 });

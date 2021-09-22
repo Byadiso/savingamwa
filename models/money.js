@@ -36,12 +36,9 @@ const moneySchema = new mongoose.Schema(
             ref: 'USer'
         },
            
-    
-
-    },
+     },
       { timestamps: true }
 );
-
 
 
 module.exports = mongoose.model("Money", moneySchema);

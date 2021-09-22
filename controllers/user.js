@@ -38,8 +38,7 @@ exports.update = (req, res)=>{
                user.hashed_password = undefined;
                user.salt = undefined;  
                res.json(user);
-            } ) ;
-        
+            } ) ;       
 
 };
 
@@ -71,7 +70,6 @@ exports.addOrderToUserHistory = (req, res, next) => {
             name: item.name,
             description: item.description,
             category: item.category,
-            quantity: item.count,
             transaction_id: req.body.order.transaction_id,
             amount: req.body.order.amount
         });
@@ -101,20 +99,6 @@ exports.purchaseHistory = (req, res) => {
         });
 };
 
-exports.listMoneysByUser = (req, res) => {
-    Order.find({ user: req.profile._id })
-        .populate('user', '_id name')
-        .sort('-created')
-        .exec((err, orders) => {
-            if (err) {
-                return res.status(400).json({
-                    error: errorHandler(err)
-                });
-            }
-            res.json(orders);
-        });
-};
-
 exports.userPhoto = (req, res, next) => {
     if (req.profile.photo.data) {
         res.set(('Content-Type', req.profile.photo.contentType));
@@ -124,9 +108,7 @@ exports.userPhoto = (req, res, next) => {
 };
 
 //fetch all users from the database
-
-exports.listUsers = (req, res )=>{
-    
+exports.listUsers = (req, res )=>{    
     User.find()
         .select('-photo')
         .exec((err, users) =>{
@@ -136,24 +118,10 @@ exports.listUsers = (req, res )=>{
             });
         }
        return res.status(200).json({
-            users:users,
+            users: users,
             message: 'all users',
             status: true
         })
     })
 }
 
-
-
-exports.findPeople = (req, res) => {
-    let following = req.profile.following;
-    following.push(req.profile._id);
-    User.find({ _id: { $nin: following } }, (err, users) => {
-        if (err) {
-            return res.status(400).json({
-                error: err
-            });
-        }
-        res.json(users);
-    }).select('name');
-};
