@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import expressValidator from 'express-validator';
+import session from 'express-session';
 require('dotenv').config(); 
 import path from 'path';
 
@@ -26,6 +27,15 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     next();
   });
+
+  // session
+
+  app.use(session({
+    secret: "yes-yeso",
+    resave: true,
+    saveUninitialized: false
+}));
+
 
 //db
 mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://byadiso:Uwineza3010@cluster0.kbaby.mongodb.net/kodesha?retryWrites=true&w=majority' ,  {
