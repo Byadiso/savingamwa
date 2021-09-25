@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // fetching of categories 
-        function fetchCategories(){
+function fetchCategories(){
         return  fetch(`http://localhost:3000/api/v1/categories`, {
                 method: 'GET',
                 headers:{
@@ -66,14 +66,6 @@ filters.addEventListener('change',(e)=>{
     // find the id of the category     
 })
 
-// le
-// let filtredCatId = CategoriesStored.find(cat => cat.name === filter);
-//     console.log(filtredCatId)
-
-
-// //    get id  from localStorage for category
-//     
-    
    ///handle search business 
 
 
@@ -97,7 +89,7 @@ filters.addEventListener('change',(e)=>{
             }
         console.log("and I have reached to list function")
         console.log("query", query);
-        return fetch(`http://localhost:3000/api/v1/properties/search?${query}`, {
+        return fetch(`http://localhost:3000/api/v1/moneys/search?${query}`, {
             method: "GET"
         })
             .then(response => {
