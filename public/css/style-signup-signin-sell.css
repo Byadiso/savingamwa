@@ -90,6 +90,7 @@ font-weight: 200;
 margin: 20px auto;
 width: 600px;
 }
+
 .login-screen {
 background-color: #FFF;
 padding-bottom: 70px;
@@ -199,25 +200,6 @@ for updated successful */
   color: green;  
   border-radius: 5px;
   height: 100%;
-}
-
-
-/*  
-for cart */
-
-.cart-btn {
-  position: relative;
-  cursor: pointer;
-  margin-right: 20px;
-}
-.cart-items {
-  position: absolute;
-  top: 4px;
-  right: -6px;
-  background: #f09d51;
-  padding: 0 5px;
-  border-radius: 30%;
-  color: #fff;
 }
 
 

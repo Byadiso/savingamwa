@@ -1,5 +1,6 @@
 :root{
   --blueColor: #1e90ff;
+  --colorHover:  #0f4e8d;
   --whiteColor: #ffffff;
   --expenseColor: rgb(230, 91, 91);
   --incomeColor: rgb(84, 197, 84);
@@ -8,8 +9,6 @@
   --spacing: 4px;
   
 }
-
-
 
 * {
 box-sizing: border-box;
@@ -33,7 +32,7 @@ margin:0;
   color: var(--whiteColor);
   font-family: helvetica;
   font-size: 16px;
-font-weight: 200;
+  font-weight: 200;
 }
 /* 
 /*for nav bar    */
@@ -63,53 +62,10 @@ font-weight: 200;
   color: white;
 }
 
-.topnav a.register {
-  background-color: grey;
-  color: white;
-}
-
-.topnav a.sign_in{
-  background-color: grey;
-  color: white;
-}
-
 
 
 .topnav .login-container {
   float: right;
-}
-/*  
-for cart */
-.cart_container{
-  display: flex;
-  justify-content:center;
-  align-items:center;
-  color: black; 
-  margin: 20px;
-  margin-right:100px;
-  padding-right:20px;
- 
-  
-}
-
-
-.checkout{
-  margin:60px;
-  padding:50px;
-  float:right;
-}
-
-.buying_link{
-  text-decoration-style: none;
-}
-
-
-#post{  
-  margin: 10px;
-}
-
-#banner{
-  border-bottom: 30px solid white;
 }
 
 #header-text{
@@ -169,11 +125,7 @@ margin-bottom: 10px;
   float:left;
 }
 
-/* property page*/
 
-.register-property{
-  background: blue;
-}
 
 /* Clear floats after the columns */
 
@@ -188,101 +140,11 @@ margin-bottom: 10px;
   clear: both;
 }
 
-.img{
-  height:170px;
-  width:180px;
-  margin-right:20px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  background-color:white;
-  border: 5px solid grey; 
-  border-radius: 20px;
-  
-}
-
-.property-float img{
-
-  float:left;
-}
 .text-property{
   border-bottom: solid, 10px,
 }
 
-/* Create two equal columns that floats next to each other */
-.column-profile{
-  float: left;
-  width: 50%;
-  padding: 10px;
-  margin-top: 30px;
-  height: 500px; 
-}
 
-/* Clear floats after the columns */
-.row-profile:after {
-  content: "";
-  display: table;
-  clear: both;
-
-}
-
-/*for modigying and delte button */
-
-.btn-modify {
-  border: 2px solid white;  
-  background:rgb(52, 243, 84);
-  color: #ffffff;
-  font-size: 17px;
-  line-height: 25px;  
-  text-decoration: none;
-  text-shadow: none;
-  border-radius: 3px;
-  box-shadow: none;
-  transition: 0.25s;
-  display: inline;
-  width:auto;
-  /* margin-left: 20px; */
-  cursor: pointer;
-  margin: 20px;
-}
-
-
-.btn-delete {
-  border: 2px solid white;
-  background: rgb(219, 52, 66);
-  color: #ffffff;
-  font-size: 17px;
-  line-height: 25px;
-  padding-left:5px;
-  text-decoration: none;
-  text-shadow: none;
-  border-radius: 3px;
-  box-shadow: none;
-  transition: 0.25s;
-  display: inline;
-  width: auto;
-  margin: 20px;
-  /* margin: 0 20px; */
-  cursor: pointer;
-
-}
-
-.btn-view{
-  border: 2px solid white;
-  background: rgba(50, 80, 163, 0.459);
-  color: #ffffff;
-  font-size: 17px;
-  line-height: 25px;
-  text-decoration: none;
-  text-shadow: none;
-  border-radius: 3px;
-  box-shadow: none;
-  transition: 0.25s;
-  display: inline;
-  width:250px; 
-  margin: 30px;
-  margin-left:5px;  
-  cursor: pointer;
-}
 .btnSearch{
   border: 2px solid white;
   background: rgba(50, 80, 163, 0.459);
@@ -311,58 +173,6 @@ margin-bottom: 10px;
 
 
 /*filter for advert*/
-
-
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
-
-.dropdown .dropbtn {
-  cursor: pointer;
-  font-size: 16px;  
-  border: none;
-  outline: none;
-  color: black;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-}
- .dropdown:hover .dropbtn, .dropbtn:focus {
-  background-color: grey;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
-
-.show {
-  display: block;
-}
-
-.sold{
-  display:inline
-}
-
 
 /* for radio checking sold things*/
 
@@ -394,19 +204,6 @@ margin-bottom: 10px;
 	transition: all 0.1s ease-in-out;
 }
 
-.switch-field input:checked + label {
-	background-color: #a5dc86;
-	box-shadow: none;
-}
-
-.switch-field label:first-of-type {
-	border-radius: 4px 0 0 4px;
-}
-
-.switch-field label:last-of-type {
-	border-radius: 0 4px 4px 0;
-}
-
 /* for footer */
  
 #footer {
@@ -434,15 +231,6 @@ margin-bottom: 10px;
   /* for my updated list from selling property 
  */
 
-.imgCreated{
-  width :'350px';
-  height :'400px';
-  display: block;
-  border: 1px solid white;
-  border-radius: 20px;
-  width: 20%;
-}
- 
 
 .hide{
 display:none
@@ -555,24 +343,6 @@ after search hide other property */
   justify-content: center;
 
 }
-.property-single{
-    width:800px;
-    height: auto;     
-    float: left;  
-    padding: 20px;
-    border-radius: 5px;
-    border: 1px solid white;
-    margin: 20px;
-    background-color:rgba(222,222,222, 0.4);
-}
-
-.imgSingleCreated{
-  display: block;
-  border: 1px solid white;
-  border-radius: 40px;
-  width: 500px;
-}
-
 
 .filters{
   display: flex;
@@ -620,6 +390,7 @@ float: left;
   animation: spin 1s linear infinite;
 }
 
+
 @keyframes spin {
   100% {
       transform: rotate(360deg);
@@ -629,7 +400,7 @@ float: left;
 .center {
   position: absolute;
   top: 0;
-  bottom: 0;
+  bottom: 10px;
   left: 0;
   right: 0;
   margin: auto;
@@ -658,7 +429,6 @@ float: left;
 }
 
 
-
 /* for new money style */
 
 .money_details{
@@ -679,18 +449,19 @@ float: left;
 }
 
 .expenses{
-  border-left: solid 4px var(--expenseColor); 
-  border-radius:10px ; 
+  border-left: solid 4px var(--expenseColor);   
 }
 
 .income{
   border-left: solid 4px var(--incomeColor); 
-  border-radius:10px ; 
-}
+ }
 
 .savings{
   border-left: solid 4px var(--savingsColor); 
-  border-radius:10px ; 
+}
+
+.savings, .income, .expenses{
+  border-radius:12px ; 
 }
 
 .saving_card{
@@ -726,16 +497,11 @@ float: left;
   padding: 8px; 
   margin-left:10px;
   border-radius: 20%;
-  align-items: center;
- 
+  align-items: center; 
 }
 
 .wallet_details .savings{
   background-color: yellow;
-}
-
-.money_details:hover{
-cursor: pointer;
 }
 
 .wallet_details .incomes{
@@ -746,7 +512,7 @@ cursor: pointer;
   background-color: orange;
 }
 
-.category_details:hover {
+.category_details:hover, .money_details:hover {
 	cursor:pointer;
 }
 

@@ -287,22 +287,6 @@ box-shadow: none;
   clear: both;
 }
 
-.img{
-  height:170px;
-  width:180px;
-  margin-right:20px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  background-color:white;
-  border: 5px solid grey; 
-  border-radius: 20px;
-  
-}
-
-.property-float img{
-
-  float:left;
-}
 .text-property{
   border-bottom: solid, 10px,
 }
@@ -324,112 +308,12 @@ box-shadow: none;
 
 }
 
-/*for modigying and delte button */
-
-.btn-modify {
-  border: 2px solid white;
-  background:rgb(52, 172, 219);
-  color: #ffffff;
-  font-size: 5px;
-  line-height: 10px;
-  padding: 3px 3px 3px 3px;
-  text-decoration: none;
-  text-shadow: none;
-  border-radius: 3px;
-  box-shadow: none;
-  transition: 0.25s;
-  display: inline;
-  width:200px;
-  margin: 0 auto;
-}
-
-.btn-delete {
-  border: 2px solid white;
-  background: rgb(219, 52, 66);
-  color: #ffffff;
-  font-size: 5px;
-  line-height: 10px;
-  padding: 3px 3px 3px 3px;
-  text-decoration: none;
-  text-shadow: none;
-  border-radius: 3px;
-  box-shadow: none;
-  transition: 0.25s;
-  display: inline;
-  width:200px;
-  margin: 0 auto;
-  cursor: pointer;
-}
-  
-
-.btn-request {
-  border: 2px solid white;
-  background: rgb(52, 172, 219);
-  color: #ffffff;
-  font-size: 17px;
-  line-height: 25px;
-  padding: 7px 7px 7px 7px;
-  text-decoration: none;
-  text-shadow: none;
-  border-radius: 3px;
-  box-shadow: none;
-  transition: 0.25s;
-  display: inline;
-  width: 250px;
-  margin: 0 auto;
-}
-
 /*filter for advert*/
 
 
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
-
-.dropdown .dropbtn {
-  cursor: pointer;
-  font-size: 16px;  
-  border: none;
-  outline: none;
-  color: black;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-}
- .dropdown:hover .dropbtn, .dropbtn:focus {
-  background-color: grey;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
 
 .show {
   display: block;
-}
-
-.sold{
-  display:inline
 }
 
 
@@ -478,9 +362,7 @@ box-shadow: none;
 
 
 
-
   /* user property */
-
 
   .column-grid-Property{
     
@@ -501,18 +383,6 @@ box-shadow: none;
     
   }
 
-
-.img-property{
-  height:290px;
-  width:300px;
-  margin-right:20px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  background-color:white;
-  border: 5px solid grey; 
-  border-radius: 20px;
-  
-}
 
 .dashboard{
   display: block;

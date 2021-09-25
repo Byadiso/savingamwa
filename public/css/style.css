@@ -10,8 +10,6 @@
 }
 
 
-
-
 * {
   box-sizing: border-box;
   }
@@ -237,23 +235,6 @@
     clear: both;
   }
   
-  .img{
-    height:170px;
-    width:180px;
-    margin-right:5px;
-    margin-left:20px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    background-color:white;
-    border: 5px solid grey; 
-    border-radius: 20px;
-    
-  }
-  
-  .property-float img{
-  
-    float:left;
-  }
   .text-property{
     border-bottom: solid, 10px,
   }
@@ -274,104 +255,10 @@
     clear: both;
   
   }
-  
-  /*for modigying and delte button */
-  
-  .btn-modify {
-    border: 2px solid white;
-    background:rgb(52, 172, 219);
-    color: #ffffff;
-    font-size: 17px;
-    line-height: 25px;
-    padding: 7px 7px 7px 7px;
-    text-decoration: none;
-    text-shadow: none;
-    border-radius: 3px;
-    box-shadow: none;
-    transition: 0.25s;
-    display: inline;
-    width:auto;
-    margin: 0 auto;
-  }
-  
-  .btn-delete {
-    border: 2px solid white;
-    background: rgb(219, 52, 66);
-    color: #ffffff;
-    font-size: 17px;
-    line-height: 25px;
-    padding: 7px 7px 7px 7px;
-    text-decoration: none;
-    text-shadow: none;
-    border-radius: 3px;
-    box-shadow: none;
-    transition: 0.25s;
-    display: inline;
-    width:auto;
-    margin: 0 auto;
-  }
-  .btn_addCart {
-    border: 2px solid white;
-    background: rgba(7, 139, 78, 0.705);
-    color: #ffffff;
-    font-size: 17px;
-    line-height: 25px;
-    padding: 7px 7px 7px 7px;
-    text-decoration: none;
-    text-shadow: none;
-    border-radius: 3px;
-    box-shadow: none;
-    transition: 0.25s;
-    display: inline;
-    width:auto;
-    margin: 0 auto;
-  }
+ 
   
   
   /*filter for advert*/
-  
-  
-  .dropdown {
-    float: left;
-    overflow: hidden;
-  }
-  
-  .dropdown .dropbtn {
-    cursor: pointer;
-    font-size: 16px;  
-    border: none;
-    outline: none;
-    color: black;
-    padding: 14px 16px;
-    background-color: inherit;
-    font-family: inherit;
-    margin: 0;
-  }
-   .dropdown:hover .dropbtn, .dropbtn:focus {
-    background-color: grey;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  
-  .dropdown-content a {
-    float: none;
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
-  
-  .dropdown-content a:hover {
-    background-color: #ddd;
-  }
   
   .show {
     display: block;
@@ -448,16 +335,7 @@
     /* user property */
   
   
-    /* .column-grid-Property{
-      
-      margin-right: 50px;
-      margin-left: 20px;
-      margin-bottom: 20px;
-      width:390px;
-      height: auto;
-      float: right;  
-     
-    } */
+ 
     
     .grid-property{
       background-color:rgba(222,222,222, 0.4) ;
@@ -484,7 +362,10 @@
   
   
   /******* Slideshow ********/
-  .mySlides {display: none;}
+  .mySlides {
+    display: none;
+  }
+  
   img {
     vertical-align: middle;
     max-height: 300px;    
