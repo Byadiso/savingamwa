@@ -1,8 +1,23 @@
 import  { errorHandler } from "../helper/dbErroHandler";
 import  formidable from 'formidable';
-import _  from 'lodash';
-import fs from 'fs';
+import  _  from 'lodash';
+import fs  from 'fs';
 import Money from "../models/money";
+import path from 'path';
+import express from 'express';
+
+//app 
+const app = express();
+
+// seting heeders
+
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
+
+  // controlls for routes
 
 
 exports.moneyById = (req,res, next) =>{    
@@ -19,7 +34,7 @@ exports.moneyById = (req,res, next) =>{
     });
 };
 
-exports.read = (req,res )=>{
+exports.read = (req,res)=>{
     req.money.photo = undefined;
     return res.json(req.money);
 }
@@ -77,13 +92,21 @@ exports.listCategories = (req, res )=>{
 }
 
 exports.listByUser= (req, res )=>{
+    var payload =  {
+        pageTitle:"User ",
+        userLoggedIn: req.session.user,
+        userLoggedInJs: JSON.stringify(req.session.user),    
+            };
     Money.find({ createdBy: req.userId}, (err, moneys) => {
         if (err) {
             return res.status(400).json({
                 error: errorHandler(err)
             });
         }
-        res.json(moneys);
+        res.json({
+            moneys: moneys,
+            payload:payload
+        });
     });
 }
 

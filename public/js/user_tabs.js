@@ -7,13 +7,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const allMyProperty= document.querySelector('.manager_property');
     const admin= document.querySelector('.admin_details');
     const allUser = document.querySelector('.all_user');
-    const for_admin_only = document.querySelector('.for_admin_only');
-
-
-    
-    
-  
-   
+    const for_admin_only = document.querySelector('.for_admin_only');     
+     
    let userIdStored = JSON.parse(localStorage.getItem('user'));
    let id = userIdStored.user._id
    let token = userIdStored.token
@@ -41,8 +36,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
      console.log(user);
 
     //fro user details 
+    const {name,email,_id } = user.user ;
+    console.log(name, email, _id)
    const userHeader = document.querySelector('.all_admin_header');
-   userHeader.textContent = ` ${user.role == 1 ? "Admin " + user.name : "User " + user.name}`; 
+   userHeader.textContent = ` ${user.role == 1 ? "Admin " + name : name}`; 
 
    //creating property here is for admin only so this menu for creating property will have hide class
 
@@ -53,9 +50,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
    
 
    userContainer.innerHTML = 
-     `<p id="phone"><strong>name:</strong> ${user.name}</p>
-      <p id="address"><strong>email:</strong>${user.email}</p>
-      <p id="owner"><strong>User ID:</strong> ${user._id}</p>
+     `<p id="phone"><strong>name:</strong> ${name}</p>
+      <p id="address"><strong>email:</strong>${email}</p>
+      <p id="owner"><strong>User ID:</strong> ${_id}</p>
       <p id="accountType"><strong>Acount Type: </strong> ${user.role == 1 ? user.role =" Admin" : user.role =" Normal" }</p>
    `; 
 
@@ -82,7 +79,7 @@ admin.append(userContainer);
   
   // for fetching user all created property
   const  propertyCreatedByUser = ( () => {
-    fetch( `http://localhost:3000/api/v1/properties/${id}/`,
+    fetch( `http://localhost:3000/api/v1/moneys/${id}/`,
     {
       method: 'GET',
       headers: {

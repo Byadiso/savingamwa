@@ -1,5 +1,5 @@
 import express from 'express';
-import userCtrl, { userById, read, update,remove, listUsers,userPhoto, purchaseHistory,listMoneysByUser } from '../controllers/user';
+import userCtrl, { userById, read, update,remove, listUsers,userPhoto, purchaseHistory } from '../controllers/user';
 import { requireSignin, isAuth, isAdmin } from '../controllers/auth';
 const router = express.Router();
 

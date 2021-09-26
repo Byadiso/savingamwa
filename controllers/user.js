@@ -17,9 +17,19 @@ exports.userById = (req, res, next, id)=>{
 
  
 exports.read = (req,res )=>{ 
+    var payload =  {
+        pageTitle:"Profile ",
+        userLoggedIn: req.session.user,
+        userLoggedInJs: JSON.stringify(req.session.user),    
+            };
     req.profile.hashed_password = undefined;
-    req.profile.salt = undefined;   
-    return res.json(req.profile);
+    req.profile.salt = undefined; 
+    let user =  req.profile  
+    return res.json({
+        user: user ,
+        payload:payload
+       
+    });
 }
 
 
@@ -38,8 +48,7 @@ exports.update = (req, res)=>{
                user.hashed_password = undefined;
                user.salt = undefined;  
                res.json(user);
-            } ) ;       
-
+            } ) ;     
 };
 
 
@@ -57,8 +66,6 @@ exports.remove = (req, res)=>{
         })
     })
 }
-
-
 
 
 exports.addOrderToUserHistory = (req, res, next) => {
