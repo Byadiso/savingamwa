@@ -120,7 +120,7 @@ function renderAllCategories (cat){
 
  // ------------------------------CREATE CATEGORY--------------------------------------------------------
 
-    submitButton.addEventListener('click',  (e) => {
+submitButton.addEventListener('click',  (e) => {
     e.preventDefault();     
     if (!namecategory.value.trim()) {
       display_error.textContent = '* Please fill the name of category';        
