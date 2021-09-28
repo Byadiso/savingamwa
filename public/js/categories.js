@@ -1,4 +1,5 @@
 
+
 /* eslint-disable prettier/prettier */
 document.addEventListener('DOMContentLoaded', ()=> { 
               
@@ -73,35 +74,44 @@ function renderAllCategories (cat){
     const delBtns =document.querySelectorAll('.btn-delete') ;
     delBtns.forEach(btn => {
       btn.addEventListener('click',(e)=>{
-        let categroy_id = e.target.parentElement.dataset.id;
+        let category_id = e.target.parentElement.dataset.id;
 
-        console.log('soon i am going to delete you enemy ' + categroy_id);
+         //checking if we have a money linked to this category and alert something the user
+        let moneys =   JSON.parse(localStorage.getItem('moneys'));
+        
+     if(moneys != undefined){
+      
+      //  let thatMoney = moneys.find(item => item.moneys)
+    
+      //  console.log(thatMoney)
+     
+      console.log(moneys)
+      console.log('remember to comeback here')
 
-        // checking for deletion later
+     }
 
-        // alert('do you want do delete this property?')
-
+     // to work on this later maybe 
                            
-         return fetch( `http://localhost:3000/api//v1/category/${categroy_id}/${id}`, {
-            method: 'DELETE',
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`
-           }
-          }).then((res)=>res.json()).then(data => {              
-            if(data.status== true){
-              // show a successful message to the user by creating a div 
-              // after put a button to go to market or shop or rental space
-              // location.reload();
-              // propertyCreatedByUser();
-              console.log("category with Id" + categroy_id + "has been deleted" )
+        //  return fetch( `http://localhost:3000/api//v1/category/${category_id}/${id}`, {
+        //     method: 'DELETE',
+        //     headers: {
+        //       Accept: "application/json",
+        //       "Content-Type": "application/json",
+        //       Authorization: `Bearer ${token}`
+        //    }
+        //   }).then((res)=>res.json()).then(data => {              
+        //     if(data.status== true){
+        //       // show a successful message to the user by creating a div 
+        //       // after put a button to go to market or shop or rental space
+        //       // location.reload();
+        //       // propertyCreatedByUser();
+        //       console.log("category with Id" + categroy_id + "has been deleted" )
 
-            } else {
-              console.log(data.error);
-            }
+        //     } else {
+        //       console.log(data.error);
+        //     }
             
-          });    
+        //   });    
       })        
     });
     

@@ -15,10 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
           let incomesAmount = []; 
           let expensesAmount = []; 
           
-          let myWallet;
-          let savingsMoney;
-          let incomesMoney;
-          let expensesMoney;
+          let myWallet = 0;
+          let savingsMoney = 0;
+          let incomesMoney = 0;
+          let expensesMoney = 0;
 
           
          
@@ -98,25 +98,33 @@ document.addEventListener('DOMContentLoaded', () => {
                    })  
                 });
               }            
-                          
-              //get amount from localstorage and calculate my savings
+                
               
-              let amountFromLocal = getItemStorage('amountTotal'); 
+              // chech if localstorage have something stored arleady
+              if(getItemStorage('Savings') != undefined || getItemStorage('amountTotal') != undefined 
+              ||  getItemStorage('amountTotal') != undefined ||  getItemStorage('amountTotal') != undefined ){
+
+                //get amount from localstorage and calculate my savings
+              
+              let amountFromLocal = JSON.parse(getItemStorage('amountTotal')); 
               renderToUI(savings,myWallet, amountFromLocal)
 
               //get individual details for expenses incomes and savings
 
               //for savings
-              let amountSavedFromLocal = getItemStorage('Savings'); 
+              
+              let amountSavedFromLocal =  JSON.parse(getItemStorage('Savings')); 
               renderToUI(savingsDisplay,savingsMoney, amountSavedFromLocal)
 
                  //for incomes
-              let amountIncomesFromLocal = getItemStorage('Incomes'); 
+              let amountIncomesFromLocal =  JSON.parse(getItemStorage('Incomes')); 
               renderToUI(incomesDisplay,incomesMoney, amountIncomesFromLocal)
 
                 //for expense
-              let amountexpensesFromLocal = getItemStorage('Expenses'); 
+              let amountexpensesFromLocal =  JSON.parse(getItemStorage('Expenses')); 
               renderToUI(expensesDisplay,expensesMoney, amountexpensesFromLocal)
+              }
+              
 
                                
               // implementing logOut
@@ -164,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
             //render item to ui
             function renderToUI(render,amount, amountFromLocal ){          
               amount = getTotal(amountFromLocal)                           
-              render.innerHTML = amount + " PLN"
+              render.innerHTML = amount + " Rwf"
             }
 
             //add class function and i am not putting expense cos I am not interested in that

@@ -39,6 +39,7 @@ exports.read = (req,res )=>{
 }
 
 exports.remove = (req, res)=>{
+    
     let category = req.category;
     category.remove((err, deletedCategory)=>{
         if(err){

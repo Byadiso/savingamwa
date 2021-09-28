@@ -55,7 +55,6 @@
     <!--  main admin dashboard -->
     
         <div class="main_admin">
-
             <div class="tab">
                 <button
                     class="tablinks"
@@ -63,12 +62,7 @@
                 >
                     Personal Details
                 </button>
-                <button
-                    class="tablinks"
-                    onclick="open_menu_dashboard(event, 'manager_property')"
-                >
-                    Manager transaction
-                </button>
+                
                 <button
                     class="tablinks"
                     onclick="open_menu_dashboard(event, 'manager_category')"
@@ -84,18 +78,7 @@
                         <h5> Welcome <span class="all_admin_header"></span></h5>
                     </div>
     
-                    <div id="manager_property" class="tabcontent manager_property">
-                        <h3>
-                            Manager all your
-                            <span class="all_property_header"></span> transaction
-                        </h3>
-                    </div>
-    
-                    <div id="all_user" class="tabcontent all_user">
-                        <h3>
-                            All <span class="all_user_header"></span> users on the website
-                        </h3>
-                    </div>
+                       
                     <div id="manager_category" class="tabcontent manager_category">
                         <h3>All <span class="all_category_header"></span> Categories</h3>
     
@@ -125,21 +108,12 @@
                         </div>
                     </div>
             </div>
-
-
-
-
-
-
-
-
         </div>
 
-       
-
+      
 
         <div id="footer">
-            &copy; 2019 Designed by BYAMUNGU desire || Savingamwa.rw
+            &copy; <span id="date_savingamwa">2021</span>  Designed by BYAMUNGU desire || Savingamwa.rw
         </div>
 
         <script>
@@ -186,7 +160,44 @@
                 }
 
 
-                //real time for footer
+            // ---------------------for real time date at the bootom-------------------
+            const date = document.getElementById('date_savingamwa');
+            let date_Today = new Date();
+            let year = date_Today.getFullYear();
+            let month = date_Today.getMonth();
+            let day = date_Today.getUTCDay();
+            console.log(month)
+
+            let today = date_Today.getUTCDate()
+            //formating date month to normal format jan-december
+                if(month == 0){
+                    month = "Jan"
+                } else if(month == 1){
+                    month = "Feb"
+                }else if(month == 2){
+                    month = "Mar"
+                }else if(month == 3){
+                    month = "Apr"
+                }else if(month == 4){
+                    month = "May"
+                }else if(month == 5){
+                    month = "Jun"
+                }else if(month == 7){
+                    month = "Aug"
+                }else if(month == 8){
+                    month = "Sept"
+                }else if(month == 9){
+                    month = "Oct"
+                }else if(month == 10){
+                    month = "Nov"
+                }else if(month == 11){
+                    month = "Dec"
+                }
+
+                
+            date.textContent= today +"-"+ month +"-"+year;
+
+            //...............................End here date month format 
 
 
         </script>
