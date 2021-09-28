@@ -81,43 +81,37 @@ function renderAllCategories (cat){
         
      if(moneys != undefined){
       
-      //  let thatMoney = moneys.find(item => item.moneys)
+      // let thatMoney = moneys.find(item => item.moneys)
     
-      //  console.log(thatMoney)
-     
-      console.log(moneys)
-      console.log('remember to comeback here')
+        // we will not delete category linked to an item  
+      success_message.innerHTML = `<h3 class="error">First delete your moneys linked to this category</h3>`   
+      console.log('First remove those record connectd with this category' + moneys);
 
-     }
-
-     // to work on this later maybe 
+     } else {
+     // still thinking how to make it better
                            
-        //  return fetch( `http://localhost:3000/api//v1/category/${category_id}/${id}`, {
-        //     method: 'DELETE',
-        //     headers: {
-        //       Accept: "application/json",
-        //       "Content-Type": "application/json",
-        //       Authorization: `Bearer ${token}`
-        //    }
-        //   }).then((res)=>res.json()).then(data => {              
-        //     if(data.status== true){
-        //       // show a successful message to the user by creating a div 
-        //       // after put a button to go to market or shop or rental space
-        //       // location.reload();
-        //       // propertyCreatedByUser();
-        //       console.log("category with Id" + categroy_id + "has been deleted" )
-
-        //     } else {
-        //       console.log(data.error);
-        //     }
-            
-        //   });    
+     return fetch( `http://localhost:3000/api//v1/category/${category_id}/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+     }
+    }).then((res)=>res.json()).then(data => {              
+      if(data.status== true){
+        // show a successful message to the user by creating a div 
+        success_message.innerHTML = `<h3 class="success">Your category has been successfully deleted </h3>`
+         // location.reload();    
+        console.log("category with Id" + category_id + "has been deleted" )
+      } else {
+          console.log(data.error);
+          success_message.innerHTML = `<h3 class="error">${data.error}</h3>`
+         }      
+          });   
+         }
       })        
-    });
-    
-
-  }
- 
+    });    
+  } 
 }
 
 
