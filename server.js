@@ -8,6 +8,20 @@ import expressValidator from 'express-validator';
 import session from 'express-session';
 require('dotenv').config(); 
 import path from 'path';
+import middleware from './middleware';
+
+
+// // middleware
+// app.get("/", middleware.requireLogin, (req,res)=>{
+//     var payload = {
+//         pageTitle:"Home",
+//         userLoggedIn: req.session.user,
+//         userLoggedInJs: JSON.stringify(req.session.user)
+//     }
+//     res.status(200).json({
+//         payload: payload
+//     })
+// });
 
 
 //import routes 
@@ -52,7 +66,6 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(expressValidator());
 app.use(cors());
-
 
 app.use(express.urlencoded({
     extended: false

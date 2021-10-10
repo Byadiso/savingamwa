@@ -14,10 +14,8 @@ const NotificationSchema = new mongoose.Schema({
 );
 
 
-NotificationSchema.statics.insertNotification = async (userTo, userFrom, notificationType, entityId)=>{
+NotificationSchema.statics.insertNotification = async ( notificationType, entityId)=>{
     var data = {
-        userTo: userTo,
-        userFrom: userFrom,
         notificationType: notificationType,
         entityId:entityId
     };

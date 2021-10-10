@@ -17,7 +17,7 @@
 
 
     // fetch delete function
-     export   const deletePro = (id)=> {                         
+  export   const deletePro = (id)=> {                         
           fetch( `http://localhost:3000/api/v1/property/${id}`, {
             method: 'DELETE',
             headers: {
@@ -32,7 +32,7 @@
 
        // for modfying action
 
-        export const updatePro =(proId, property) => {
+  export const updatePro = (proId, property) => {
           fetch( `http://localhost:3000/api/v1/property/${proId}`, {
             method: 'PUT',
             body: JSON.stringify({ property

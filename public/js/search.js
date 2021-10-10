@@ -1,8 +1,6 @@
       
-document.addEventListener('DOMContentLoaded', () => {            
+document.addEventListener('DOMContentLoaded', () => {         
   
-    
-
     const searchBar = document.getElementById('searchBar'); 
     const submit_serch_btn = document.querySelector('.btnSearch');
     const search_container = document.querySelector('.search_container');

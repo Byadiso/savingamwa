@@ -7,6 +7,7 @@
   --walletColor:rgb(156, 155, 75);
   --savingsColor:rgb(236, 233, 40);
   --spacing: 4px;
+  --error:rgb(204, 14, 14);
   
 }
 
@@ -62,6 +63,10 @@
     padding:20px;
     color:#36a9c0;
     align-items: center;
+  }
+
+  .item-error{
+    color: var(--error);
   }
 
 

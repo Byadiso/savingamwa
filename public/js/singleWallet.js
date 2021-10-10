@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const singleWallet = () => {
         return  fetch(`http://localhost:3000/api/v1/money/${moneyIdFrom}`)
          .then((resp) =>resp.json())
-         .then((data) =>  {        
+         .then((data) =>{        
          renderWalet(data)
          localStorage.setItem('single_wallet', JSON.stringify(data));
        });             
@@ -18,61 +18,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ..................................render money ................................................
 
-    const renderWalet = (data) => {          
-        console.log(data)
-     let { description,amount,title,category,createdAt, _id } = data; 
-     // time display in readable format
-     var timestamp= timeDifference(new Date(), new Date(createdAt));
+    const renderWalet = (data) => {  
+        if(data.status == 400 ){
+            let {message, status} = data
+            console.log('something went wrong' + message)            
+            renderError(message , status);
+
+           
+        }  else {
+            console.log(data)
+            let { description,amount,title,category,createdAt, _id } = data; 
+            // time display in readable format
+            var timestamp= timeDifference(new Date(), new Date(createdAt));
+            
+               const moneyContainer = document.createElement('DIV');     
+                             
+                moneyContainer.innerHTML =`
+                       <div class="money_container">    
+                          <h5>${title}</h5>               
+                          <h5>${description}</h5>                   
+                          <h5>${category.name}</h5>
+                          <h5>${amount}</h5>
+                          <h5>Added ${timestamp}</h5>
+                          <div class=" btns_category" data-toAdd="${_id}">
+                               <buton class="btn_edit">Edit</buton>
+                               <buton class="btn_delete">Delete</buton>
+                               <span class="message_display"></span>
+                          </div>
+                          
+                    </div>
+                        `                     
+                 
+               //appending the main container
+               mainSingleDiv.appendChild(moneyContainer);   
+        }
+
      
-     function timeDifference(current, previous) {
-         var msPerMinute = 60 * 1000;
-         var msPerHour = msPerMinute * 60;
-         var msPerDay = msPerHour * 24;
-         var msPerMonth = msPerDay * 30;
-         var msPerYear = msPerDay * 365;
-     
-         var elapsed = current - previous;            
-         if (elapsed < msPerMinute) {
-             if(elapsed/1000 <30) return "Just now";            
-             return Math.round(elapsed/1000) + ' seconds ago';   
-         }            
-         else if (elapsed < msPerHour) {
-              return Math.round(elapsed/msPerMinute) + ' minutes ago';   
-         }
-         else if (elapsed < msPerDay ) {
-              return Math.round(elapsed/msPerHour ) + ' hours ago';   
-         }
-     
-         else if (elapsed < msPerMonth) {
-             return Math.round(elapsed/msPerDay) + ' days ago';   
-         }            
-         else if (elapsed < msPerYear) {
-             return Math.round(elapsed/msPerMonth) + ' months ago';   
-         }            
-         else {
-             return Math.round(elapsed/msPerYear ) + ' years ago';   
-         }
-     }
-        const moneyContainer = document.createElement('DIV');     
-                      
-         moneyContainer.innerHTML =`
-                <div class="money_container">    
-                   <h5>${title}</h5>               
-                   <h5>${description}</h5>                   
-                   <h5>${category.name}</h5>
-                   <h5>${amount}</h5>
-                   <h5>Added ${timestamp}</h5>
-                   <div class=" btns_category" data-toAdd="${_id}">
-                        <buton class="btn_edit">Edit</buton>
-                        <buton class="btn_delete">Delete</buton>
-                        <span class="message_display"></span>
-                   </div>
-                   
-             </div>
-                 `                     
-          
-        //appending the main container
-        mainSingleDiv.appendChild(moneyContainer);   
     }
    
     //  fetchingSingle();
@@ -131,6 +112,20 @@ function renderUIPart(id,title,amount){
   `
 }
 
+function renderError(errorMessage, status){
+    console.log(errorMessage)
+    let errorDiv = document.createElement('DIV')
+    errorDiv.innerHTML =`
+                                      
+        <div class="item-error" data-status='${status}'>
+            <p class="title"> ${errorMessage}</p>   
+        </div>                                            
+                   
+  `
+   //appending the main container
+   mainSingleDiv.appendChild(errorDiv);   
+}
+
 document.getElementById('singleMoney').addEventListener('click',(event)=> {
     if (event.target.className === 'btn_edit') { 
        let propId = event.target.parentElement.dataset.toadd;        
@@ -169,5 +164,39 @@ document.getElementById('singleMoney').addEventListener('click',(event)=> {
             })
             .catch(err => console.log(err));
             };   
-    })
+    });
+
+
+    function timeDifference(current, previous) {
+        var msPerMinute = 60 * 1000;
+        var msPerHour = msPerMinute * 60;
+        var msPerDay = msPerHour * 24;
+        var msPerMonth = msPerDay * 30;
+        var msPerYear = msPerDay * 365;
+    
+        var elapsed = current - previous;            
+        if (elapsed < msPerMinute) {
+            if(elapsed/1000 <30) return "Just now";            
+            return Math.round(elapsed/1000) + ' seconds ago';   
+        }            
+        else if (elapsed < msPerHour) {
+             return Math.round(elapsed/msPerMinute) + ' minutes ago';   
+        }
+        else if (elapsed < msPerDay ) {
+             return Math.round(elapsed/msPerHour ) + ' hours ago';   
+        }
+    
+        else if (elapsed < msPerMonth) {
+            return Math.round(elapsed/msPerDay) + ' days ago';   
+        }            
+        else if (elapsed < msPerYear) {
+            return Math.round(elapsed/msPerMonth) + ' months ago';   
+        }            
+        else {
+            return Math.round(elapsed/msPerYear ) + ' years ago';   
+        }
+    }
+    
+
+
 })

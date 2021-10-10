@@ -100,13 +100,14 @@ document.addEventListener('DOMContentLoaded', () => {
               }            
                 
               
-              // chech if localstorage have something stored arleady
-              if(getItemStorage('Savings') != undefined || getItemStorage('amountTotal') != undefined 
-              ||  getItemStorage('amountTotal') != undefined ||  getItemStorage('amountTotal') != undefined ){
-
+              // chech if localstorage have something stored already
                 //get amount from localstorage and calculate my savings
               
-              let amountFromLocal = JSON.parse(getItemStorage('amountTotal')); 
+                let amountFromLocal = JSON.parse(getItemStorage('amountTotal')); 
+              if(getItemStorage('Savings') != undefined || amountFromLocal != undefined 
+              ||  amountFromLocal != undefined ||  amountFromLocal != undefined ){
+
+              
               renderToUI(savings,myWallet, amountFromLocal)
 
               //get individual details for expenses incomes and savings
@@ -141,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   blockMoney.addEventListener('click', (e)=>{
                     // Storage()
                     let categoryBlockId = e.target.dataset.category;    
-                    console.log(categoryBlockId)                
+                                  
                     let saveCategoryToLocalStorage = localStorage.setItem('category-details', JSON.stringify(categoryBlockId))                  
                       location.href='../pages/category.html';
                                     
@@ -154,7 +155,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             //function to calculate total
             function getTotal(amountArray){
-              return amountArray.reduce((previousValue, currentValue) => previousValue + currentValue)
+              let array = []
+              array.push(amountArray)
+              console.log(array)
+              return array.reduce((previousValue, currentValue) => previousValue + currentValue)
             }
 
             //funciton get items form local
@@ -170,9 +174,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             //render item to ui
-            function renderToUI(render,amount, amountFromLocal ){          
-              amount = getTotal(amountFromLocal)                           
-              render.innerHTML = amount + " Rwf"
+            function renderToUI(render,amount, amountFromLocal ){  
+              if(amountFromLocal == undefined){
+                return
+              }   
+              else {
+                amount = getTotal(amountFromLocal)                           
+                render.innerHTML = amount + " Rwf"
+               }    
             }
 
             //add class function and i am not putting expense cos I am not interested in that

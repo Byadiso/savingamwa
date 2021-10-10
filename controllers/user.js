@@ -17,6 +17,7 @@ exports.userById = (req, res, next, id)=>{
 
  
 exports.read = (req,res )=>{ 
+    
     var payload =  {
         pageTitle:"Profile ",
         userLoggedIn: req.session.user,

@@ -1,4 +1,5 @@
 import  express from 'express';
+import  { errorHandler } from "../helper/dbErroHandler";
 import session from 'express-session';
 import Notification from '../models/notification';
 
@@ -32,7 +33,7 @@ exports.getAllNotification = async(req,res)=>{
  };
 
  
- exports.singleMarkAsOpened = async(req,res)=>{    
+exports.singleMarkAsOpened = async(req,res)=>{    
     Notification.findByIdAndUpdate(req.params.id, { opened: true })
     .then(()=>res.sendStatus(204))
     .catch(error => {     
