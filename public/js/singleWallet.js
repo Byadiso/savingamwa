@@ -35,10 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
                              
                 moneyContainer.innerHTML =`
                        <div class="money_container">    
-                          <h5>${title}</h5>               
-                          <h5>${description}</h5>                   
-                          <h5>${category.name}</h5>
-                          <h5>${amount}</h5>
+                          <h5><span>Title:</span>${title}</h5>               
+                          <h5><span>Description:</span>${description}</h5>                   
+                          <h5><span>Category:</span>${category.name}</h5>
+                          <h5><span>Amount:</span>${amount} PLN</h5>
                           <h5>Added ${timestamp}</h5>
                           <div class=" btns_category" data-toAdd="${_id}">
                                <buton class="btn_edit">Edit</buton>

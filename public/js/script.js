@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
               // chech if localstorage have something stored already
                 //get amount from localstorage and calculate my savings
               
-                let amountFromLocal = JSON.parse(getItemStorage('amountTotal')); 
+                let amountFromLocal = (getItemStorage('amountTotal')); 
               if(getItemStorage('Savings') != undefined || amountFromLocal != undefined 
               ||  amountFromLocal != undefined ||  amountFromLocal != undefined ){
 
@@ -114,15 +114,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
               //for savings
               
-              let amountSavedFromLocal =  JSON.parse(getItemStorage('Savings')); 
+              let amountSavedFromLocal =  (getItemStorage('Savings')); 
+              if(amountSavedFromLocal == undefined) {
+                amountSavedFromLocal = 0
+              }
+              // checkAmount(amountSavedFromLocal);
               renderToUI(savingsDisplay,savingsMoney, amountSavedFromLocal)
 
                  //for incomes
-              let amountIncomesFromLocal =  JSON.parse(getItemStorage('Incomes')); 
+              let amountIncomesFromLocal =  (getItemStorage('Incomes')); 
+              if(amountIncomesFromLocal == undefined) {
+                amountIncomesFromLocal = 0
+              }
               renderToUI(incomesDisplay,incomesMoney, amountIncomesFromLocal)
 
                 //for expense
-              let amountexpensesFromLocal =  JSON.parse(getItemStorage('Expenses')); 
+              let amountexpensesFromLocal = (getItemStorage('Expenses')); 
+              
+              if(amountexpensesFromLocal == undefined) {
+                amountexpensesFromLocal = 0
+              }
               renderToUI(expensesDisplay,expensesMoney, amountexpensesFromLocal)
               }
               
@@ -174,13 +185,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             //render item to ui
-            function renderToUI(render,amount, amountFromLocal ){  
-              if(amountFromLocal == undefined){
+            function renderToUI(render,amount, amountFromLocal ){
+              if(amountFromLocal == undefined){               
                 return
               }   
-              else {
-                amount = getTotal(amountFromLocal)                           
-                render.innerHTML = amount + " Rwf"
+              else {                 
+                   
+                //check of negative value
+                amount = getTotal(amountFromLocal)
+                if(amount < 0){
+                 amount = amount * -1                  
+                }    
+                console.log(amount)   
+                render.innerHTML = amount + " PLN"
                }    
             }
 
