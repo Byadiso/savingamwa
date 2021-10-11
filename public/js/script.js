@@ -67,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
                          
               localStorage.setItem('amountTotal', JSON.stringify(walletAmount));
 
-
                  //save all transaction in locastorage savings               
                  if(category.name.toLowerCase() =="savings"){ 
                    setItemStorage(savingsAmount, 'Savings', amount); 
@@ -106,20 +105,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 let amountFromLocal = (getItemStorage('amountTotal')); 
               if(getItemStorage('Savings') != undefined || amountFromLocal != undefined 
               ||  amountFromLocal != undefined ||  amountFromLocal != undefined ){
-
               
               renderToUI(savings,myWallet, amountFromLocal)
 
               //get individual details for expenses incomes and savings
 
-              //for savings
-              
+              //for savings              
               let amountSavedFromLocal =  (getItemStorage('Savings')); 
               if(amountSavedFromLocal == undefined) {
                 amountSavedFromLocal = 0
               }
               // checkAmount(amountSavedFromLocal);
-              renderToUI(savingsDisplay,savingsMoney, amountSavedFromLocal)
+             renderToUI(savingsDisplay,savingsMoney, amountSavedFromLocal)
 
                  //for incomes
               let amountIncomesFromLocal =  (getItemStorage('Incomes')); 
@@ -129,8 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
               renderToUI(incomesDisplay,incomesMoney, amountIncomesFromLocal)
 
                 //for expense
-              let amountexpensesFromLocal = (getItemStorage('Expenses')); 
-              
+              let amountexpensesFromLocal = (getItemStorage('Expenses'));  
+                       
               if(amountexpensesFromLocal == undefined) {
                 amountexpensesFromLocal = 0
               }
@@ -159,17 +156,13 @@ document.addEventListener('DOMContentLoaded', () => {
                                     
                    })  
                 });
-
             
                listAll();
 
 
             //function to calculate total
-            function getTotal(amountArray){
-              let array = []
-              array.push(amountArray)
-              console.log(array)
-              return array.reduce((previousValue, currentValue) => previousValue + currentValue)
+            function getTotal(amountArray){              
+              return  amountArray.reduce((previousValue, currentValue) => previousValue + currentValue)             
             }
 
             //funciton get items form local
@@ -180,23 +173,25 @@ document.addEventListener('DOMContentLoaded', () => {
             //function set items to local storage
             function setItemStorage(arrayMoney, titleMoney, amountMoney){
               arrayMoney.push(amountMoney)
-              localStorage.setItem(titleMoney , JSON.stringify(arrayMoney));  
-             
+              localStorage.setItem(titleMoney , JSON.stringify(arrayMoney));             
             }
 
-            //render item to ui
+            //render item to UI
             function renderToUI(render,amount, amountFromLocal ){
+             
               if(amountFromLocal == undefined){               
                 return
               }   
-              else {                 
+              else {  
+                let array =[];
+                array.push(amountFromLocal)              
                    
                 //check of negative value
-                amount = getTotal(amountFromLocal)
+                amount = getTotal(array)
                 if(amount < 0){
                  amount = amount * -1                  
-                }    
-                console.log(amount)   
+                } 
+                console.log(amount)
                 render.innerHTML = amount + " PLN"
                }    
             }
@@ -212,7 +207,6 @@ document.addEventListener('DOMContentLoaded', () => {
                   render.classList.add("expenses")
                 }
             };
-
 
 
             //list by user 
