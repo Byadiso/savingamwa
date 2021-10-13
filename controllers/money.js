@@ -92,11 +92,7 @@ exports.listCategories = (req, res )=>{
 }
 
 exports.listByUser= (req, res )=>{
-    var payload =  {
-        pageTitle:"User ",
-        userLoggedIn: req.session.user,
-        userLoggedInJs: JSON.stringify(req.session.user),    
-            };
+   
     Money.find({ createdBy: req.userId}, (err, moneys) => {
         if (err) {
             return res.status(400).json({
@@ -104,8 +100,21 @@ exports.listByUser= (req, res )=>{
             });
         }
         res.json({
-            moneys: moneys,
-            payload:payload
+            moneys: moneys,           
+        });
+    });
+}
+
+exports.listBycategory= (req, res )=>{    
+    Money.find({ category: req.params.categoryId}, (err, moneys) => {
+        if (err) {
+            return res.status(400).json({
+                error: errorHandler(err)                
+            });
+        }
+        res.json({
+            data: moneys, 
+            message:'moneys by category'
         });
     });
 }

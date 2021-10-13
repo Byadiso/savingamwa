@@ -20,52 +20,7 @@
             href="//use.fontawesome.com/releases/v5.0.7/css/all.css"
         />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-        <style>
-
-            .b-skills{
-                border-top: 1px;
-                text-align: center;
-                padding: 45px;
-            }
-            .skill-item{
-                position: relative;
-                max-width: 250px;
-                width: 100px;
-                margin-bottom: 30px;
-                color: #555;
-            }
-
-            .skill-container{
-                position: relative;
-                max-width: 250px;
-                width: 100px;
-                height: 0;
-                padding-top:100% ;
-                margin-bottom: 27px;
-                color: #555;
-            }
-
             
-            .skill-item .chart, .skill-item .chart canvas{
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100% !important;
-                height: 100% !important;
-               
-            }
-
-            .skill-item .chart:before{
-                content: "";
-                width: 0;
-                height: 100%;
-
-            }
-
-
-
-        </style>
-    
     </head>
     <body>
         <a class="sell" href="http://localhost:3000/public/pages/property.html"
@@ -131,7 +86,7 @@
 
             <div class="wallet_details"> 
                 <h5 class="category_details savings" data-category="savings">My Savings <span id="savings"></span></h5>
-                <h5 class="category_details incomes" data-category="incomes">My Income <span id="incomes"></span></h5>
+                <h5 class="category_details incomes" data-category="income">My Income <span id="incomes"></span></h5>
                 <h5 class="category_details expense" data-category="expenses">My Expenses <span id="expenses"></span></h5>
             </div>
 
@@ -139,50 +94,7 @@
                 <div class="saving_card">                    
                     <h3 class="saving">My Wallet <span id="saving"></span></h3>
                 </div>
-                <!-- <div class="saving_chart">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="skill-item center-block">
-                                <div class="chart-container">
-                                    <div class="chart" data-percent="92" data-bar-color="deepskyblue">
-                                        <span class="percent" data-after="%"> 92</span>
-
-                                    </div>
-                                </div>
-                                <p>Saving</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="skill-item center-block">
-                                <div class="chart-container">
-                                    <div class="chart" data-percent="40" data-bar-color="deepskyblue">
-                                        <span class="percent" data-after="%"> 40</span>
-
-                                    </div>
-                                </div>
-                                <p>Income</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="skill-item center-block">
-                                <div class="chart-container">
-                                    <div class="chart" data-percent="30" data-bar-color="deepskyblue">
-                                        <span class="percent" data-after="%"> 30</span>
-
-                                    </div>
-                                </div>
-                                <p>Expenses</p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>                      
-       </div> -->
-
-       
-
-        
+                      
 
         <!--  implementation of loading spin  -->
         <div id="loader-wrapper">

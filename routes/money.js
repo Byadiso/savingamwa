@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 const { requireSignin, isAuth, isAdmin } = require('../controllers/auth');
-const { create, moneyById ,read, remove, update , list, listRelated,listByUser, listCategories,listBySearch,listSearch,
+const { create, moneyById ,read, remove, update , list, listRelated,listByUser, listCategories,listBycategory,listBySearch,listSearch,
      } = require('../controllers/money');
 const { userById} = require('../controllers/user');
 // const { moneyById} = require('../controllers/money');
@@ -17,6 +17,7 @@ router.get('/v1/moneys', list);
 router.get("/v1/moneys/search", listSearch);
 router.get('/v1/moneys/related/:moneyId', listRelated);
 router.get('/v1/moneys/:userId/', listByUser);
+router.get('/v1/moneys/by/:categoryId/', listBycategory);
 router.get('/v1/moneys/categories' ,  listCategories);
 router.post("/v1/moneys/by/search", listBySearch);
 router.param('userId', userById);

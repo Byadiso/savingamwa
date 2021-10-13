@@ -1,24 +1,17 @@
-      
+     
           
 document.addEventListener('DOMContentLoaded', () => {     
           
           const ordersMsg = document.getElementById('header-text');  
           const mainDiv = document.getElementById('myMoneys'); 
           const searchBar = document.getElementById('searchBar'); 
-          const savings = document.querySelector('#saving');
+          const WalletDisplay = document.querySelector('#saving');
           const savingsDisplay = document.querySelector('#savings');
           const incomesDisplay = document.querySelector('#incomes');
           const expensesDisplay = document.querySelector('#expenses');
           let moneys = [] ;   
-          let walletAmount = []; 
-          let savingsAmount = []; 
-          let incomesAmount = []; 
-          let expensesAmount = []; 
-          
-          let myWallet = 0;
-          let savingsMoney = 0;
-          let incomesMoney = 0;
-          let expensesMoney = 0;
+        
+        
 
           
          
@@ -36,17 +29,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
           // function to render my property
           function  renderProperty(dataPro) {          
-              console.log(dataPro);             
+              console.log(dataPro);
+              
+              //for storage of total amount
+              let totalWalletAmount = [];
+              let totalSavings= [];
+              let totalExpenses = [];
+              let totalIncomes =[]
 
                ordersMsg.className = 'err';
               ordersMsg.innerHTML = dataPro.message;
-                moneys= dataPro.moneys;                  
+                moneys= dataPro.moneys;   
+                let money_block = document.createElement('Div');
+                money_block.classList.add('money_block')              
               for ( var i= 0; i < moneys.length; i++ ){            
                 let  divprop= document.createElement("DIV"); 
-                let { _id,amount,title,category} = moneys[i];            
-             
-               // for short  notation is the best
-             
+                let { _id,amount,title,category} = moneys[i];    
+                
+                          
                 divprop.innerHTML =`
                 <div class="money_details" data-id="${_id}">                                        
                   <div class="item_money>
@@ -55,37 +55,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>`
                 
 
-              //save amount in localstorage
 
+         
               //adding negative sign to amount for expenses
               if(category.name.toLowerCase() =="expenses"){ 
                 amount = -amount                  
-                walletAmount.push(amount)  
+                totalWalletAmount.push(amount)
+                //money for expenses
+                 totalExpenses.push(amount);             
+
+              }else if(category.name.toLowerCase() =="income"){
+                totalWalletAmount.push(amount)
+                //money for income                
+                totalIncomes.push(amount) 
               }else {
-                walletAmount.push(amount)  
+                totalWalletAmount.push(amount) 
+                //money for savings
+                 totalSavings.push(amount);
               }
                          
-              localStorage.setItem('amountTotal', JSON.stringify(walletAmount));
-
-                 //save all transaction in locastorage savings               
-                 if(category.name.toLowerCase() =="savings"){ 
-                   setItemStorage(savingsAmount, 'Savings', amount); 
-                }else if (category.name.toLowerCase() =="income"){  
-                  setItemStorage(incomesAmount, 'Incomes', amount);
-                } else if(category.name.toLowerCase() =="expenses") {   
-                  setItemStorage(expensesAmount, 'Expenses', amount);
-                }                       
-               
-              
+                        
                    
                   // add a class function for a right border
                   addClassBorderToMyWallet( "income", "savings",category, divprop )
                     // to append my whole create section   
-                    mainDiv.append(divprop); 
+                    money_block.append(divprop); 
                         
-                        }   
-              
-                   
+                        }  
+                    mainDiv.append(money_block)        
+
+        //check if it is  from a category and do calculations
+
+        // for showing total on the UI
+        WalletDisplay.innerHTML = getTotal(totalWalletAmount) 
+        savingsDisplay.innerHTML = getTotal(totalSavings) 
+        incomesDisplay.innerHTML = getTotal(totalIncomes) 
+        expensesDisplay.innerHTML = getTotal(totalExpenses) 
+
          const money_details = document.querySelectorAll('.money_details');
          money_details.forEach(blockMoney => {
                   blockMoney.addEventListener('click', (e)=>{
@@ -98,42 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
               }            
                 
-              
-              // chech if localstorage have something stored already
-                //get amount from localstorage and calculate my savings
-              
-                let amountFromLocal = (getItemStorage('amountTotal')); 
-              if(getItemStorage('Savings') != undefined || amountFromLocal != undefined 
-              ||  amountFromLocal != undefined ||  amountFromLocal != undefined ){
-              
-              renderToUI(savings,myWallet, amountFromLocal)
-
-              //get individual details for expenses incomes and savings
-
-              //for savings              
-              let amountSavedFromLocal =  (getItemStorage('Savings')); 
-              if(amountSavedFromLocal == undefined) {
-                amountSavedFromLocal = 0
-              }
-              // checkAmount(amountSavedFromLocal);
-             renderToUI(savingsDisplay,savingsMoney, amountSavedFromLocal)
-
-                 //for incomes
-              let amountIncomesFromLocal =  (getItemStorage('Incomes')); 
-              if(amountIncomesFromLocal == undefined) {
-                amountIncomesFromLocal = 0
-              }
-              renderToUI(incomesDisplay,incomesMoney, amountIncomesFromLocal)
-
-                //for expense
-              let amountexpensesFromLocal = (getItemStorage('Expenses'));  
-                       
-              if(amountexpensesFromLocal == undefined) {
-                amountexpensesFromLocal = 0
-              }
-              renderToUI(expensesDisplay,expensesMoney, amountexpensesFromLocal)
-              }
-              
+                        
 
                                
               // implementing logOut
@@ -159,43 +130,17 @@ document.addEventListener('DOMContentLoaded', () => {
             
                listAll();
 
-
             //function to calculate total
-            function getTotal(amountArray){              
-              return  amountArray.reduce((previousValue, currentValue) => previousValue + currentValue)             
+            function getTotal(array){  
+              if(array.length === 0){
+                let initial_amount = 0
+                 return  initial_amount
+              }  
+
+              return  array.reduce((previousValue, currentValue) => previousValue + currentValue)             
             }
 
-            //funciton get items form local
-            function getItemStorage(item){             
-              return JSON.parse(localStorage.getItem(item));           
-            }
-
-            //function set items to local storage
-            function setItemStorage(arrayMoney, titleMoney, amountMoney){
-              arrayMoney.push(amountMoney)
-              localStorage.setItem(titleMoney , JSON.stringify(arrayMoney));             
-            }
-
-            //render item to UI
-            function renderToUI(render,amount, amountFromLocal ){
-             
-              if(amountFromLocal == undefined){               
-                return
-              }   
-              else {  
-                let array =[];
-                array.push(amountFromLocal)              
-                   
-                //check of negative value
-                amount = getTotal(array)
-                if(amount < 0){
-                 amount = amount * -1                  
-                } 
-                console.log(amount)
-                render.innerHTML = amount + " PLN"
-               }    
-            }
-
+            
             //add class function and i am not putting expense cos I am not interested in that
             function addClassBorderToMyWallet( income, savings,category, render ){
                 if(category.name.toLowerCase() ==income){

@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const main_properties = document.querySelector('.main_properties');  
     const filters = document.querySelector('.filterCheck');
 
+    const moneyBlock = document.querySelector('.money_block');
+    const mainDiv = document.getElementById('myMoneys'); 
+
 
     let categoryAny = "";
 
@@ -61,8 +64,46 @@ filters.addEventListener('change',(e)=>{
     // filter ? categoryAny = filtredCatId._id : categoryAny = "" ; 
     categoryAny = filtredCatId._id;   
     console.log(categoryAny); 
-    // find the id of the category     
+    // find the id of the category  and fetch by category
+
+    return fetch(`http://localhost:3000/api/v1/moneys/by/${categoryAny}`, {
+        method: "GET"
+    })
+        .then(response =>  response.json())
+        .then(data => renderByCategory(data))
+        .catch(err => console.log(err));    
 })
+
+//render by category
+function renderByCategory(data){
+    moneyBlock.innerHTML= '';
+    moneyBlock.classList.add('hide');
+    moneyBlock.classList.remove('money_block');
+    
+    for ( var i= 0; i < data.length; i++ ){            
+        let  divprop= document.createElement("DIV"); 
+        let { _id,amount,title} = data[i];    
+        
+                  
+        divprop.innerHTML =`
+        <div class="money_details" data-id="${_id}">                                        
+          <div class="item_money>
+              <p id="title"> ${title}<span class="amount"> ${amount + " "}PLN</span></p>   
+          </div>                                            
+        </div>`;
+        // 
+        console.log(mainDiv)
+
+        // mainDiv.append(divprop)
+
+    }
+
+
+
+}
+
+
+
 
    ///handle search business 
 
@@ -75,9 +116,7 @@ filters.addEventListener('change',(e)=>{
     } )
 
 
-    //for fetching data 
-
-   
+    //for fetching data    
 
     const list = params => {
         // const query = queryString.stringify(params);
@@ -128,24 +167,22 @@ function renderSearch(searchedData){
 
 if(searchedData.length === 0 ){
     searchedContent.innerHTML= '';
-    Searched_title.innerHTML = `No property found`;
+    Searched_title.innerHTML = `No item found`;
     
     } else {
        
-        Searched_title.textContent =   `Found ${searchedData.length} Property`;       
-        searchedContent.innerHTML= '';
-       
-
-        
+        Searched_title.textContent =   `Found ${searchedData.length} Item`;       
+        searchedContent.innerHTML= '';     
+      
 
 
         for (var i = 0 ; i< searchedData.length ; i++){
             let searched =document.createElement('div');
             searched.classList.add('searched_content_item');
             searched.innerHTML = `      
-            <p>${searchedData[i].name}</p>
-            <p>${searchedData[i].description}</p>
-            <p>${searchedData[i].price}</p>
+            <p>Title: ${searchedData[i].title}</p>
+            <p>Descriotion: ${searchedData[i].description}</p>
+            <p>Amount: ${searchedData[i].amount} PLN</p>
           `;            
             searchedContent.append(searched);
        }
