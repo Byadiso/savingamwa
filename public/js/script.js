@@ -41,7 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
               ordersMsg.innerHTML = dataPro.message;
                 moneys= dataPro.moneys;   
                 let money_block = document.createElement('Div');
-                money_block.classList.add('money_block')              
+                money_block.setAttribute('id','money_block');
+                          
               for ( var i= 0; i < moneys.length; i++ ){            
                 let  divprop= document.createElement("DIV"); 
                 let { _id,amount,title,category} = moneys[i];    

@@ -8,12 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const main_properties = document.querySelector('.main_properties');  
     const filters = document.querySelector('.filterCheck');
 
-    const moneyBlock = document.querySelector('.money_block');
+    // let moneyBlock = document.querySelector('#money_block');
     const mainDiv = document.getElementById('myMoneys'); 
 
 
     let categoryAny = "";
-
+    let CategoriesStoredArray=[]
 
 // fetching of categories 
 function fetchCategories(){
@@ -24,8 +24,8 @@ function fetchCategories(){
                         }
         })
         .then(response =>response.json())
-        .then(categories =>{ 
-        let storedCategories = localStorage.setItem('categories', JSON.stringify(categories))
+        .then(categories =>{        
+            renderCategory(categories)
 
         })
         .catch(err =>console.log(err));
@@ -34,11 +34,7 @@ function fetchCategories(){
         fetchCategories();
 
 
-    //   get them from localStorage
-let CategoriesStored = JSON.parse(localStorage.getItem('categories'));
-
-
-function renderCategory(){      
+function renderCategory(CategoriesStored){      
    CategoriesStored.forEach(category => {
     const listOfCategories = document.createElement('div');
     listOfCategories.classList.add('check_item');
@@ -46,13 +42,11 @@ function renderCategory(){
             <input type="checkbox" name="${category.name}" id="all_property" value="${category.name}">
             <label for="all"><strong>${category.name}</strong></label>                
    `;
+   CategoriesStoredArray.push(category);
 
     filters.appendChild(listOfCategories);
     });         
 }
-
-
-renderCategory();
 
 
 // let handle change on checking event 
@@ -60,7 +54,8 @@ renderCategory();
 filters.addEventListener('change',(e)=>{
  let filter = e.target.value;
     // console.log(filter);
-    let filtredCatId = CategoriesStored.find(cat => cat.name === filter);
+    console.log(CategoriesStoredArray);
+    let filtredCatId = CategoriesStoredArray.find(cat => cat.name === filter);
     // filter ? categoryAny = filtredCatId._id : categoryAny = "" ; 
     categoryAny = filtredCatId._id;   
     console.log(categoryAny); 
@@ -75,29 +70,31 @@ filters.addEventListener('change',(e)=>{
 })
 
 //render by category
-function renderByCategory(data){
-    moneyBlock.innerHTML= '';
-    moneyBlock.classList.add('hide');
-    moneyBlock.classList.remove('money_block');
-    
-    for ( var i= 0; i < data.length; i++ ){            
-        let  divprop= document.createElement("DIV"); 
-        let { _id,amount,title} = data[i];    
+function renderByCategory(data){ 
+    let moneyBlock = document.querySelector('#money_block'); 
+    console.log('is reachable' + moneyBlock);
+
+    //hide previous list default one 
+    moneyBlock.style.display = 'none';
+  
+    for ( var i= 0; i < data.length; i++ ){  
+        let { _id,amount,title} = data[i];              
+        let  divprop = document.createElement("DIV");      
         
                   
-        divprop.innerHTML =`
+        divprop.innerHTML = `
         <div class="money_details" data-id="${_id}">                                        
           <div class="item_money>
               <p id="title"> ${title}<span class="amount"> ${amount + " "}PLN</span></p>   
           </div>                                            
         </div>`;
         // 
-        console.log(mainDiv)
-
-        // mainDiv.append(divprop)
-
+        console.log('yes')
+       
+        mainDiv.append(divprop)
     }
 
+    console.log(data)
 
 
 }
