@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let searchedContent = document.querySelector('#searched_content');
     const main_properties = document.querySelector('.main_properties');  
     const filters = document.querySelector('.filterCheck');
+    const loader = document.querySelector('#loader');
 
     // let moneyBlock = document.querySelector('#money_block');
     const mainDiv = document.getElementById('myMoneys'); 
@@ -24,8 +25,8 @@ function fetchCategories(){
                         }
         })
         .then(response =>response.json())
-        .then(categories =>{        
-            renderCategory(categories)
+        .then(categories =>{                 
+            renderCategory(categories);
 
         })
         .catch(err =>console.log(err));
@@ -34,7 +35,11 @@ function fetchCategories(){
         fetchCategories();
 
 
-function renderCategory(CategoriesStored){      
+function renderCategory(CategoriesStored){
+
+    //hide the laoder 
+    hideDisplay(loader);    
+       
    CategoriesStored.forEach(category => {
     const listOfCategories = document.createElement('div');
     listOfCategories.classList.add('check_item');
@@ -53,58 +58,65 @@ function renderCategory(CategoriesStored){
 
 filters.addEventListener('change',(e)=>{
  let filter = e.target.value;
-    // console.log(filter);
-    console.log(CategoriesStoredArray);
+ let parent = e.target;
+  
+// fetch only if checked
+if(parent.checked){
+   
     let filtredCatId = CategoriesStoredArray.find(cat => cat.name === filter);
     // filter ? categoryAny = filtredCatId._id : categoryAny = "" ; 
-    categoryAny = filtredCatId._id;   
-    console.log(categoryAny); 
+    categoryAny = filtredCatId._id;      
     // find the id of the category  and fetch by category
-
     return fetch(`http://localhost:3000/api/v1/moneys/by/${categoryAny}`, {
         method: "GET"
     })
         .then(response =>  response.json())
         .then(data => renderByCategory(data))
-        .catch(err => console.log(err));    
+        .catch(err => console.log(err)); 
+}else {
+    let moneyBlock = document.querySelector('#money_block');   
+    showDisplay(moneyBlock);  //normal fetching   
+    }        
 })
 
 //render by category
 function renderByCategory(data){ 
-    let moneyBlock = document.querySelector('#money_block'); 
-    console.log('is reachable' + moneyBlock);
 
-    //hide previous list default one 
-    moneyBlock.style.display = 'none';
-  
-    for ( var i= 0; i < data.length; i++ ){  
-        let { _id,amount,title} = data[i];              
-        let  divprop = document.createElement("DIV");      
-        
-                  
+    //hide the laoder
+    hideDisplay(loader);  
+
+    let moneyBlock = document.querySelector('#money_block');    
+    //hide previous list default one     
+    hideDisplay(moneyBlock);
+    let containerMoney = document.querySelector('#myMoneys');   
+    for ( var i= 0; i < data.data.length; i++ ){ 
+        console.log('yes') 
+        let { _id,amount,title} = data.data[i];              
+        let  divprop = document.createElement("DIV");    
+                          
         divprop.innerHTML = `
         <div class="money_details" data-id="${_id}">                                        
           <div class="item_money>
               <p id="title"> ${title}<span class="amount"> ${amount + " "}PLN</span></p>   
           </div>                                            
         </div>`;
-        // 
-        console.log('yes')
-       
-        mainDiv.append(divprop)
+        //               
+        containerMoney.append(divprop)
     }
-
-    console.log(data)
-
-
 }
 
 
+// hide the display function
+function hideDisplay(display){
+    display.style.display = 'none';
+}
+// show display function
+function showDisplay(display){
+    display.style.display = 'block';
+}
 
 
    ///handle search business 
-
-
     let input_search
     const input = document.getElementById('input_search');
     input.addEventListener('keyup',(e)=>{
@@ -113,7 +125,7 @@ function renderByCategory(data){
     } )
 
 
-    //for fetching data    
+    //for fetching data 
 
     const list = params => {
         // const query = queryString.stringify(params);

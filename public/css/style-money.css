@@ -377,6 +377,9 @@ float: left;
 
 ....................................................... */
 #loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 5px solid #f3f3f3;
   border-radius: 50%;
   border-top: 5px solid #444444;
@@ -425,7 +428,6 @@ float: left;
 
 
 /* for new money style */
-
 .money_details{
   background-color: white;   
   border-radius:10px ; 
