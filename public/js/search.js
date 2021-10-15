@@ -32,14 +32,14 @@ function fetchCategories(){
         .catch(err =>console.log(err));
         };
 
-        fetchCategories();
+    fetchCategories();
 
 
 function renderCategory(CategoriesStored){
 
     //hide the laoder 
     hideDisplay(loader);    
-       
+
    CategoriesStored.forEach(category => {
     const listOfCategories = document.createElement('div');
     listOfCategories.classList.add('check_item');
@@ -48,7 +48,6 @@ function renderCategory(CategoriesStored){
             <label for="all"><strong>${category.name}</strong></label>                
    `;
    CategoriesStoredArray.push(category);
-
     filters.appendChild(listOfCategories);
     });         
 }
@@ -146,8 +145,7 @@ function showDisplay(display){
 
 
 // for search data 
-    const searchData = () => {
-        console.log('now it is going on to search data functon')
+    const searchData = () => {        
         let search = input_search;
         // console.log(search, category);
         if (search) {
@@ -155,8 +153,7 @@ function showDisplay(display){
                 response => {
                     if (response.error) {
                         console.log(response.error);
-                    } else {
-                       console.log(response);
+                    } else {                      
                        renderSearch(response);
                     }
                 }
@@ -170,45 +167,31 @@ function renderSearch(searchedData){
     let Searched_title = document.querySelector('.search_title');
     searchedContent.classList.add('border_bottom');
 
-
     // i want to hide all other content let add a class hide to it 
     main_properties.classList.add('hide');
-
 if(searchedData.length === 0 ){
     searchedContent.innerHTML= '';
-    Searched_title.innerHTML = `No item found`;
-    
-    } else {
-       
+    Searched_title.innerHTML = `No item found`;    
+    } else {       
         Searched_title.textContent =   `Found ${searchedData.length} Item`;       
         searchedContent.innerHTML= '';     
       
-
-
         for (var i = 0 ; i< searchedData.length ; i++){
             let searched =document.createElement('div');
             searched.classList.add('searched_content_item');
             searched.innerHTML = `      
-            <p>Title: ${searchedData[i].title}</p>
-            <p>Descriotion: ${searchedData[i].description}</p>
-            <p>Amount: ${searchedData[i].amount} PLN</p>
+                <p>Title: ${searchedData[i].title}</p>
+                <p>Descriotion: ${searchedData[i].description}</p>
+                <p>Amount: ${searchedData[i].amount} PLN</p>
           `;            
-            searchedContent.append(searched);
-       }
+        searchedContent.append(searched);
+          }      
+        }      
+      }
 
-      
-
-}
-      
-      
-   }
-
-   
-   submit_serch_btn.addEventListener('click', (e)=>{
+submit_serch_btn.addEventListener('click', (e)=>{
     e.preventDefault();
     console.log('I am serach something');
-    searchData();
-            
+    searchData();            
 });
-
     })
