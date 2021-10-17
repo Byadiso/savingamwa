@@ -30,7 +30,7 @@ import authRoutes from './routes/auth';
 import userRoutes from './routes/user';
 import categoryRoutes from './routes/category';
 import moneyRoutes from './routes/money';
-import orderRoutes from './routes/order';
+
 
 
 //app 
@@ -77,7 +77,6 @@ app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", moneyRoutes);
-app.use('/api', orderRoutes);
 
 
 

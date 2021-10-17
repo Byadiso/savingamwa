@@ -6,7 +6,7 @@ const { requireSignin, isAuth, isAdmin } = require('../controllers/auth');
 const { create, moneyById ,read, remove, update , list, listRelated,listByUser, listCategories,listBycategory,listBySearch,listSearch,
      } = require('../controllers/money');
 const { userById} = require('../controllers/user');
-// const { moneyById} = require('../controllers/money');
+
 
 
 router.post('/v1/money/create/:userId', requireSignin, isAuth, isAdmin, create);
