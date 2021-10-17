@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
    let userIdStored = JSON.parse(localStorage.getItem('user'));
    let id = userIdStored.user._id
    let token = userIdStored.token
-   console.log(userIdStored);
-   console.log(token);
-   console.log(id);
+  //  console.log(userIdStored);
+  //  console.log(token);
+  //  console.log(id);
   
     // for fetching user detail
      const  fetchingUser = ( () => {
@@ -30,11 +30,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
    }); 
      
    function renderUser(user){
-     console.log(user);
-
-    //fro user details 
+         //fro user details 
     const {name,email,_id } = user.user ;
-    console.log(name, email, _id)
+    // console.log(name, email, _id)
    const userHeader = document.querySelector('.all_admin_header');
    userHeader.textContent = ` ${user.role == 1 ? "Admin " + name : name}`; 
 

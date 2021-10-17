@@ -40,8 +40,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
        function getCategories(){
       fetchCategories();
      for ( var i= 0; i < categoriesItem.length; i++ ){        
-        let { name, _id} = categoriesItem[i];
-        console.log(name);
+        let { name, _id} = categoriesItem[i];   
         const optionCategorie = document.createElement('option');
         optionCategorie.innerHTML= `<option class="option_tag login-field" data-id=${_id}>${name}</option>`;
         selectionCategory.appendChild(optionCategorie);

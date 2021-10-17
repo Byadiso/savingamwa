@@ -28,9 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
           }
 
           // function to render my property
-          function  renderProperty(dataPro) {          
-              console.log(dataPro);
-              
+          function  renderProperty(dataPro) {       
+             
               //for storage of total amount
               let totalWalletAmount = [];
               let totalSavings= [];
@@ -94,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // in ordrer to get a positive number I will mulitpy by -1 for expenses
         expensesDisplay.innerHTML = getTotal(totalExpenses)* -1
-        
+                        
 //-------------------------------------------------------------------------------------------------
 
          const money_details = document.querySelectorAll('.money_details');
@@ -160,13 +159,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
             //list by user 
-          const userId= JSON.parse(localStorage.getItem('user')).user._id; 
-          console.log(userId);
+          const userId= JSON.parse(localStorage.getItem('user')).user._id;          
           const listByMe = () => {
             return  fetch(`http://localhost:3000/api/v1/moneys/${userId}`)
              .then((resp) =>resp.json())
-             .then((data) =>  {
-             console.log(data);
+             .then((data) =>  {             
              localStorage.setItem('moneysByUser', JSON.stringify(data));
            });             
              }
