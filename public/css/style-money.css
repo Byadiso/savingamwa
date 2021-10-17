@@ -489,9 +489,12 @@ float: left;
 }
 
 .saving_card{
+  display: flex;
+  justify-content: center;
+  align-content: center;
   color: var(--whiteColor);
   background-color: var(--walletColor);
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
 .saving_card h3{
   padding: 10px;

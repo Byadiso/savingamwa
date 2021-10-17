@@ -91,7 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
         WalletDisplay.innerHTML = getTotal(totalWalletAmount) 
         savingsDisplay.innerHTML = getTotal(totalSavings) 
         incomesDisplay.innerHTML = getTotal(totalIncomes) 
-        expensesDisplay.innerHTML = getTotal(totalExpenses) 
+
+        // in ordrer to get a positive number I will mulitpy by -1 for expenses
+        expensesDisplay.innerHTML = getTotal(totalExpenses)* -1
+        
+//-------------------------------------------------------------------------------------------------
 
          const money_details = document.querySelectorAll('.money_details');
          money_details.forEach(blockMoney => {
