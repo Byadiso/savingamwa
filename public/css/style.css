@@ -1,14 +1,21 @@
 :root{
   --blueColor: #1e90ff;
+  --colorHover:  #0f4e8d;
   --whiteColor: #ffffff;
-  --expenseColor: rgb(230, 91, 91);
-  --incomeColor: rgb(84, 197, 84);
-  --walletColor:rgb(156, 155, 75);
-  --savingsColor:rgb(236, 233, 40);
+  --walletHeaderColor:rgb(130, 129, 113);
+  --activeColorHeader:rgb(97, 97, 87);
+  --expenseColor: rgb(236, 126, 35);
+  --incomeColor: rgb(124, 250, 66);
+  --savingsColor:rgb(194, 182, 24);
+  --walletColor:rgb(97, 97, 87);
+  --buttonColor:rgb(97, 97, 87);
+  --textColorWhite:#ffffff;
+  --textColorGrey:rgb(97, 97, 87);
   --spacing: 4px;
-  
+  --error:rgb(204, 14, 14);
+  --colorText: #555;  
+  --background-color:rgb(163, 163, 145);
 }
-
 
 * {
   box-sizing: border-box;
@@ -19,9 +26,8 @@
   }
   body {
   font-family: Arial;
-  background-color: #3498DB;
-  padding: 50px;
-  background-image: url("../image/nganatech.jpg");
+  background-color: var(--background-color);
+  padding: 50px;  
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -45,7 +51,7 @@
   .topnav a {
     float: left;
     display: block;
-    color: black;
+    color: var(--textColorGrey);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -53,18 +59,18 @@
   }
   
   .topnav a:hover {
-    background-color: #ddd;
-    color: black;
+    background-color: var(--activeColorHeader);
+    color:var(--whiteColor);
   }
   
   .topnav a.active {
-    background-color: #555;
-    color: white;
+    background-color: var(--activeColorHeader);
+    color: var(--whiteColor);
   }
   
   .topnav a.register {
-    background-color: grey;
-    color: white;
+    background-color: var(--activeColorHeader);
+    color: var(--whiteColor);
   }
   
   .topnav a.sign_in{
@@ -455,4 +461,88 @@
     color: white;
     text-shadow: #555;
   }
+
+/* 
+  for single money or page */
+
+  
+* {
+  box-sizing: border-box;
+  }
+  
+  *:focus {
+      outline: none;
+  }
+  
+  
+  .btn_edit, .btn_delete{
+    border: 2px solid transparent;
+    background: #3498DB;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 15px;
+    padding: 2px 0;
+    margin: 2px 3px;
+    text-decoration: none;
+    text-shadow: none;
+    border-radius: 3px;
+    box-shadow: none;
+    transition: 0.25s;
+    display: flex;
+    justify-content: center;
+    width: 60px;  
+  }
+
+  .btn_edit:hover, .btn_delete:hover {
+    background-color:var(--colorHover);
+    cursor: pointer;
+  }
+
+  .btn_delete{
+    background-color: var(--error);
+  }
+
+  
+
+.amount{
+  background-color: var(--blueColor);
+  color: var(--whiteColor); 
+  border-radius: 20px;
+  margin: var(--spacing);
+  padding: var(--spacing);
+}
+   
+  
+  .transparentBcg {
+    visibility: visible;
+  }
+
+  
+  #singleMoney{
+    background-color:white;
+    padding:20px;
+    color:#36a9c0;
+    align-items: center;
+  }
+
+  .item-error{
+    color: var(--error);
+  }
+
+  .money_container{
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+    align-items:center;
+    color: var(--colorText);
+  }
+
+
+
+  @media screen and (min-width: 768px) {
+ 
+
+
+  }
+  
   

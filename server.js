@@ -79,7 +79,6 @@ app.use("/api", categoryRoutes);
 app.use("/api", moneyRoutes);
 
 
-
 // set header
 
 app.use((req, res, next) => {
@@ -105,8 +104,6 @@ app.get('/', (_req, res) => {
             message: 'Welcome to PropertyPro-Lite you can sale or rent your needs!',
         })
 })
-
-
 
 app.use('*', (req, res) => {
     res.status(400).json({
@@ -151,7 +148,6 @@ app.get('/index', (_req, res) => {
 
 
 const port = process.env.PORT || 3000 ;
-
 
 if(process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));

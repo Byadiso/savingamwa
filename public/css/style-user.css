@@ -1,13 +1,21 @@
 
 :root{
   --blueColor: #1e90ff;
+  --colorHover:  #0f4e8d;
   --whiteColor: #ffffff;
-  --expenseColor: rgb(230, 91, 91);
-  --incomeColor: rgb(84, 197, 84);
-  --walletColor:rgb(156, 155, 75);
-  --savingsColor:rgb(236, 233, 40);
+  --walletHeaderColor:rgb(130, 129, 113);
+  --activeColorHeader:rgb(97, 97, 87);
+  --expenseColor: rgb(236, 126, 35);
+  --incomeColor: rgb(124, 250, 66);
+  --savingsColor:rgb(194, 182, 24);
+  --walletColor:rgb(97, 97, 87);
+  --buttonColor:rgb(97, 97, 87);
+  --textColorWhite:#ffffff;
+  --textColorGrey:rgb(97, 97, 87);
   --spacing: 4px;
-  
+  --error:rgb(204, 14, 14);
+  --colorText: #555;  
+  --background-color:rgb(163, 163, 145);
 }
 
 
@@ -21,9 +29,8 @@ box-sizing: border-box;
 }
 body {
 font-family: Arial;
-background-color: #3498DB;
+background-color: var(--background-color);
 padding: 50px;
-background-image: url("../image/nganatech.jpg");
 background-position: center;
 background-repeat: no-repeat;
 background-size: cover;
@@ -47,7 +54,7 @@ font-weight: 200;
 .topnav a {
   float: left;
   display: block;
-  color: black;
+  color: var(--textColorGrey);
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -55,18 +62,18 @@ font-weight: 200;
 }
 
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: var(--activeColorHeader);
+  color: var(--whiteColor);
 }
 
 .topnav a.active {
-  background-color: #555;
-  color: white;
+  background-color: var(--activeColorHeader);
+  color: var(--whiteColor);
 }
 
 .topnav a.register {
-  background-color: grey;
-  color: white;
+  background-color: var(--activeColorHeader);
+  color: var(--whiteColor);
 }
 
 .topnav a.sign_in{
@@ -431,18 +438,6 @@ box-shadow: none;
     margin-left: 20px;
      
 }
-/* 
-.manager:last-of-type{
-  border-bottom: none;
-  background-color: blue;
-} */
-
-
-
-
-
-
-
 
 
 /* for footer */
