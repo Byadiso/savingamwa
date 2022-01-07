@@ -152,7 +152,7 @@ app.get('/index', (_req, res) => {
         })
 })
 
-const port = process.env.PORT || 80
+const port = process.env.PORT || 3000
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'))
