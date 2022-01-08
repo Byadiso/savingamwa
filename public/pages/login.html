@@ -39,12 +39,12 @@
                 <div id="password2Err"></div>
                   <div id="usernameErr"></div>
                     <div class="control-group">
-                      <input type="text" class="login-field"  placeholder="Email" name="email" id="email">
+                      <input type="text" class="login-field"  placeholder="Email*" name="email" id="email">
                      
                      </div>
                 <div id="emailErr"></div>
                 <div class="control-group">
-                   <input type="password" class="login-field" placeholder="Password" name="password"  id="password">
+                   <input type="password" class="login-field" placeholder="Password*" name="password"  id="password">
                 </div>
                 <div id="passwordErr"></div>
                 
@@ -63,7 +63,7 @@
     </div>
 
     <div id="footer">
-        &copy; 2019  Designed by BYAMUNGU desire || Savingamwa.rw
+        &copy; <span id="date_savingamwa">2019 </span> Designed by BYAMUNGU desire || Savingamwa.rw
     </div> 
 
 </body>
@@ -92,7 +92,43 @@
 
 
    // Real time footer
+   // ---------------------for real time date at the bootom-------------------
+   const date = document.getElementById('date_savingamwa');
+            let date_Today = new Date();
+            let year = date_Today.getFullYear();
+            let month = date_Today.getMonth();
+            let day = date_Today.getUTCDay();
+            console.log(month)
 
+            let today = date_Today.getUTCDate()
+            //formating date month to normal format jan-december
+                if(month == 0){
+                    month = "Jan"
+                } else if(month == 1){
+                    month = "Feb"
+                }else if(month == 2){
+                    month = "Mar"
+                }else if(month == 3){
+                    month = "Apr"
+                }else if(month == 4){
+                    month = "May"
+                }else if(month == 5){
+                    month = "Jun"
+                }else if(month == 7){
+                    month = "Aug"
+                }else if(month == 8){
+                    month = "Sept"
+                }else if(month == 9){
+                    month = "Oct"
+                }else if(month == 10){
+                    month = "Nov"
+                }else if(month == 11){
+                    month = "Dec"
+                }
+
+                
+            date.textContent= today +"-"+ month +"-"+ year;
+            //...............................End here date month format   
    
 </script>
 <script src="../js/login.js"></script>
