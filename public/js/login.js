@@ -10,7 +10,6 @@ const usernameErr = document.querySelector('div#usernameErr')
 const emailErr = document.querySelector('div#emailErr')
 const passwordErr = document.querySelector('div#passwordErr')
 const password2Err = document.querySelector('div#password2Err')
-const incorrectServer = document.querySelector('div#incorrectServer')
 
 loginBtn.onmouseover = () => {
     if (
