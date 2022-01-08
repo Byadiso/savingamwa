@@ -28,7 +28,6 @@ loginBtn.onmouseover = () => {
 //remove error when inputting into input
 fields.forEach((field) => {
     field.addEventListener('input', () => {
-        console.log('I have to remove erro')
         password2Err.innerHTML = ''
     })
 })
